@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" role="img" aria-label="SuperK concept V4-B">
+  <!-- V4-B: "Hex K" (lettermark in geometry). Monoline K inside a hexagon ring.
+       Freeform silhouette, charcoal on transparent, single color. -->
+  <polygon points="128,22 222,76 222,180 128,234 34,180 34,76" fill="none" stroke="#2A2529" stroke-width="20" stroke-linejoin="round"/>
+  <path d="M100 84 V172 M156 84 L100 128 L156 172" fill="none" stroke="#2A2529"
+        stroke-width="26" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

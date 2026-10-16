@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" role="img" aria-label="SuperK concept V5-B">
+  <!-- V5-B: "Speed K" (lettermark, no container). Sheared italic K with trailing
+       speed bars — the super in SuperK. Airy opposite of every tile so far. -->
+  <g transform="translate(128,128) skewX(-12) translate(-128,-128)">
+    <path d="M108 58 V198 M182 58 L108 128 L182 198" fill="none" stroke="#2A2529"
+          stroke-width="30" stroke-linecap="round" stroke-linejoin="round"/>
+    <rect x="26" y="92" width="52" height="17" rx="8.5" fill="#2A2529"/>
+    <rect x="38" y="148" width="40" height="17" rx="8.5" fill="#2A2529"/>
+  </g>
+</svg>

@@ -1,0 +1,21 @@
+/* SuperK official site tokens — Warm Paper system (spec section 1). */
+:root {
+  --paper: #F3F0E7;
+  --card: #FBF9F3;
+  --paper2: #E9E3D1;
+  --line: #D9D1BC;
+  --line-soft: #E4DDC9;
+  --ink: #2A2529;
+  --ink2: #544D52;
+  --mut: #877D82;
+  --faint: #ABA19F;
+  --acc-ink: #F3F0E7;
+  --display: "Poppins", system-ui, sans-serif;
+  --body: "Montserrat", system-ui, -apple-system, sans-serif;
+  --mono: "JetBrains Mono", ui-monospace, monospace;
+  --ease: cubic-bezier(.22, .8, .24, 1);
+  --t-fast: 140ms;
+  --t-med: 260ms;
+  --tactile: 3px 3px 0 rgba(42, 37, 41, .9);
+  --soft-shadow: 0 1px 0 rgba(42, 37, 41, .06), 0 18px 40px -28px rgba(42, 37, 41, .5);
+}

@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" role="img" aria-label="SuperK concept B">
+  <!-- B: Emblem — download shield holding an S/K ligature. Black-first master. -->
+  <path d="M128 16 L224 64 V136 C224 190 180 222 128 240 C76 222 32 190 32 136 V64 Z" fill="#111111"/>
+  <!-- S/K ligature simplified: bold K -->
+  <path d="M100 84 V172 M156 84 L100 128 L156 172" fill="none" stroke="#FFFFFF" stroke-width="26" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Download tray -->
+  <rect x="84" y="188" width="88" height="12" rx="6" fill="#FFFFFF"/>
+</svg>

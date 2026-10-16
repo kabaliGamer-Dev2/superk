@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Why SuperK Was Created — The Story | SuperK by Kabali Gamer</title>
+<meta name="description" content="The origin story of SuperK: how a Parul University LMS update removed every PDF download link, and why student developer Kabali Gamer built the fix." />
+<link rel="icon" href="assets/favicon.ico" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700;800&family=Montserrat:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="tokens.css" />
+<link rel="stylesheet" href="site.css?v=4" />
+<style>
+  .page-hero { padding: 56px 0 6px; }
+  .page-hero h1 { font: 800 clamp(32px, 4.6vw, 48px)/1.05 var(--display); letter-spacing: -.03em; margin: 14px 0 12px; }
+  .byline { font: 600 13px var(--body); color: var(--ink2); margin: 0; }
+  .quote { background: var(--card); border: 1.5px solid var(--ink); border-radius: 20px; box-shadow: var(--tactile); overflow: hidden; display: grid; grid-template-columns: 120px 1fr; margin-top: 28px; }
+  .quote-mark { background: var(--ink); color: var(--acc-ink); font: 800 84px/1 var(--display); display: grid; place-items: center; padding-top: 26px; }
+  .quote-body { padding: clamp(24px, 4vw, 40px); }
+  .quote p { font: 500 clamp(16px, 2.2vw, 21px)/1.65 var(--body); margin: 0 0 18px; }
+  .quote cite { font: 600 13px var(--body); font-style: normal; }
+  .doc { background: var(--card); border: 1.5px solid var(--ink); border-radius: 18px; box-shadow: var(--tactile); padding: clamp(24px, 4vw, 40px); margin-top: 26px; }
+  .doc h2 { font: 700 21px/1.3 var(--display); letter-spacing: -.01em; margin: 30px 0 8px; }
+  .doc h2:first-child { margin-top: 0; }
+  .doc p { font-size: 14.5px; color: var(--ink2); margin: 0 0 14px; }
+  .doc ol { margin: 0 0 14px; padding-left: 22px; color: var(--ink2); font-size: 14.5px; }
+  .doc li { margin-bottom: 8px; }
+  .doc code { font: 600 12px var(--mono); background: var(--paper2); border: 1px solid var(--line); border-radius: 6px; padding: 1px 6px; }
+  .sign { font: 700 15px var(--display); color: var(--ink); margin: 22px 0 0; }
+  .cta-row { display: flex; gap: 14px; flex-wrap: wrap; margin-top: 30px; }
+  @media (max-width: 900px) { .quote { grid-template-columns: 1fr; } .quote-mark { padding: 10px; font-size: 56px; } }
+  @media (max-width: 640px) { .page-hero { padding-top: 40px; } .cta-row .btn { width: 100%; justify-content: center; } }
+</style>
+</head>
+<body>
+<div class="grain" aria-hidden="true"></div>
+<div class="announce"><div class="wrap"><span>v1.0.0 is here — one-click subject ZIPs are live</span><a href="releases/superk-1.0.0.zip">Get the ZIP</a></div></div>
+<nav class="nav" aria-label="Primary">
+  <div class="wrap nav-row">
+    <a class="brand" href="index.html"><img src="assets/logo.svg" alt="SuperK logo" /><b>SuperK</b><span class="ver">v1.0.0 Official</span></a>
+    <div class="links" id="navLinks">
+      <a href="index.html#features">Features</a>
+      <a href="story.html">Story</a>
+      <a href="installation.html">Installation Guide</a>
+      <a href="terms.html">Terms</a>
+      <a href="privacy.html">Privacy</a>
+      <a href="feedback.html">Feedback</a>
+    </div>
+    <button class="menu-btn" id="menuBtn" aria-label="Open menu"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M4 7h16" /><path d="M4 12h16" /><path d="M4 17h16" /></svg></button>
+    <a class="btn btn-ink btn-sm" href="releases/superk-1.0.0.zip">Download Extension</a>
+  </div>
+</nav>
+
+<main class="wrap">
+  <div class="page-hero">
+    <p class="eyebrow rule">Origin &amp; Mission</p>
+    <h1>Why SuperK Was Created</h1>
+    <p class="byline">By <a href="https://www.instagram.com/kabali.gamer/" target="_blank" rel="noopener" style="color:var(--ink);font-weight:700;text-decoration:none">Kabali Gamer</a> · Student Developer &amp; Creator</p>
+  </div>
+
+  <div class="quote">
+    <div class="quote-mark" aria-hidden="true">&ldquo;</div>
+    <div class="quote-body">
+      <p>A few days ago, our college website was updated, and we lost the option to download our lecture notes and PPTs completely. Whenever exams came around, we couldn't save our study materials offline. I couldn't let students struggle through that. So, I built SuperK. Now, every student can install SuperK and download all their course PDFs with a single click.</p>
+      <cite>— <b>Kabali Gamer</b>, Creator &amp; Lead Developer of SuperK</cite>
+    </div>
+  </div>
+
+  <div class="doc">
+    <h2>The Day the Downloads Disappeared</h2>
+    <p>In October 2026, students across Parul University logged into the elearning portal to prepare for upcoming examinations and assignments. Following a recent LMS platform update, every single direct PDF download link had vanished.</p>
+    <p>Lecture presentations, handwritten faculty notes, laboratory manuals, and previous years' question papers were locked inside an embedded viewer (<code>PdfViewer-*.js</code>). Students could only read files page-by-page inside the browser tab. Offline study during commute, printing notes, and revising without an internet connection suddenly became impossible.</p>
+    <h2>The Decision to Build a Solution</h2>
+    <p>Rather than waiting weeks for official fixes, I decided to take action. As a student developer, I knew that the underlying documents were still accessible via authorized API endpoints and cloud buckets.</p>
+    <p>I set out to create an extension that would be:</p>
+    <ol>
+      <li>Completely effortless for any student to use, regardless of technical background.</li>
+      <li>Fully compliant with browser privacy standards — never collecting user passwords or data.</li>
+      <li>Capable of downloading not just single files, but entire subjects packaged cleanly into ZIP archives.</li>
+    </ol>
+    <h2>From Prototype to Official Release</h2>
+    <p>After reverse-engineering the classroom API tokens and writing custom filename normalization heuristics to fix messy faculty filenames, <b>SuperK</b> was born.</p>
+    <p>What started as a script to help my classmates is now an official extension available to every student in our university. SuperK is free, open, and dedicated to every student striving for academic excellence.</p>
+    <p class="sign">— <a href="https://www.instagram.com/kabali.gamer/" target="_blank" rel="noopener" style="color:inherit;text-decoration:none;border-bottom:1.5px solid var(--ink)">Kabali Gamer</a></p>
+  </div>
+
+  <div class="cta-row">
+    <a class="btn btn-ink" href="releases/superk-1.0.0.zip">Download SuperK (v1.0.0 ZIP)</a>
+    <a class="btn btn-paper" href="installation.html">Install Guide (30s)
+      <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14" /><path d="m13 6 6 6-6 6" /></svg></a>
+  </div>
+</main>
+
+<footer class="foot">
+  <div class="wrap foot-row">
+    <div class="foot-brand"><img src="assets/logo-white.svg" alt="SuperK logo" /><span>© 2026 SuperK · v1.0.0 · Created by Kabali Gamer.</span><a class="ig" href="https://www.instagram.com/kabali.gamer/" target="_blank" rel="noopener" aria-label="SuperK on Instagram"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="5" /><circle cx="12" cy="12" r="4" /><circle cx="17.2" cy="6.8" r="1.1" fill="currentColor" stroke="none" /></svg></a><span class="ver" style="font:600 10px var(--mono);letter-spacing:.1em;border:1px solid rgba(243,240,231,.45);border-radius:99px;padding:3px 9px;">v1.0.0</span></div>
+    <nav class="foot-links" aria-label="Footer">
+      <a href="index.html">Home</a>
+      <a href="story.html">Story</a>
+      <a href="installation.html">Installation Guide</a>
+      <a href="terms.html">Terms &amp; Conditions</a>
+      <a href="privacy.html">Privacy Policy</a>
+      <a href="cookies.html">Cookie Statement</a>
+      <a href="feedback.html">Bug Reports &amp; Feedback</a>
+    </nav>
+    <p class="disclaimer">SuperK is an independent student utility and is not officially affiliated with Parul University or Edorer.</p>
+  </div>
+</footer>
+
+<script>
+  document.getElementById("menuBtn").onclick = () => document.getElementById("navLinks").classList.toggle("open");
+  const io = new IntersectionObserver((es) => es.forEach((e) => { if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); } }), { threshold: .1, rootMargin: "0px 0px -6% 0px" });
+  [...document.querySelectorAll("main .page-hero, main section, main .doc, main .fb-layout, main .cta-row")].forEach((el, i) => { el.classList.add("rv", "d" + ((i % 4) + 1)); io.observe(el); });
+</script>
+</body>
+</html>

@@ -1,0 +1,20 @@
+{
+  "hosting": {
+    "public": "official",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**",
+      "assets/superk-demo.mp4"
+    ],
+    "headers": [
+      {
+        "source": "**/*.@(png|ico|svg|css|js)",
+        "headers": [{ "key": "Cache-Control", "value": "public, max-age=3600" }]
+      }
+    ]
+  },
+  "firestore": {
+    "rules": "firestore.rules"
+  }
+}

@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" role="img" aria-label="SuperK concept V2-C">
+  <!-- V2-C: "Folder spark" (object). The subject folder, Tab intact, lit by a spark.
+       Freeform silhouette, transparent ground. No text, no gradients. -->
+  <polygon points="52,108 116,108 134,130 204,130 204,206 52,206" fill="#2A2529"/>
+  <rect x="70" y="182" width="60" height="10" rx="5" fill="#F3F0E7"/>
+  <polygon points="170,128 176,144 192,150 176,156 170,172 164,156 148,150 164,144" fill="#F3F0E7"/>
+</svg>

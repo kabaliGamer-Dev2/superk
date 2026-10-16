@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" role="img" aria-label="SuperK logo small-size cut">
+  <!-- Small-size cut (16-32px): heavier ring + K, tighter K, no fine gaps. -->
+  <circle cx="128" cy="128" r="100" fill="none" stroke="#2A2529" stroke-width="26"/>
+  <path d="M108 88 V168 M152 88 L108 128 L152 168" fill="none" stroke="#2A2529"
+        stroke-width="32" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

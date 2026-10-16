@@ -1,0 +1,6 @@
+# Binaries / scratch — never push
+official/assets/superk-demo.mp4
+temp/
+.playwright-mcp/
+*.out
+.firebase/

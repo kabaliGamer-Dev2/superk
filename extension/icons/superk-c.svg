@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" role="img" aria-label="SuperK concept C">
+  <!-- C: Abstract — paper-plane K in a hexagon. Black-first master. -->
+  <polygon points="128,16 224,72 224,184 128,240 32,184 32,72" fill="#111111"/>
+  <!-- Paper plane (45/90-degree geometry) -->
+  <polygon points="60,148 196,84 140,196 124,142" fill="#FFFFFF"/>
+  <polygon points="124,142 140,196 112,168" fill="#111111"/>
+  <!-- K crossbar hint -->
+  <rect x="150" y="120" width="44" height="18" rx="9" fill="#FFFFFF" transform="rotate(45 172 129)"/>
+</svg>

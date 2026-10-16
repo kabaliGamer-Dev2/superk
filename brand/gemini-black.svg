@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <!-- SuperK one-color black, transparent ground. -->
+  <g transform="rotate(-24 256 256)" fill="none" stroke="#000000" stroke-width="28" stroke-linecap="round">
+    <ellipse cx="256" cy="256" rx="196" ry="118" stroke-dasharray="920 140" stroke-dashoffset="35"/>
+  </g>
+  <circle cx="418" cy="148" r="18" fill="#000000"/>
+  <g fill="none" stroke="#000000" stroke-width="34" stroke-linecap="round" stroke-linejoin="round">
+    <line x1="196" y1="152" x2="196" y2="360"/>
+    <line x1="202" y1="258" x2="316" y2="152"/>
+    <line x1="236" y1="226" x2="322" y2="360"/>
+  </g>
+</svg>

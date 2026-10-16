@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <!-- SuperK small-size cut (16-32px): heavier ring + K, bigger node dot.
+       Source for 16px toolbar/favicon rendering. -->
+  <g transform="rotate(-24 256 256)" fill="none" stroke="#2A2529" stroke-width="42" stroke-linecap="round">
+    <ellipse cx="256" cy="256" rx="190" ry="114" stroke-dasharray="900 150" stroke-dashoffset="35"/>
+  </g>
+  <circle cx="418" cy="148" r="27" fill="#2A2529"/>
+  <g fill="none" stroke="#2A2529" stroke-width="48" stroke-linecap="round" stroke-linejoin="round">
+    <line x1="196" y1="152" x2="196" y2="360"/>
+    <line x1="202" y1="258" x2="316" y2="152"/>
+    <line x1="236" y1="226" x2="322" y2="360"/>
+  </g>
+</svg>

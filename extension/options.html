@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>SuperK Official — Guide &amp; Options</title>
+<style>
+  :root{
+    --paper:#F3F0E7; --card:#FBF9F3; --paper2:#E9E3D1; --line:#D9D1BC;
+    --ink:#2A2529; --ink2:#544D52; --mut:#877D82; --acc-ink:#F3F0E7;
+    --display:"Poppins","Avenir Next",system-ui,sans-serif;
+    --body:"Montserrat",system-ui,-apple-system,"Segoe UI",sans-serif;
+    --mono:"JetBrains Mono",ui-monospace,Consolas,monospace;
+    --ease:cubic-bezier(.22,.8,.24,1);
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--paper);color:var(--ink);font:400 15px/1.6 var(--body);-webkit-font-smoothing:antialiased}
+  .wrap{max-width:760px;margin:0 auto;padding:40px 22px 80px}
+  .hero{display:flex;gap:16px;align-items:center;background:var(--ink);color:var(--acc-ink);
+    border-radius:20px;padding:26px clamp(20px,4vw,36px);box-shadow:5px 5px 0 rgba(42,37,41,.25)}
+  .mark{flex:none;width:52px;height:52px;border-radius:15px;display:grid;place-items:center;background:rgba(243,240,231,.1)}
+  .hero h1{font:800 clamp(24px,3.4vw,32px)/1.1 var(--display);letter-spacing:-.02em;margin:0}
+  .hero p{margin:6px 0 0;font:600 11px var(--mono);letter-spacing:.12em;text-transform:uppercase;color:#c9c5cf}
+  .card{background:var(--card);border:1.5px solid var(--ink);border-radius:18px;
+    box-shadow:3px 3px 0 rgba(42,37,41,.9);padding:clamp(20px,3.4vw,30px);margin-top:20px}
+  .card h2{font:700 19px var(--display);margin:0 0 10px;letter-spacing:-.01em}
+  .card p,.card li{font-size:14px;color:var(--ink2)}
+  .card ol,.card ul{margin:0;padding-left:22px}
+  .card li{margin-bottom:8px}
+  .card code{font:600 12px var(--mono);background:var(--paper2);border:1px solid var(--line);border-radius:6px;padding:1px 6px;word-break:break-all}
+  .card b{color:var(--ink)}
+  .quote{border-left:4px solid var(--ink);padding:2px 0 2px 16px;margin:0 0 12px;font:500 14.5px/1.65 var(--body);color:var(--ink)}
+  .fine{font:400 12px/1.6 var(--mono);color:var(--mut)}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="hero">
+    <span class="mark" aria-hidden="true">
+      <svg viewBox="0 0 512 512" width="34" height="34"><g transform="rotate(-24 256 256)" fill="none" stroke="#F3F0E7" stroke-width="28" stroke-linecap="round"><ellipse cx="256" cy="256" rx="196" ry="118" stroke-dasharray="920 140" stroke-dashoffset="35"/></g><circle cx="418" cy="148" r="18" fill="#F3F0E7"/><g fill="none" stroke="#F3F0E7" stroke-width="34" stroke-linecap="round" stroke-linejoin="round"><line x1="196" y1="152" x2="196" y2="360"/><line x1="202" y1="258" x2="316" y2="152"/><line x1="236" y1="226" x2="322" y2="360"/></g></svg>
+    </span>
+    <div>
+      <h1>SuperK Official v1.0.0</h1>
+      <p>Created by Kabali Gamer · Offline guide</p>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>Why SuperK exists</h2>
+    <p class="quote">"When our LMS update removed every PDF download link, I built SuperK so no student has to struggle before exams. One click, every PDF, beautifully." — <b>Kabali Gamer</b></p>
+    <p>SuperK lists and bulk-downloads PDFs from your Parul University elearning classroom, grouping them into topic folders and packing whole subjects into one ZIP.</p>
+  </div>
+
+  <div class="card">
+    <h2>How to use</h2>
+    <ol>
+      <li>Open <code>elearning.paruluniversity.ac.in/classrooms/…/student</code> and log in.</li>
+      <li>Open any subject, then click the SuperK toolbar icon — it locks onto that subject.</li>
+      <li>Click <b>Download all</b> for the whole subject as a ZIP, or tick files and click <b>Selected</b>.</li>
+    </ol>
+    <p>Tip: type in the search box (or press <code>Ctrl+K</code> / <code>⌘K</code>) to filter hundreds of files instantly.</p>
+  </div>
+
+  <div class="card">
+    <h2>Troubleshooting</h2>
+    <ul>
+      <li><b>"Page bridge is outdated — refresh tab":</b> the extension was reloaded while the classroom tab was already open. Press <code>F5</code> on the classroom tab and reopen SuperK.</li>
+      <li><b>Huge subjects (~150MB+):</b> SuperK automatically switches from one ZIP to rapid individual downloads to protect browser memory.</li>
+      <li><b>"No PDFs yet":</b> open a subject topic page (PPT / Notes / Previous papers), then press <b>Rescan</b>.</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h2>Privacy guarantee</h2>
+    <p><b>Zero-Data Collection.</b> No trackers, no analytics, no remote servers. Your login session token never leaves your own browser — requests go only to the official university LMS infrastructure (<code>platform-api.edorer.com</code>, <code>*.digitaloceanspaces.com</code>).</p>
+  </div>
+
+  <div class="card">
+    <h2>Fair use</h2>
+    <p>SuperK downloads only materials you are already authorized to access, for <b>personal, non-commercial study</b>. Downloaded files remain the intellectual property of their authors and Parul University — do not redistribute them. SuperK is an independent student utility, not affiliated with Parul University or Edorer.</p>
+    <p class="fine">Full legal text ships with the official site: Terms &amp; Conditions · Privacy Policy · Cookie Statement.</p>
+  </div>
+</div>
+</body>
+</html>

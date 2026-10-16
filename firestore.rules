@@ -1,0 +1,21 @@
+rules_version = '2';
+
+// SuperK feedback: public create-only, validated. Reads/writes restricted
+// to the Firebase Console (project owners). Everything else denied.
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /feedback/{doc} {
+      allow create: if request.resource.data.type in ['bug', 'feature', 'download', 'praise']
+        && request.resource.data.message is string
+        && request.resource.data.message.size() >= 10
+        && request.resource.data.message.size() <= 2000
+        && request.resource.data.rating is int
+        && request.resource.data.rating >= 0
+        && request.resource.data.rating <= 5;
+      allow read, update, delete: if false;
+    }
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}

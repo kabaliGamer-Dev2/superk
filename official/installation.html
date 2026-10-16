@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Installation &amp; Setup Guide — SuperK by Kabali Gamer</title>
+<meta name="description" content="Install SuperK in 30 seconds on Chrome, Brave, Edge, Opera, or Arc. Step-by-step developer-mode setup plus troubleshooting." />
+<link rel="icon" href="assets/favicon.ico" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700;800&family=Montserrat:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="tokens.css" />
+<link rel="stylesheet" href="site.css?v=4" />
+<style>
+  .page-hero { padding: 56px 0 6px; }
+  .page-hero h1 { font: 800 clamp(32px, 4.6vw, 48px)/1.05 var(--display); letter-spacing: -.03em; margin: 14px 0 12px; }
+  .sec { margin-top: 46px; }
+  .sec h2 { font: 700 clamp(22px, 3vw, 30px)/1.15 var(--display); letter-spacing: -.02em; margin: 0 0 8px; }
+  .sec .sub { color: var(--ink2); margin: 0 0 24px; max-width: 44em; }
+  .steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+  .step { background: var(--card); border: 1.5px solid var(--ink); border-radius: 16px; padding: 24px 22px; }
+  .step .n { font: 800 15px var(--display); background: var(--ink); color: var(--acc-ink); border-radius: 99px; width: 38px; height: 38px; display: grid; place-items: center; margin-bottom: 14px; }
+  .step h3 { font: 600 17px var(--display); margin: 0 0 8px; }
+  .step p { font-size: 13.5px; color: var(--ink2); margin: 0; }
+  .step code, .istep code { font: 600 11.5px var(--mono); background: var(--paper2); border: 1px solid var(--line); border-radius: 6px; padding: 1px 6px; word-break: break-all; }
+  .cta-row { display: flex; gap: 14px; flex-wrap: wrap; margin-top: 36px; }
+  @media (max-width: 900px) { .install { grid-template-columns: 1fr 1fr; } .steps { grid-template-columns: 1fr; } }
+  @media (max-width: 640px) { .page-hero { padding-top: 40px; } .install { grid-template-columns: 1fr; } .cta-row .btn { width: 100%; justify-content: center; } }
+</style>
+</head>
+<body>
+<div class="grain" aria-hidden="true"></div>
+<div class="announce"><div class="wrap"><span>v1.0.0 is here — one-click subject ZIPs are live</span><a href="releases/superk-1.0.0.zip">Get the ZIP</a></div></div>
+<nav class="nav" aria-label="Primary">
+  <div class="wrap nav-row">
+    <a class="brand" href="index.html"><img src="assets/logo.svg" alt="SuperK logo" /><b>SuperK</b><span class="ver">v1.0.0 Official</span></a>
+    <div class="links" id="navLinks">
+      <a href="index.html#features">Features</a>
+      <a href="story.html">Story</a>
+      <a href="installation.html">Installation Guide</a>
+      <a href="terms.html">Terms</a>
+      <a href="privacy.html">Privacy</a>
+      <a href="feedback.html">Feedback</a>
+    </div>
+    <button class="menu-btn" id="menuBtn" aria-label="Open menu"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M4 7h16" /><path d="M4 12h16" /><path d="M4 17h16" /></svg></button>
+    <a class="btn btn-ink btn-sm" href="releases/superk-1.0.0.zip">Download Extension</a>
+  </div>
+</nav>
+
+<main class="wrap">
+  <div class="page-hero">
+    <p class="eyebrow rule">Setup Guide</p>
+    <h1>Installation &amp; Setup Guide</h1>
+    <p class="sub">Side-load once in developer mode — no accounts, no configuration. Works on every Chromium browser:</p>
+    <div class="meta-row"><span>Google Chrome</span><span>Brave</span><span>Microsoft Edge</span><span>Opera</span><span>Vivaldi</span><span>Arc</span></div>
+  </div>
+
+  <section class="sec" aria-label="Quick install">
+    <h2>Quick install via unpacked extension</h2>
+    <p class="sub">Five steps, about thirty seconds.</p>
+    <div class="install">
+      <div class="istep"><h3>Download</h3><p>Click <b>Download SuperK.zip</b> and unzip it somewhere safe (e.g. <code>Documents/SuperK</code>).</p></div>
+      <div class="istep"><h3>Open extensions page</h3><p>Chrome: <code>chrome://extensions</code><br />Brave: <code>brave://extensions</code><br />Edge: <code>edge://extensions</code></p></div>
+      <div class="istep"><h3>Enable Developer mode</h3><p>Toggle the <b>Developer mode</b> switch in the top-right corner of the page.</p></div>
+      <div class="istep"><h3>Load unpacked</h3><p>Click <b>Load unpacked</b> (top-left) and select the unzipped <code>extension</code> folder.</p></div>
+    </div>
+    <div class="install" style="margin-top:14px">
+      <div class="istep"><h3>Pin SuperK</h3><p>Click the puzzle icon in your toolbar, then pin <b>SuperK</b> so it's one click away.</p></div>
+    </div>
+  </section>
+
+  <section class="sec" aria-label="How to use">
+    <h2>How to use on the Parul LMS</h2>
+    <p class="sub">Your classroom session is detected automatically — nothing to configure.</p>
+    <div class="steps">
+      <div class="step"><span class="n">01</span><h3>Open your classroom</h3><p>Go to <code>elearning.paruluniversity.ac.in</code>, log in, and open any course: <code>/classrooms/&lt;id&gt;/student</code>.</p></div>
+      <div class="step"><span class="n">02</span><h3>Click the SuperK icon</h3><p>Open any subject in the page, then click SuperK in your toolbar. It locks onto that subject automatically.</p></div>
+      <div class="step"><span class="n">03</span><h3>Download all</h3><p>Click <b>Download all</b> for the whole subject as one ZIP, or tick files and click <b>Selected</b>.</p></div>
+    </div>
+  </section>
+
+  <section class="sec" aria-label="Troubleshooting">
+    <h2>Common troubleshooting</h2>
+    <p class="sub">The two answers every student needs.</p>
+    <div class="faq">
+      <details><summary>The popup says "Page bridge is outdated — refresh tab"?</summary><p>This happens if you reloaded the extension while the LMS tab was already open. Simply press <code>F5</code> / Refresh on your LMS tab and reopen SuperK.</p></details>
+      <details><summary>What if a subject has over 150MB of PDFs?</summary><p>SuperK has an automatic memory safeguard. Past ~150MB it skips the single ZIP and downloads the files individually instead — same PDFs, zero browser crashes.</p></details>
+    </div>
+  </section>
+
+  <div class="cta-row">
+    <a class="btn btn-ink" href="releases/superk-1.0.0.zip">Download SuperK (v1.0.0 ZIP)</a>
+    <a class="btn btn-paper" href="story.html">Why SuperK exists
+      <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14" /><path d="m13 6 6 6-6 6" /></svg></a>
+  </div>
+</main>
+
+<footer class="foot">
+  <div class="wrap foot-row">
+    <div class="foot-brand"><img src="assets/logo-white.svg" alt="SuperK logo" /><span>© 2026 SuperK · v1.0.0 · Created by Kabali Gamer.</span><a class="ig" href="https://www.instagram.com/kabali.gamer/" target="_blank" rel="noopener" aria-label="SuperK on Instagram"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="5" /><circle cx="12" cy="12" r="4" /><circle cx="17.2" cy="6.8" r="1.1" fill="currentColor" stroke="none" /></svg></a><span class="ver" style="font:600 10px var(--mono);letter-spacing:.1em;border:1px solid rgba(243,240,231,.45);border-radius:99px;padding:3px 9px;">v1.0.0</span></div>
+    <nav class="foot-links" aria-label="Footer">
+      <a href="index.html">Home</a>
+      <a href="story.html">Story</a>
+      <a href="installation.html">Installation Guide</a>
+      <a href="terms.html">Terms &amp; Conditions</a>
+      <a href="privacy.html">Privacy Policy</a>
+      <a href="cookies.html">Cookie Statement</a>
+      <a href="feedback.html">Bug Reports &amp; Feedback</a>
+    </nav>
+    <p class="disclaimer">SuperK is an independent student utility and is not officially affiliated with Parul University or Edorer.</p>
+  </div>
+</footer>
+
+<script>
+  document.getElementById("menuBtn").onclick = () => document.getElementById("navLinks").classList.toggle("open");
+  const io = new IntersectionObserver((es) => es.forEach((e) => { if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); } }), { threshold: .1, rootMargin: "0px 0px -6% 0px" });
+  [...document.querySelectorAll("main .page-hero, main section, main .doc, main .fb-layout, main .cta-row")].forEach((el, i) => { el.classList.add("rv", "d" + ((i % 4) + 1)); io.observe(el); });
+</script>
+</body>
+</html>

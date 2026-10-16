@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Privacy Policy — SuperK by Kabali Gamer</title>
+<meta name="description" content="SuperK Zero-Data Collection Policy: what the extension accesses, why each permission exists, and the no-trackers guarantee." />
+<link rel="icon" href="assets/favicon.ico" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700;800&family=Montserrat:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="tokens.css" />
+<link rel="stylesheet" href="site.css?v=4" />
+<style>
+  .page-hero { padding: 56px 0 6px; }
+  .page-hero h1 { font: 800 clamp(32px, 4.6vw, 48px)/1.05 var(--display); letter-spacing: -.03em; margin: 14px 0 12px; }
+  .doc { background: var(--card); border: 1.5px solid var(--ink); border-radius: 18px; box-shadow: var(--tactile); padding: clamp(24px, 4vw, 40px); margin-top: 26px; }
+  .doc h2 { font: 700 19px/1.3 var(--display); letter-spacing: -.01em; margin: 30px 0 8px; }
+  .doc h2:first-child { margin-top: 0; }
+  .doc p { font-size: 14.5px; color: var(--ink2); margin: 0 0 14px; }
+  .doc p strong, .doc li strong { color: var(--ink); }
+  .doc ul { margin: 0 0 14px; padding-left: 22px; color: var(--ink2); font-size: 14.5px; list-style: none; padding-left: 0; }
+  .doc li { margin-bottom: 10px; }
+  .doc code { font: 600 12px var(--mono); background: var(--paper2); border: 1px solid var(--line); border-radius: 6px; padding: 1px 6px; word-break: break-all; }
+  .doc .eff { font: 600 12px var(--mono); color: var(--mut); letter-spacing: .08em; margin-bottom: 22px; }
+  @media (max-width: 640px) { .page-hero { padding-top: 40px; } }
+</style>
+</head>
+<body>
+<div class="grain" aria-hidden="true"></div>
+<div class="announce"><div class="wrap"><span>v1.0.0 is here — one-click subject ZIPs are live</span><a href="releases/superk-1.0.0.zip">Get the ZIP</a></div></div>
+<nav class="nav" aria-label="Primary">
+  <div class="wrap nav-row">
+    <a class="brand" href="index.html"><img src="assets/logo.svg" alt="SuperK logo" /><b>SuperK</b><span class="ver">v1.0.0 Official</span></a>
+    <div class="links" id="navLinks">
+      <a href="index.html#features">Features</a>
+      <a href="story.html">Story</a>
+      <a href="installation.html">Installation Guide</a>
+      <a href="terms.html">Terms</a>
+      <a href="privacy.html">Privacy</a>
+      <a href="feedback.html">Feedback</a>
+    </div>
+    <button class="menu-btn" id="menuBtn" aria-label="Open menu"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M4 7h16" /><path d="M4 12h16" /><path d="M4 17h16" /></svg></button>
+    <a class="btn btn-ink btn-sm" href="releases/superk-1.0.0.zip">Download Extension</a>
+  </div>
+</nav>
+
+<main class="wrap">
+  <div class="page-hero">
+    <p class="eyebrow rule">Privacy</p>
+    <h1>Privacy Policy</h1>
+  </div>
+
+  <div class="doc">
+    <p class="eff">EFFECTIVE DATE: OCTOBER 17, 2026 · PRODUCT: SUPERK (CREATED BY KABALI GAMER)</p>
+    <h2>1. Our Commitment to Your Privacy</h2>
+    <p>SuperK was built by a student, for students. We believe privacy is a fundamental right. SuperK operates under a strict <strong>Zero-Data Collection Policy</strong>. We do not collect, store, transmit, track, or sell any personal data, usage metrics, or browsing activities.</p>
+    <h2>2. What Information SuperK Accesses &amp; Why</h2>
+    <p>To function, SuperK requires specific browser permissions. Here is transparently how each permission is used:</p>
+    <ul>
+      <li><strong>Active Tab (<code>activeTab</code>):</strong> Used solely when you click the extension popup to verify that you are currently viewing an authorized Parul University classroom page (<code>elearning.paruluniversity.ac.in</code>).</li>
+      <li><strong>Storage (<code>storage</code>):</strong> Used entirely locally on your device (<code>chrome.storage.local</code>) to cache the list of discovered PDF titles and download progress during your active session. No data is synchronized across external servers.</li>
+      <li><strong>Downloads (<code>downloads</code>):</strong> Used solely to save the requested PDF or ZIP files to your browser's local <code>Downloads/Parul/</code> folder.</li>
+      <li><strong>Host permissions:</strong> <code>elearning.paruluniversity.ac.in</code> bridges the classroom view; <code>platform-api.edorer.com</code> reads the subject syllabus using your existing local session token; <code>*.digitaloceanspaces.com</code> downloads the authorized PDF buffers from the university's cloud storage.</li>
+    </ul>
+    <h2>3. Authentication &amp; Credential Security</h2>
+    <p>SuperK <strong>never</strong> sees or stores your password. When you log in to the university portal, your browser creates a local authentication session token in your browser's <code>localStorage</code>. SuperK merely passes this existing local token in memory to fetch your enrolled subjects list. Your credentials are never transmitted anywhere other than the official university API.</p>
+    <h2>4. Third-Party Analytics and Telemetry</h2>
+    <p>SuperK contains:</p>
+    <ul>
+      <li>❌ <strong>No Google Analytics or trackers</strong></li>
+      <li>❌ <strong>No user fingerprinting</strong></li>
+      <li>❌ <strong>No ad networks</strong></li>
+      <li>❌ <strong>No remote logging servers</strong></li>
+    </ul>
+    <p>All network communication takes place directly and exclusively between your browser and the official university LMS infrastructure.</p>
+    <h2>5. Contact</h2>
+    <p>If you have any questions or security disclosures regarding this policy, please reach out to the developer, <strong>Kabali Gamer</strong>, via the official project repository.</p>
+  </div>
+</main>
+
+<footer class="foot">
+  <div class="wrap foot-row">
+    <div class="foot-brand"><img src="assets/logo-white.svg" alt="SuperK logo" /><span>© 2026 SuperK · v1.0.0 · Created by Kabali Gamer.</span><a class="ig" href="https://www.instagram.com/kabali.gamer/" target="_blank" rel="noopener" aria-label="SuperK on Instagram"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="5" /><circle cx="12" cy="12" r="4" /><circle cx="17.2" cy="6.8" r="1.1" fill="currentColor" stroke="none" /></svg></a><span class="ver" style="font:600 10px var(--mono);letter-spacing:.1em;border:1px solid rgba(243,240,231,.45);border-radius:99px;padding:3px 9px;">v1.0.0</span></div>
+    <nav class="foot-links" aria-label="Footer">
+      <a href="index.html">Home</a>
+      <a href="story.html">Story</a>
+      <a href="installation.html">Installation Guide</a>
+      <a href="terms.html">Terms &amp; Conditions</a>
+      <a href="privacy.html">Privacy Policy</a>
+      <a href="cookies.html">Cookie Statement</a>
+      <a href="feedback.html">Bug Reports &amp; Feedback</a>
+    </nav>
+    <p class="disclaimer">SuperK is an independent student utility and is not officially affiliated with Parul University or Edorer.</p>
+  </div>
+</footer>
+
+<script>
+  document.getElementById("menuBtn").onclick = () => document.getElementById("navLinks").classList.toggle("open");
+  const io = new IntersectionObserver((es) => es.forEach((e) => { if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); } }), { threshold: .1, rootMargin: "0px 0px -6% 0px" });
+  [...document.querySelectorAll("main .page-hero, main section, main .doc, main .fb-layout, main .cta-row")].forEach((el, i) => { el.classList.add("rv", "d" + ((i % 4) + 1)); io.observe(el); });
+</script>
+</body>
+</html>

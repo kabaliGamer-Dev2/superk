@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" role="img" aria-label="SuperK concept V2-A">
+  <!-- V2-A: "Page stack + spark" (abstract). Three study sheets, one lifted short;
+       4-point spark = the 'super'. Charcoal disc, ivory mark. No text, no gradients. -->
+  <circle cx="128" cy="128" r="112" fill="#2A2529"/>
+  <rect x="72" y="98" width="112" height="24" rx="12" fill="#F3F0E7"/>
+  <rect x="72" y="132" width="76" height="24" rx="12" fill="#F3F0E7"/>
+  <rect x="72" y="166" width="112" height="24" rx="12" fill="#F3F0E7"/>
+  <polygon points="196,52 202,68 218,74 202,80 196,96 190,80 174,74 190,68" fill="#F3F0E7"/>
+</svg>

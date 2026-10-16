@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" role="img" aria-label="SuperK concept V4-A">
+  <!-- V4-A: "K lands the download" (lettermark + pictorial). Bold monoline K whose
+       lower leg drops into a down-arrow over a tray. Charcoal tile, ivory mark. -->
+  <rect x="28" y="28" width="200" height="200" rx="54" fill="#2A2529"/>
+  <path d="M92 62 V150 M164 62 L92 116" fill="none" stroke="#F3F0E7"
+        stroke-width="28" stroke-linecap="round" stroke-linejoin="round"/>
+  <polygon points="92,108 126,108 126,150 150,150 109,196 68,150 92,150" fill="#F3F0E7"/>
+  <rect x="66" y="204" width="124" height="13" rx="6.5" fill="#F3F0E7"/>
+</svg>

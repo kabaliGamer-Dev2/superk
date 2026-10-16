@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" role="img" aria-label="SuperK concept V5-A">
+  <!-- V5-A: "Book-grown K" (pictorial). An open book; the spine rises as a stem
+       and ivory arms strike from it — the K grows out of study. -->
+  <polygon points="40,84 112,62 112,202 40,202" fill="#2A2529"/>
+  <polygon points="144,62 216,84 216,202 144,202" fill="#2A2529"/>
+  <rect x="112" y="52" width="32" height="160" rx="10" fill="#2A2529"/>
+  <path d="M204 92 L136 140 L204 190" fill="none" stroke="#F3F0E7"
+        stroke-width="22" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

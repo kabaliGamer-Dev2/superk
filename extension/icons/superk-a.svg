@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" role="img" aria-label="SuperK concept A">
+  <!-- A: K-monogram on rounded tile. Upper arm = lightning bolt, lower leg = down arrow into tray. -->
+  <!-- Black-first master: solid black tile, white mark, no gradients, no text. -->
+  <rect x="16" y="16" width="224" height="224" rx="56" fill="#111111"/>
+  <!-- K stem -->
+  <rect x="60" y="60" width="34" height="136" rx="12" fill="#FFFFFF"/>
+  <!-- Upper arm: lightning bolt (45-degree angles) -->
+  <polygon points="108,66 188,66 148,116 176,116 112,168 130,122 104,122" fill="#FFFFFF"/>
+  <!-- Lower leg: down arrow -->
+  <polygon points="108,132 142,132 142,164 166,164 118,206 70,164 94,164 94,132" fill="#FFFFFF"/>
+  <!-- Document tray -->
+  <rect x="56" y="208" width="144" height="14" rx="7" fill="#FFFFFF"/>
+</svg>

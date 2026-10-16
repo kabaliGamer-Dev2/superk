@@ -1,0 +1,45 @@
+{
+  "manifest_version": 3,
+  "name": "SuperK",
+  "version": "1.0.0",
+  "description": "SuperK Official — Created by Kabali Gamer. Seamlessly list and bulk-download PDFs from Parul University elearning classrooms.",
+  "author": "Kabali Gamer",
+  "homepage_url": "https://superk-official.web.app",
+  "options_ui": { "page": "options.html", "open_in_tab": true },
+  "icons": {
+    "16": "icons/gemini-16.png",
+    "48": "icons/gemini-48.png",
+    "128": "icons/gemini-128.png"
+  },
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "SuperK",
+    "default_icon": {
+      "16": "icons/gemini-16.png",
+      "48": "icons/gemini-48.png",
+      "128": "icons/gemini-128.png"
+    }
+  },
+  "permissions": ["storage", "downloads", "scripting", "activeTab"],
+  "host_permissions": [
+    "https://elearning.paruluniversity.ac.in/*",
+    "https://platform-api.edorer.com/*",
+    "https://*.digitaloceanspaces.com/*"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "content_scripts": [
+    {
+      "matches": ["https://elearning.paruluniversity.ac.in/classrooms/*"],
+      "js": ["content.js"],
+      "run_at": "document_idle"
+    }
+  ],
+  "web_accessible_resources": [
+    {
+      "resources": ["injected.js"],
+      "matches": ["https://elearning.paruluniversity.ac.in/*"]
+    }
+  ]
+}

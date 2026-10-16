@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" role="img" aria-label="SuperK concept V3-B">
+  <!-- V3-B: "Bookmark spine K" (lettermark + pictorial). The K's spine IS a saved-study
+       bookmark (notched foot); arms reach from it. Charcoal tile, ivory mark. -->
+  <rect x="28" y="28" width="200" height="200" rx="54" fill="#2A2529"/>
+  <polygon points="92,52 126,52 126,196 109,180 92,196" fill="#F3F0E7"/>
+  <path d="M178 62 L118 118 M118 138 L178 194" fill="none" stroke="#F3F0E7"
+        stroke-width="26" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

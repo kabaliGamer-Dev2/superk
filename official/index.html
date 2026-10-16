@@ -1,0 +1,601 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>SuperK — Grab every lecture PDF. Beautifully. | Created by Kabali Gamer</title>
+<meta name="description" content="SuperK is a free browser utility for Parul University students. One-click batch downloads, clean unit-based filenames, and instant topic ZIP archives." />
+<link rel="icon" href="assets/favicon.ico" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700;800&family=Montserrat:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="tokens.css" />
+<link rel="stylesheet" href="site.css?v=4" />
+<style>
+  /* --- INDEX backdrop: Warm Paper dot-grid + top glow (behind everything) --- */
+  body {
+    background:
+      radial-gradient(70% 46% at 50% -6%, rgba(42, 37, 41, .10), transparent 70%),
+      radial-gradient(rgba(42, 37, 41, .10) 1px, transparent 1.25px),
+      var(--paper);
+    background-size: auto, 24px 24px, auto;
+  }
+  /* --- HERO: Engineered for iOS, 9:16 Portrait & Desktop --- */
+  .hero {
+    padding: clamp(38px, 6.5vw, 80px) 0 clamp(24px, 3vw, 32px);
+    position: relative;
+    overflow-x: clip;
+    -webkit-text-size-adjust: 100%;
+  }
+  .hero-grid {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+  }
+  .hero-copy {
+    width: 100%;
+    max-width: 52rem;
+    min-width: 0;
+    margin: 0 auto;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  /* Eyebrow Pill with Live Emerald Indicator */
+  .hero-badge-wrap {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 14px;
+    width: 100%;
+  }
+  .hero-eyebrow {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    flex-wrap: wrap;
+    max-width: 100%;
+    padding: 0 16px;
+  }
+  .hero-eyebrow-ver {
+    flex: none;
+    font: 600 10px var(--mono);
+    letter-spacing: .08em;
+    background: var(--ink);
+    color: var(--acc-ink);
+    border-radius: 99px;
+    padding: 3px 11px;
+    white-space: nowrap;
+  }
+  .hero-eyebrow-text {
+    font: 600 10px var(--mono);
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    color: var(--ink2);
+    text-align: center;
+  }
+
+  /* Display Title with Fluid clamp and iOS safe highlights */
+  .hero-title {
+    font-family: var(--display);
+    font-weight: 800;
+    font-size: clamp(28px, 6.2vw, 56px);
+    line-height: 1.08;
+    letter-spacing: -.035em;
+    margin: 0 auto 16px;
+    color: var(--ink);
+    max-width: 22ch;
+    text-wrap: balance;
+    -webkit-font-smoothing: antialiased;
+  }
+  .hl-badge {
+    display: inline-block;
+    background: var(--ink);
+    color: var(--acc-ink);
+    padding: 2px 14px 4px;
+    border-radius: 12px;
+    margin: 4px 0;
+    box-shadow: 3px 3px 0 rgba(42, 37, 41, .25);
+    transform: rotate(-0.8deg);
+    -webkit-box-decoration-break: clone;
+    box-decoration-break: clone;
+  }
+  .hero-subline {
+    font-weight: 700;
+    font-size: clamp(21px, 4.6vw, 42px);
+    letter-spacing: -.02em;
+    color: var(--ink2);
+    display: inline-block;
+  }
+
+  /* Lede paragraph with graceful readability */
+  .hero-copy .lede {
+    font: 500 clamp(14px, 3.6vw, 16.5px)/1.6 var(--body);
+    color: var(--ink2);
+    max-width: 35em;
+    margin: 0 auto 24px;
+    text-wrap: pretty;
+    padding: 0 4px;
+  }
+
+  /* CTAs: Fluid responsive cluster */
+  .ctas {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    max-width: 540px;
+    margin: 0 auto;
+  }
+  .hero-cta-primary {
+    background: var(--ink);
+    color: var(--acc-ink);
+    box-shadow: var(--tactile);
+    min-height: 50px;
+    padding: 13px 22px;
+    font: 700 14px var(--body);
+    border-radius: 13px;
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+  }
+  .hero-cta-primary b { font-weight: 800; }
+  .hero-cta-secondary {
+    background: var(--card);
+    color: var(--ink);
+    box-shadow: var(--tactile);
+    min-height: 50px;
+    padding: 13px 20px;
+    font: 700 14px var(--body);
+    border-radius: 13px;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .hero-cta-secondary small {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--ink2);
+    margin-left: 2px;
+  }
+
+  /* Micro-Trust line */
+  .hero-trust {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin: 16px auto 0;
+    font: 600 clamp(11px, 2.7vw, 12px) var(--mono);
+    color: var(--ink2);
+  }
+  .trust-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    white-space: nowrap;
+  }
+  .trust-item svg { color: var(--ink); flex: none; }
+  .trust-sep { opacity: .35; }
+
+  /* Creator Tagline */
+  .hero-author {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+    flex-wrap: wrap;
+    margin: 14px auto 0;
+    padding: 6px 14px;
+    background: rgba(42, 37, 41, .04);
+    border: 1px solid var(--line-soft);
+    border-radius: 99px;
+    font: 500 12.5px var(--body);
+    color: var(--ink2);
+  }
+  .author-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    background: var(--ink);
+    color: var(--acc-ink);
+    text-decoration: none;
+    padding: 3px 10px;
+    border-radius: 99px;
+    font: 700 12px var(--body);
+    transition: transform .12s var(--ease), box-shadow .12s;
+  }
+  .author-badge:hover { transform: scale(1.04); }
+  .author-badge svg { flex: none; }
+  .author-note { font-size: 12px; color: var(--ink2); white-space: nowrap; }
+
+  /* Meta compatibility tags */
+  .meta-row {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 14px;
+    padding-bottom: 4px;
+  }
+  .meta-tag {
+    font: 600 clamp(10px, 2.4vw, 11px) var(--mono);
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    color: var(--ink2);
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 99px;
+    padding: 4px 11px;
+    white-space: nowrap;
+  }
+
+  /* 9:16 Portrait / iPhone Specific Touch Engineering */
+  @media (max-width: 600px) {
+    .hero {
+      padding-top: max(32px, env(safe-area-inset-top));
+      padding-bottom: 22px;
+    }
+    .hero-title {
+      font-size: clamp(28px, 8.2vw, 38px);
+      letter-spacing: -.03em;
+      max-width: none;
+      line-height: 1.1;
+    }
+    .hl-badge {
+      font-size: clamp(24px, 7vw, 32px);
+      padding: 2px 10px 3px;
+      transform: none;
+      border-radius: 9px;
+    }
+    .hero-subline {
+      font-size: clamp(20px, 5.8vw, 26px);
+      display: block;
+      margin-top: 2px;
+    }
+    .hero-eyebrow-text {
+      font-size: 10px;
+    }
+    .ctas {
+      display: grid;
+      grid-template-columns: 1fr;
+      justify-items: center;
+      gap: 12px;
+    }
+    .hero-cta-primary, .hero-cta-secondary {
+      width: 100%;
+      max-width: 300px;
+      justify-content: center;
+      min-height: 44px;
+      font-size: 13px;
+      border-radius: 11px;
+      padding: 10px 16px;
+    }
+    .hero-trust {
+      gap: 6px 10px;
+      font-size: 11px;
+    }
+    .hero-author {
+      font-size: 12px;
+      padding: 6px 12px;
+    }
+    .meta-row {
+      gap: 5px;
+    }
+    .meta-tag {
+      font-size: 9.5px;
+      padding: 3.5px 9px;
+    }
+  }
+  section.block { padding: 64px 0 0; }
+  section.block h2 { font: 700 clamp(26px, 3.4vw, 34px)/1.15 var(--display); letter-spacing: -.02em; margin: 0 0 10px; }
+  .sub { color: var(--ink2); max-width: 44em; margin: 0 0 30px; }
+  .quote { background: var(--card); border: 1.5px solid var(--ink); border-radius: 20px; box-shadow: var(--tactile); padding: 0; overflow: hidden; display: grid; grid-template-columns: 120px 1fr; }
+  .quote-mark { background: var(--ink); color: var(--acc-ink); font: 800 84px/1 var(--display); display: grid; place-items: center; padding-top: 26px; }
+  .quote-body { padding: clamp(24px, 4vw, 40px); }
+  .quote p { font: 500 clamp(16px, 2.2vw, 21px)/1.65 var(--body); margin: 0 0 18px; }
+  .quote cite { font: 600 13px var(--body); font-style: normal; }
+  .quote cite span { font-family: var(--mono); font-size: 11px; color: var(--mut); letter-spacing: .08em; }
+  .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+  .card { background: var(--card); border: 1.5px solid var(--ink); border-radius: 16px; padding: 24px 22px; box-shadow: var(--soft-shadow); transition: transform .16s var(--ease), box-shadow .16s var(--ease), background .16s; }
+  .card h3 { font: 600 18px/1.3 var(--display); margin: 0 0 8px; letter-spacing: -.01em; }
+  .card p { font-size: 14px; color: var(--ink2); margin: 0; }
+  .card code { font: 600 12px var(--mono); background: var(--paper2); border: 1px solid var(--line); border-radius: 6px; padding: 1px 6px; }
+  .preview { background: var(--ink); color: var(--acc-ink); border-radius: 20px; padding: clamp(26px, 4vw, 48px); position: relative; overflow: hidden; }
+  .preview h2 { color: var(--acc-ink); }
+  .preview .sub { color: #c9c5cf; }
+  .preview figure { margin: 26px 0 0; border: 1.5px solid var(--acc-ink); border-radius: 14px; overflow: hidden; }
+  .preview figure img { display: block; width: 100%; height: auto; }
+  .demo-video { aspect-ratio: 16 / 9; }
+  .demo-video video, .demo-video iframe { display: block; width: 100%; height: 100%; object-fit: cover; background: #000; border: 0; }
+  .follow { background: var(--card); border: 1.5px solid var(--ink); border-radius: 20px; box-shadow: var(--tactile); padding: clamp(22px, 3.4vw, 32px); display: grid; grid-template-columns: auto 1fr auto; gap: 20px; align-items: center; }
+  .follow-mark { width: 52px; height: 52px; border-radius: 16px; display: grid; place-items: center; background: var(--ink); color: var(--acc-ink); }
+  .follow .eyebrow { margin: 0 0 6px; }
+  .follow-quote { font: 700 clamp(18px, 2.4vw, 24px)/1.3 var(--display); letter-spacing: -.02em; margin: 0 0 6px; }
+  .follow-sub { font-size: 14px; color: var(--ink2); margin: 0; }
+  .follow-sub .handle { font: 600 12.5px var(--mono); background: var(--paper2); border: 1px solid var(--line); border-radius: 6px; padding: 1px 8px; white-space: nowrap; }
+  @media (max-width: 900px) { .follow { grid-template-columns: auto 1fr; } .follow .btn { grid-column: 1 / -1; justify-content: center; } }
+  .tags { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 20px; }
+  .tags span { font: 600 11px var(--mono); letter-spacing: .1em; text-transform: uppercase; border: 1px solid rgba(243,240,231,.45); color: var(--acc-ink); border-radius: 99px; padding: 6px 14px; }
+  .steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+  .step { background: var(--card); border: 1.5px solid var(--ink); border-radius: 16px; padding: 24px 22px; }
+  .step h3 { font: 600 17px var(--display); margin: 0 0 8px; }
+  .step p { font-size: 13.5px; color: var(--ink2); margin: 0; }
+  .step code { font: 600 11.5px var(--mono); background: var(--paper2); border: 1px solid var(--line); border-radius: 6px; padding: 1px 6px; word-break: break-all; }
+  .final { text-align: center; padding: 70px 0 10px; }
+  .final h2 { font: 800 clamp(28px, 4vw, 42px)/1.1 var(--display); letter-spacing: -.025em; margin: 0 0 14px; }
+  .final p { color: var(--ink2); margin: 0 0 26px; }
+  @media (max-width: 900px) {
+    .grid, .steps { grid-template-columns: 1fr; }
+    .steps::before { display: none; }
+    .compare { grid-template-columns: 1fr; }
+    .vs { justify-self: center; transform: rotate(90deg); }
+    .quote { grid-template-columns: 1fr; }
+    .quote-mark { padding: 10px; font-size: 56px; }
+  }
+</style>
+</head>
+<body>
+<div class="grain" aria-hidden="true"></div>
+<div class="announce"><div class="wrap"><span>v1.0.0 is here — one-click subject ZIPs are live</span><a href="releases/superk-1.0.0.zip">Get the ZIP</a></div></div>
+<nav class="nav" aria-label="Primary">
+  <div class="wrap nav-row">
+    <a class="brand" href="index.html"><img src="assets/logo.svg" alt="SuperK logo" /><b>SuperK</b><span class="ver">v1.0.0 Official</span></a>
+    <div class="links" id="navLinks">
+      <a href="#features">Features</a>
+      <a href="story.html">Story</a>
+      <a href="installation.html">Installation Guide</a>
+      <a href="terms.html">Terms</a>
+      <a href="privacy.html">Privacy</a>
+      <a href="feedback.html">Feedback</a>
+    </div>
+    <button class="menu-btn" id="menuBtn" aria-label="Open menu"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M4 7h16" /><path d="M4 12h16" /><path d="M4 17h16" /></svg></button>
+    <a class="btn btn-ink btn-sm" href="releases/superk-1.0.0.zip">Download Extension</a>
+  </div>
+</nav>
+
+<header class="hero wrap">
+  <div class="hero-grid">
+    <div class="hero-copy">
+      <div class="hero-badge-wrap">
+        <div class="hero-eyebrow">
+          <span class="hero-eyebrow-ver">v1.0.0</span>
+          <span class="hero-eyebrow-text">Student-built utility · For Parul University students</span>
+        </div>
+      </div>
+      <h1 class="hero-title">
+        Grab every lecture PDF.<br />
+        <span class="hl-badge">Beautifully. Instantly.</span><br />
+        <span class="hero-subline">In one single click.</span>
+      </h1>
+      <p class="lede">
+        When our university LMS was updated and removed all direct download options, SuperK was engineered to solve it. One-click batch downloads, clean unit-based filenames, and instant topic ZIP archives.
+      </p>
+      <div class="ctas">
+        <a class="btn btn-ink hero-cta-primary" href="releases/superk-1.0.0.zip" download="superk-1.0.0.zip">
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11" /><path d="m7 11 5 5 5-5" /><path d="M4 20h16" /></svg>
+          <span>Download SuperK <b>(v1.0.0 ZIP)</b></span>
+        </a>
+        <a class="btn btn-paper hero-cta-secondary" href="installation.html">
+          <span>Install Guide <small>(30s)</small></span>
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14" /><path d="m13 6 6 6-6 6" /></svg>
+        </a>
+      </div>
+      <div class="hero-trust">
+        <span class="trust-item"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 13 4 4L19 7" /></svg> 100% Free Forever</span>
+        <span class="trust-sep" aria-hidden="true">·</span>
+        <span class="trust-item"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 13 4 4L19 7" /></svg> No Account Needed</span>
+        <span class="trust-sep" aria-hidden="true">·</span>
+        <span class="trust-item"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 13 4 4L19 7" /></svg> Zero Tracking</span>
+      </div>
+      <div class="hero-author">
+        <span class="author-label">Crafted with ❤️ by</span>
+        <a class="author-badge" href="https://www.instagram.com/kabali.gamer/" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5" /><circle cx="12" cy="12" r="4" /><circle cx="17.2" cy="6.8" r="1.1" fill="currentColor" stroke="none" /></svg>
+          <b>Kabali Gamer</b>
+        </a>
+        <span class="author-note">· for all Parul students</span>
+      </div>
+      <div class="meta-row" aria-label="Compatibility">
+        <span class="meta-tag">Manifest V3</span>
+        <span class="meta-tag">100% Client-Side</span>
+        <span class="meta-tag">Chrome · Brave · Edge · Opera · Arc</span>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <div class="stats rv" aria-label="SuperK at a glance">
+    <div class="stat"><b>1-click</b><span>Subject ZIP</span></div>
+    <div class="stat"><b>100+</b><span>PDFs per class</span></div>
+    <div class="stat"><b>0</b><span>Trackers · telemetry</span></div>
+    <div class="stat"><b>30s</b><span>Install time</span></div>
+  </div>
+  <div class="marquee rv d1" aria-hidden="true"><div class="mtrack" id="mtrack"><span>8. PPTs</span><span>6. Assignments</span><span>7. Lecture Notes</span><span>11. Question Bank</span><span>12. Previous Papers</span><span>5. Lab Manuals</span></div></div>
+
+  <section class="block" aria-label="Origin story">
+    <div class="quote rv">
+      <div class="quote-mark" aria-hidden="true">&ldquo;</div>
+      <div class="quote-body">
+        <p>A few days ago, our college website was updated, and we lost the option to download our lecture notes and PPTs completely. Whenever exams came around, we couldn't save our study materials offline. I couldn't let students struggle through that. So, I built SuperK. Now, every student can install SuperK and download all their course PDFs with a single click.</p>
+        <cite>— <b>Kabali Gamer</b>, Creator &amp; Lead Developer of SuperK<br /><span><a href="story.html" style="color:inherit">READ THE FULL STORY →</a></span></cite>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" aria-label="Follow the creator">
+    <div class="follow rv">
+      <span class="follow-mark" aria-hidden="true"><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="5" /><circle cx="12" cy="12" r="4" /><circle cx="17.2" cy="6.8" r="1.1" fill="currentColor" stroke="none" /></svg></span>
+      <div>
+        <p class="eyebrow">Follow the build</p>
+        <p class="follow-quote">Built in the open, for every student.</p>
+        <p class="follow-sub">Follow along for SuperK updates, instant fix notes, and new drops — first and fastest. <span class="handle">@kabali.gamer</span></p>
+      </div>
+      <a class="btn btn-ink" href="https://www.instagram.com/kabali.gamer/" target="_blank" rel="noopener">Follow for updates</a>
+    </div>
+  </section>
+
+  <section class="block" id="features" aria-label="Features">
+    <p class="eyebrow rule rv">What SuperK does</p>
+    <h2 class="rv">Six reasons students install it</h2>
+    <p class="sub rv">Everything runs inside your browser, on your machine, using the classroom session you already have open.</p>
+    <div class="grid">
+      <article class="card rv"><span class="num" aria-hidden="true">01</span><div class="ic"><svg viewBox="0 0 24 24" width="21" height="21" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v11" /><path d="m7 11 5 5 5-5" /><path d="M4 20h16" /></svg></div><h3>One-Click Subject ZIP Packaging</h3><p>Why download 30 files one-by-one? SuperK groups all PPTs, Lecture Notes, Lab Manuals, and Question Papers into topic folders (<code>8. PPTs/</code>, <code>6. Assignments/</code>) and generates an organized <code>.zip</code> file instantly.</p></article>
+      <article class="card rv d1"><span class="num" aria-hidden="true">02</span><div class="ic"><svg viewBox="0 0 24 24" width="21" height="21" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7V5h16v2" /><path d="M9 5v14" /><path d="M18 9l-6 3 6 3" /></svg></div><h3>Smart Automatic Filename Resolution</h3><p>Faculty frequently title every document generically as "PPT" or "Assignment". SuperK automatically inspects the cloud storage slug, detects the real unit name (e.g. <code>Unit 1 - Graph Theory</code>), and numbers duplicates neatly.</p></article>
+      <article class="card rv d2"><span class="num" aria-hidden="true">03</span><div class="ic"><svg viewBox="0 0 24 24" width="21" height="21" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 4 14h6l-1 8 9-12h-6l1-8z" /></svg></div><h3>Paced &amp; Safe Downloads</h3><p>Never trigger browser crashes or cloud rate-limits. SuperK uses an intelligent 350ms throttle queue that guarantees smooth, reliable disk writes.</p></article>
+      <article class="card rv"><span class="num" aria-hidden="true">04</span><div class="ic"><svg viewBox="0 0 24 24" width="21" height="21" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4" /><path d="M4 21c0-4 3.6-6.5 8-6.5s8 2.5 8 6.5" /></svg></div><h3>Zero Account Setup</h3><p>No secondary logins or new accounts. SuperK runs securely in your browser and automatically detects your active classroom session.</p></article>
+      <article class="card rv d1"><span class="num" aria-hidden="true">05</span><div class="ic"><svg viewBox="0 0 24 24" width="21" height="21" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="10" width="16" height="11" rx="2" /><path d="M8 10V7a4 4 0 0 1 8 0v3" /></svg></div><h3>100% Private &amp; Client-Side</h3><p>Zero telemetry. Zero analytics. No remote servers. Your authentication tokens and PDF requests never leave your own machine.</p></article>
+      <article class="card rv d2"><span class="num" aria-hidden="true">06</span><div class="ic"><svg viewBox="0 0 24 24" width="21" height="21" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7" /><path d="m20 20-3.5-3.5" /></svg></div><h3>Built-in Quick Filter (<code>⌘K</code> / <code>Ctrl+K</code>)</h3><p>Instant debounced search. Type any unit, topic, or document title to filter through hundreds of classroom documents in milliseconds.</p></article>
+    </div>
+  </section>
+
+  <section class="block" aria-label="Before and after">
+    <p class="eyebrow rule rv">Before vs. after</p>
+    <h2 class="rv">From faculty mess to your folder</h2>
+    <p class="sub rv">Uploaded files arrive named like inventory codes. SuperK renames, sorts, and packs them.</p>
+    <div class="pipe rv" aria-label="How SuperK renames files">
+      <div class="pipe-head"><img src="assets/logo.svg" alt="" aria-hidden="true" /><b>Rename engine</b><span class="cnt">4 in → 4 out</span></div>
+      <div class="prow rv"><span class="old">8f9a2b-unit-1.pdf</span><span class="arr" aria-hidden="true">→</span><span class="new"><b>Unit 1.pdf</b><span>8. PPTs /</span></span></div>
+      <div class="prow rv d1"><span class="old">PPT (1).pdf</span><span class="arr" aria-hidden="true">→</span><span class="new"><b>Unit 2.pdf</b><span>8. PPTs /</span></span></div>
+      <div class="prow rv d2"><span class="old">Assignments.pdf</span><span class="arr" aria-hidden="true">→</span><span class="new"><b>Assignment1.pdf</b><span>6. Assignments /</span></span></div>
+      <div class="prow rv d3"><span class="old">Assignments(1).pdf</span><span class="arr" aria-hidden="true">→</span><span class="new"><b>Assignment2.pdf</b><span>6. Assignments /</span></span></div>
+      <div class="pipe-foot rv d4"><span>Parul / Data Structures.zip</span><span class="ok">3 folders · sorted</span></div>
+    </div>
+  </section>
+
+  <section class="block" aria-label="Interface preview">
+    <div class="preview rv">
+      <p class="eyebrow" style="color:#c9c5cf">Interface preview</p>
+      <h2>Locked to your subject.<br />Ordered. Numbered. Zipped.</h2>
+      <p class="sub">The popup detects the open subject from the page breadcrumb, lists its topics in syllabus order, resolves "PPT, PPT, PPT" into Unit 1–5, and packs it all into one ZIP.</p>
+      <figure class="demo-video"><iframe src="https://www.youtube.com/embed/fHB4gBzqxI8" title="SuperK walkthrough: open classroom, lock subject, download PDFs as ZIP" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe></figure>
+      <div class="tags"><span>Search</span><span>Topic counters</span><span>Per-file download</span><span>Download all → ZIP</span></div>
+    </div>
+  </section>
+
+  <section class="block" id="how" aria-label="How it works">
+    <p class="eyebrow rule rv">How it works</p>
+    <h2 class="rv">Three steps, thirty seconds</h2>
+    <p class="sub rv">No accounts, no configuration, no tech skills needed.</p>
+    <div class="steps">
+      <div class="step rv"><span class="n">01</span><h3>Open your classroom</h3><p>Go to <code>elearning.paruluniversity.ac.in/classrooms/.../student</code> and log in with your university credentials.</p></div>
+      <div class="step rv d1"><span class="n">02</span><h3>Click the SuperK icon</h3><p>Open any subject in the page, then click SuperK in your browser extensions toolbar. It locks onto that subject automatically.</p></div>
+      <div class="step rv d2"><span class="n">03</span><h3>Download all</h3><p>Click <b>Download all</b> to get the entire subject in a neat ZIP, or tick specific files and click <b>Selected</b>.</p></div>
+    </div>
+  </section>
+
+  <section class="block" aria-label="Install in 30 seconds">
+    <p class="eyebrow rule rv">Developer-mode install</p>
+    <h2 class="rv">On your toolbar in 30 seconds</h2>
+    <p class="sub rv">Side-load the unpacked ZIP once — full walkthrough with screenshots lives on the <a href="installation.html" style="color:var(--ink);font-weight:700">Installation Guide</a> page.</p>
+    <div class="term rv">
+      <div class="term-bar" aria-hidden="true"><i></i><i></i><i></i><span>terminal — install superk</span></div>
+      <ol>
+        <li>Download <code>superk-1.0.0.zip</code> and extract it somewhere safe</li>
+        <li>Open <code>chrome://extensions</code> <b>→</b> flip <b>Developer mode</b> on</li>
+        <li>Hit <b>Load unpacked</b>, pick the folder, pin SuperK. Done.</li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="block" aria-label="Privacy and security">
+    <div class="trust rv">
+      <p class="eyebrow" style="margin-bottom:10px">Why students trust it</p>
+      <h2 style="margin-top:0">Your login never leaves your machine.</h2>
+      <div class="trust-badges">
+        <span><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m5 13 4 4L19 7" /></svg>100% Local Processing</span>
+        <span><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m5 13 4 4L19 7" /></svg>Zero External Servers</span>
+        <span><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m5 13 4 4L19 7" /></svg>Manifest V3 Compliant</span>
+      </div>
+      <p class="fine">Transparency note: SuperK reads <code>edorer.auth.session</code> inside your own browser only, to fetch your classroom file list from <code>platform-api.edorer.com</code>. That token is never sent anywhere else — there is nowhere else to send it to.</p>
+    </div>
+  </section>
+
+  <section class="block" id="faq" aria-label="Questions">
+    <p class="eyebrow rule rv">Quick answers</p>
+    <h2 class="rv">Asked by every student</h2>
+    <p class="sub rv">Straight answers, no fine print.</p>
+    <div class="faq">
+      <details class="rv"><summary>Why did my ZIP download say "Too Big"?</summary><p>Your browser tab only has so much RAM. SuperK measures every file first, and past ~150 MB it skips the single ZIP and downloads the files individually instead — same PDFs, zero crashes.</p></details>
+      <details class="rv d1"><summary>Why does it say "No Auth" or fallback mode?</summary><p>Your classroom login session hadn't loaded when SuperK scanned. Refresh the Edorer classroom tab once so the session token loads, then reopen SuperK.</p></details>
+      <details class="rv d2"><summary>Which browsers work?</summary><p>Chrome, Brave, Edge, Opera, and Arc — any Chromium browser that supports Manifest V3 extensions.</p></details>
+    </div>
+  </section>
+
+  <section class="block" aria-label="Feedback">
+    <div class="preview rv">
+      <p class="eyebrow" style="color:#c9c5cf">Feedback &amp; bug reports</p>
+      <h2>Hit a bug? Tell us in 30 seconds.</h2>
+      <p class="sub">No Auth, too-big ZIPs, wrong names, new ideas — reports land directly with the developers. No GitHub needed.</p>
+      <div class="ctas"><a class="btn btn-paper" href="feedback.html">Open the feedback form
+        <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14" /><path d="m13 6 6 6-6 6" /></svg></a></div>
+      <div class="tags"><span>Bug reports</span><span>Feature ideas</span><span>Download errors</span></div>
+    </div>
+  </section>
+
+  <section class="final wrap" aria-label="Download">
+    <p class="pill rv">Free forever · No account · No tracking</p>
+    <h2 class="rv" style="margin-top:16px">Get SuperK for your next exam.</h2>
+    <p class="rv">Install once. Download every subject, beautifully, all semester.</p>
+    <div class="ctas rv" style="justify-content:center"><a class="btn btn-ink" href="releases/superk-1.0.0.zip">Download SuperK (v1.0.0 ZIP)</a></div>
+  </section>
+
+</main>
+
+<footer class="foot">
+  <div class="wrap foot-row">
+    <div class="foot-brand"><img src="assets/logo-white.svg" alt="SuperK logo" /><span>© 2026 SuperK · v1.0.0 · Created by Kabali Gamer.</span><a class="ig" href="https://www.instagram.com/kabali.gamer/" target="_blank" rel="noopener" aria-label="SuperK on Instagram"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="5" /><circle cx="12" cy="12" r="4" /><circle cx="17.2" cy="6.8" r="1.1" fill="currentColor" stroke="none" /></svg></a><span class="ver" style="font:600 10px var(--mono);letter-spacing:.1em;border:1px solid rgba(243,240,231,.45);border-radius:99px;padding:3px 9px;">v1.0.0</span></div>
+    <nav class="foot-links" aria-label="Footer">
+      <a href="index.html">Home</a>
+      <a href="story.html">Story</a>
+      <a href="installation.html">Installation Guide</a>
+      <a href="terms.html">Terms &amp; Conditions</a>
+      <a href="privacy.html">Privacy Policy</a>
+      <a href="cookies.html">Cookie Statement</a>
+      <a href="feedback.html">Bug Reports &amp; Feedback</a>
+    </nav>
+    <p class="disclaimer">SuperK is an independent student utility and is not officially affiliated with Parul University or Edorer.</p>
+  </div>
+</footer>
+
+<script>
+  const topics = ["8. PPTs", "6. Assignments", "7. Lecture Notes", "11. Question Bank", "12. Previous Papers", "5. Lab Manuals"];
+  const half = topics.map((t) => `<span>${t}</span>`).join("");
+  document.getElementById("mtrack").innerHTML = half + half + half + half;
+  const navLinks = document.getElementById("navLinks");
+  const menuBtn = document.getElementById("menuBtn");
+  menuBtn.onclick = (e) => {
+    e.stopPropagation();
+    const open = navLinks.classList.toggle("open");
+    menuBtn.setAttribute("aria-expanded", open ? "true" : "false");
+  };
+  navLinks.querySelectorAll("a").forEach((a) => {
+    a.onclick = () => {
+      navLinks.classList.remove("open");
+      menuBtn.setAttribute("aria-expanded", "false");
+    };
+  });
+  document.addEventListener("click", (e) => {
+    if (!navLinks.contains(e.target) && e.target !== menuBtn) {
+      navLinks.classList.remove("open");
+      menuBtn.setAttribute("aria-expanded", "false");
+    }
+  });
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") {
+      navLinks.classList.remove("open");
+      menuBtn.setAttribute("aria-expanded", "false");
+    }
+  });
+  const io = new IntersectionObserver((es) => es.forEach((e) => { if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); } }), { threshold: .12 });
+  document.querySelectorAll(".rv:not(.in)").forEach((el) => io.observe(el));
+</script>
+</body>
+</html>
