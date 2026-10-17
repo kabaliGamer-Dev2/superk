@@ -65,7 +65,7 @@ Design law: Warm Paper (`#F3F0E7` paper / `#2A2529` ink), Poppins display / Mont
 | `terms.html` / `privacy.html` / `cookies.html` | Exact spec legal text in tactile doc cards |
 | `feedback.html` | Standalone form page (see §3.3): hero, form + roadmap + promise side, success/error modal |
 
-Shared chrome: announce bar, sticky nav (hamburger icon ≤860px, 44px touch target), dark footer with Instagram glyph, `?v=N` stylesheet cache-busting (current `site.css?v=7`; favicon `assets/favicon.ico?v=2`).
+Shared chrome: announce bar, sticky nav (hamburger icon ≤860px, 44px touch target), dark footer with Instagram glyph, `?v=N` cache-busting (current `site.css?v=9` + `site.js?v=1`; favicon `assets/favicon.ico?v=2`, plus a root `favicon.ico` copy so the browser's default probe gets a 200).
 
 ### 3.2 Hero iterations (decisions, newest last)
 1. Two-column + browser mock → removed (rotation/shadow caused mobile overflow).
@@ -75,7 +75,7 @@ Shared chrome: announce bar, sticky nav (hamburger icon ≤860px, 44px touch tar
 5. Pill claiming "Official LMS Utility" → replaced with "Student-built utility" eyebrow (no university endorsement implied; other "SuperK Official" wordings still exist — scrub on request).
 6. Sticky mobile download bar → deleted. `body{overflow-x:clip}` guard added.
 7. Index backdrop: dot-grid + top glow (page `<style>`, behind everything).
-8. **All reveal/fade motion removed** (user request): every page renders fully static — elements visible immediately, no fade, no scroll-linked opacity. See §3.5.
+8. ~~All reveal/fade motion removed~~ — superseded 2026-10-17: scroll-linked fades stay banned, but a one-shot on-entry reveal system was later requested and added (§3.5).
 
 ### 3.3 Feedback system (Firestore, zero server)
 - 4 SVG pill types (bug/feature/download/praise), conditional 1-tap issue checks, auto-fix tip box, dynamic placeholders, browser select + version chip, screenshot-link field (link only — file upload is a paid Formspree-tier concept, dropped with Formspree), optional contact, SVG star rating, inline validation.
@@ -87,14 +87,21 @@ Shared chrome: announce bar, sticky nav (hamburger icon ≤860px, 44px touch tar
 ### 3.4 Media journey
 Local 86MB mp4 (poster frame, exact 16:9, excluded from deploys via `firebase.json` ignore — free-tier bandwidth protection) → Google Drive embed (rejected: unreliable) → **YouTube unlisted `fHB4gBzqxI8`** (`youtube.com/embed/…`, full 1080p60 after processing).
 
-### 3.5 Motion system — REMOVED (2026-10-17)
-The whole reveal/fade system was deleted on user request because partial-opacity mid-scroll states (scroll-linked `view()` timeline + `.rv` observer fade + `rvEnter` page-entry cascade + `d1–d5` stagger delays + all per-page IntersectionObserver scripts) made elements look broken on phones. **Current state: all 7 pages are fully static** — every element paints at full opacity immediately, no scroll dependence, no load cascade. `site.css` cache token is `?v=7`.
-Kept (intentional micro-interactions, not fades): marquee ticker, send-button spinner, button hover/press, FAQ open/close, rename-arrow nudge, `prefers-reduced-motion` guard. No blur by rule.
-Do NOT re-add `.rv`, `rvView`, `rvEnter`, or IntersectionObserver reveal code — it is deliberately gone.
+### 3.5 Motion system — one-shot scroll reveal (2026-10-17; reverses the earlier removal)
+History: the original motion system was deleted because scroll-linked partial opacity (a `view()` timeline + `.rv` observer fade + `rvEnter` cascade + `d1–d5` delays) made elements look broken while scrolling on phones. The user then requested a premium *one-shot* reveal on entry — so the rule is now: **one-shot IntersectionObserver reveals only, never scroll-linked opacity.** Rules that keep it safe (do not regress):
+- **Reveal once, keep forever**: elements get `.is-visible` when they enter the viewport (`rootMargin: 0 0 -8% 0`, threshold 0), then are unobserved — scrolling back up changes nothing, no re-animation.
+- **Hiding is opt-in via JS**: an inline head snippet adds `.js` to `<html>` only when IntersectionObserver exists; a 2.5s safety timer removes it unless `site.js` sets `data-reveal-ready`. JS disabled/failed → no hiding, all pages render fully static (live-verified).
+- **Reusable classes**: `.reveal` (element) and `.stagger` (container; children get 60ms stepped `--rd` delays, capped 360ms). Values: start `opacity:0` + `translateY(28px)`, in 700ms `cubic-bezier(.22,1,.36,1)`, transform+opacity only, no layout shift.
+- **First viewport stays static**: heroes, announce bar, nav and footer are never `.reveal`; reveal starts below the fold; one shared observer for the whole page.
+- **Reduced motion**: `prefers-reduced-motion: reduce` forces everything fully visible with `transition: none` (live-verified).
+- Targets: 37 on index, 16 on installation, 3 on story/feedback, 1 on each legal page. Engine lives in `official/site.js` + `site.css`.
+Kept (intentional micro-interactions, not fades): marquee ticker, send-button spinner, button hover/press, FAQ open/close, rename-arrow nudge. No blur by rule.
+Still banned: scroll-linked opacity, `.rv`/`rvView`/`rvEnter`/`d1–d5` names, per-page observer scripts — use `.reveal`/`.is-visible` + `site.js` only. (FAQ and `.pipe` are revealed as whole containers so `details[open]` transitions are never clobbered.)
 
 ### 3.6 Favicon & embed-params refresh (2026-10-17)
 - Favicon was stale (old circled-K from Oct 16, pre-logo-lock) — rebuilt from the locked orbit-K mark: 16/24/32px frames from `brand/gemini-small.svg` (heavy cut), 48px from `brand/gemini-master.svg` (standard cut), PNG-compressed ICO entries like the original file. All pages link `assets/favicon.ico?v=2` (favicon caches are sticky; bump to `?v=3` on the next icon change).
 - Index video iframe now uses the exact user-provided YouTube share embed (`?si=…&start=1`, `web-share` in the allow list, `referrerpolicy="strict-origin-when-cross-origin"`), still responsive 16:9 with `loading="lazy"`. Keep the video **Unlisted** — setting it Private breaks embeds.
+- Root `official/favicon.ico` added (copy of the same file) so clients that probe `/favicon.ico` directly get a 200 instead of the console 404.
 
 ### 3.7 Install section: fake terminal → setup checklist card (2026-10-17)
 User callout: the old `.term` block dressed *instructions* in terminal costume (window dots, `$` prompts, mono body text) — mono belongs to code, not explanations. Replaced with a paper "side-load checklist" card built from the site's own vocabulary:
@@ -105,7 +112,16 @@ User callout: the old `.term` block dressed *instructions* in terminal costume (
 - Cache token now `site.css?v=7`. Live-verified at 393px and 1440px: zero horizontal overflow, copy click → "Copied" → revert, no console errors. Do not regress to terminal styling for this block.
 
 ### 3.8 Instagram
-`https://www.instagram.com/kabali.gamer/` — hero attr link, follow card, footer glyph, feedback promise card.
+`https://www.instagram.com/kabali.gamer/` — hero attr link, follow card, footer glyph, feedback promise card, and the download gate below.
+
+### 3.9 Download gate — T&C + Instagram unlock (2026-10-17)
+Every ZIP link site-wide (announce bar, nav, hero, setup-card chip, install/story/finale CTAs) opens a full-screen gate. Built entirely in `official/site.js` — a delegated listener on `a[href*="releases/superk-1.0.0.zip"]`, so there is no per-page markup to maintain.
+- Two steps: (1) agree to the T&C/Privacy checkbox, (2) follow `@kabali.gamer` on Instagram (opens the profile in a new tab; the click marks the step done). When both are complete the download button enables and triggers the real ZIP download (temporary anchor + a `passing` guard so the synthetic click doesn't re-open the gate).
+- Clicking the locked button nudges focus to the first incomplete step; the lock line swaps "Both steps unlock the download button." → "You're all set — grab the ZIP."
+- Persistence: `superk.gate.terms.v1` + `superk.gate.instagram.v1` in localStorage — return visits open pre-completed.
+- A11y: `role="dialog"` + `aria-modal`, focus moves to the title on open, Tab/Shift+Tab trap, Escape closes, scroll lock via `html.gate-lock`, focus restored to the triggering link on close.
+- Warm Paper styling lives in `site.css` (`.gate*`). `text-align: left` is set on `.gate` deliberately — the index page body is `text-align: center` and the gate must not inherit it.
+- Live-verified end-to-end (open → locked → both steps → real download → persistence after reload → Escape + focus trap) at 1440×900 and 393×852.
 
 ---
 
@@ -132,7 +148,7 @@ User callout: the old `.term` block dressed *instructions* in terminal costume (
 1. **"SuperK Official" wording** — nav badge, page titles, extension strings still say Official (meaning your official release). Scrub to affiliation-safe copy on request.
 2. **Per-report notifications** (email/Discord on each feedback) — Phase 2 via Trigger Email extension or Cloud Function.
 3. **Video** — confirm Unlisted + finished HD processing on YouTube.
-4. **Cache discipline** — bump `site.css?v=N` (currently **v7**) on every style deploy; favicon token currently `?v=2` (sticky cache — bump on the next icon change); HTML can sit in cache ~1h (ask users to hard-refresh after big launches).
+4. **Cache discipline** — bump `site.css?v=N` (currently **v9**) and `site.js?v=N` (currently **v1**) on every deploy of those files; favicon token currently `?v=2` (sticky cache — bump on the next icon change); HTML can sit in cache ~1h (ask users to hard-refresh after big launches).
 5. **Local dev server** — `python -m http.server 8099` in `official/` (note: sandbox test browsers cannot reach this machine's localhost; verify via direct HTTP or the live URL).
 
 ## 7. Key Identifiers (public-safe)

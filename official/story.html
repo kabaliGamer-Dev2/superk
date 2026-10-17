@@ -10,7 +10,9 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700;800&family=Montserrat:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet" />
 <link rel="stylesheet" href="tokens.css" />
-<link rel="stylesheet" href="site.css?v=7" />
+<link rel="stylesheet" href="site.css?v=9" />
+<script>(function () { var d = document.documentElement; if (!("IntersectionObserver" in window)) return; d.classList.add("js"); setTimeout(function () { if (!d.hasAttribute("data-reveal-ready")) d.classList.remove("js"); }, 2500); })();</script>
+<script src="site.js?v=1" defer></script>
 <style>
   .page-hero { padding: 56px 0 6px; }
   .page-hero h1 { font: 800 clamp(32px, 4.6vw, 48px)/1.05 var(--display); letter-spacing: -.03em; margin: 14px 0 12px; }
@@ -59,7 +61,7 @@
     <p class="byline">By <a href="https://www.instagram.com/kabali.gamer/" target="_blank" rel="noopener" style="color:var(--ink);font-weight:700;text-decoration:none">Kabali Gamer</a> · Student Developer &amp; Creator</p>
   </div>
 
-  <div class="quote">
+  <div class="quote reveal">
     <div class="quote-mark" aria-hidden="true">&ldquo;</div>
     <div class="quote-body">
       <p>A few days ago, our college website was updated, and we lost the option to download our lecture notes and PPTs completely. Whenever exams came around, we couldn't save our study materials offline. I couldn't let students struggle through that. So, I built SuperK. Now, every student can install SuperK and download all their course PDFs with a single click.</p>
@@ -67,7 +69,7 @@
     </div>
   </div>
 
-  <div class="doc">
+  <div class="doc reveal">
     <h2>The Day the Downloads Disappeared</h2>
     <p>In October 2026, students across Parul University logged into the elearning portal to prepare for upcoming examinations and assignments. Following a recent LMS platform update, every single direct PDF download link had vanished.</p>
     <p>Lecture presentations, handwritten faculty notes, laboratory manuals, and previous years' question papers were locked inside an embedded viewer (<code>PdfViewer-*.js</code>). Students could only read files page-by-page inside the browser tab. Offline study during commute, printing notes, and revising without an internet connection suddenly became impossible.</p>
@@ -85,7 +87,7 @@
     <p class="sign">— <a href="https://www.instagram.com/kabali.gamer/" target="_blank" rel="noopener" style="color:inherit;text-decoration:none;border-bottom:1.5px solid var(--ink)">Kabali Gamer</a></p>
   </div>
 
-  <div class="cta-row">
+  <div class="cta-row reveal">
     <a class="btn btn-ink" href="releases/superk-1.0.0.zip">Download SuperK (v1.0.0 ZIP)</a>
     <a class="btn btn-paper" href="installation.html">Install Guide (30s)
       <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14" /><path d="m13 6 6 6-6 6" /></svg></a>

@@ -10,7 +10,9 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700;800&family=Montserrat:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet" />
 <link rel="stylesheet" href="tokens.css" />
-<link rel="stylesheet" href="site.css?v=7" />
+<link rel="stylesheet" href="site.css?v=9" />
+<script>(function () { var d = document.documentElement; if (!("IntersectionObserver" in window)) return; d.classList.add("js"); setTimeout(function () { if (!d.hasAttribute("data-reveal-ready")) d.classList.remove("js"); }, 2500); })();</script>
+<script src="site.js?v=1" defer></script>
 <style>
   /* --- INDEX backdrop: Warm Paper dot-grid + top glow (behind everything) --- */
   body {
@@ -412,7 +414,7 @@
 
 <main class="wrap">
 
-  <div class="stats" aria-label="SuperK at a glance">
+  <div class="stats reveal" aria-label="SuperK at a glance">
     <div class="stat"><b>1-click</b><span>Subject ZIP</span></div>
     <div class="stat"><b>100+</b><span>PDFs per class</span></div>
     <div class="stat"><b>0</b><span>Trackers · telemetry</span></div>
@@ -421,7 +423,7 @@
   <div class="marquee" aria-hidden="true"><div class="mtrack" id="mtrack"><span>8. PPTs</span><span>6. Assignments</span><span>7. Lecture Notes</span><span>11. Question Bank</span><span>12. Previous Papers</span><span>5. Lab Manuals</span></div></div>
 
   <section class="block" aria-label="Origin story">
-    <div class="quote">
+    <div class="quote reveal">
       <div class="quote-mark" aria-hidden="true">&ldquo;</div>
       <div class="quote-body">
         <p>A few days ago, our college website was updated, and we lost the option to download our lecture notes and PPTs completely. Whenever exams came around, we couldn't save our study materials offline. I couldn't let students struggle through that. So, I built SuperK. Now, every student can install SuperK and download all their course PDFs with a single click.</p>
@@ -431,7 +433,7 @@
   </section>
 
   <section class="block" aria-label="Follow the creator">
-    <div class="follow">
+    <div class="follow reveal">
       <span class="follow-mark" aria-hidden="true"><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="5" /><circle cx="12" cy="12" r="4" /><circle cx="17.2" cy="6.8" r="1.1" fill="currentColor" stroke="none" /></svg></span>
       <div>
         <p class="eyebrow">Follow the build</p>
@@ -443,24 +445,24 @@
   </section>
 
   <section class="block" id="features" aria-label="Features">
-    <p class="eyebrow rule">What SuperK does</p>
-    <h2>Six reasons students install it</h2>
-    <p class="sub">Everything runs inside your browser, on your machine, using the classroom session you already have open.</p>
-    <div class="grid">
-      <article class="card"><span class="num" aria-hidden="true">01</span><div class="ic"><svg viewBox="0 0 24 24" width="21" height="21" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v11" /><path d="m7 11 5 5 5-5" /><path d="M4 20h16" /></svg></div><h3>One-Click Subject ZIP Packaging</h3><p>Why download 30 files one-by-one? SuperK groups all PPTs, Lecture Notes, Lab Manuals, and Question Papers into topic folders (<code>8. PPTs/</code>, <code>6. Assignments/</code>) and generates an organized <code>.zip</code> file instantly.</p></article>
-      <article class="card"><span class="num" aria-hidden="true">02</span><div class="ic"><svg viewBox="0 0 24 24" width="21" height="21" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7V5h16v2" /><path d="M9 5v14" /><path d="M18 9l-6 3 6 3" /></svg></div><h3>Smart Automatic Filename Resolution</h3><p>Faculty frequently title every document generically as "PPT" or "Assignment". SuperK automatically inspects the cloud storage slug, detects the real unit name (e.g. <code>Unit 1 - Graph Theory</code>), and numbers duplicates neatly.</p></article>
-      <article class="card"><span class="num" aria-hidden="true">03</span><div class="ic"><svg viewBox="0 0 24 24" width="21" height="21" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 4 14h6l-1 8 9-12h-6l1-8z" /></svg></div><h3>Paced &amp; Safe Downloads</h3><p>Never trigger browser crashes or cloud rate-limits. SuperK uses an intelligent 350ms throttle queue that guarantees smooth, reliable disk writes.</p></article>
-      <article class="card"><span class="num" aria-hidden="true">04</span><div class="ic"><svg viewBox="0 0 24 24" width="21" height="21" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4" /><path d="M4 21c0-4 3.6-6.5 8-6.5s8 2.5 8 6.5" /></svg></div><h3>Zero Account Setup</h3><p>No secondary logins or new accounts. SuperK runs securely in your browser and automatically detects your active classroom session.</p></article>
-      <article class="card"><span class="num" aria-hidden="true">05</span><div class="ic"><svg viewBox="0 0 24 24" width="21" height="21" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="10" width="16" height="11" rx="2" /><path d="M8 10V7a4 4 0 0 1 8 0v3" /></svg></div><h3>100% Private &amp; Client-Side</h3><p>Zero telemetry. Zero analytics. No remote servers. Your authentication tokens and PDF requests never leave your own machine.</p></article>
-      <article class="card"><span class="num" aria-hidden="true">06</span><div class="ic"><svg viewBox="0 0 24 24" width="21" height="21" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7" /><path d="m20 20-3.5-3.5" /></svg></div><h3>Built-in Quick Filter (<code>⌘K</code> / <code>Ctrl+K</code>)</h3><p>Instant debounced search. Type any unit, topic, or document title to filter through hundreds of classroom documents in milliseconds.</p></article>
+    <p class="eyebrow rule reveal">What SuperK does</p>
+    <h2 class="reveal">Six reasons students install it</h2>
+    <p class="sub reveal">Everything runs inside your browser, on your machine, using the classroom session you already have open.</p>
+    <div class="grid stagger">
+      <article class="card reveal"><span class="num" aria-hidden="true">01</span><div class="ic"><svg viewBox="0 0 24 24" width="21" height="21" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v11" /><path d="m7 11 5 5 5-5" /><path d="M4 20h16" /></svg></div><h3>One-Click Subject ZIP Packaging</h3><p>Why download 30 files one-by-one? SuperK groups all PPTs, Lecture Notes, Lab Manuals, and Question Papers into topic folders (<code>8. PPTs/</code>, <code>6. Assignments/</code>) and generates an organized <code>.zip</code> file instantly.</p></article>
+      <article class="card reveal"><span class="num" aria-hidden="true">02</span><div class="ic"><svg viewBox="0 0 24 24" width="21" height="21" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7V5h16v2" /><path d="M9 5v14" /><path d="M18 9l-6 3 6 3" /></svg></div><h3>Smart Automatic Filename Resolution</h3><p>Faculty frequently title every document generically as "PPT" or "Assignment". SuperK automatically inspects the cloud storage slug, detects the real unit name (e.g. <code>Unit 1 - Graph Theory</code>), and numbers duplicates neatly.</p></article>
+      <article class="card reveal"><span class="num" aria-hidden="true">03</span><div class="ic"><svg viewBox="0 0 24 24" width="21" height="21" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 4 14h6l-1 8 9-12h-6l1-8z" /></svg></div><h3>Paced &amp; Safe Downloads</h3><p>Never trigger browser crashes or cloud rate-limits. SuperK uses an intelligent 350ms throttle queue that guarantees smooth, reliable disk writes.</p></article>
+      <article class="card reveal"><span class="num" aria-hidden="true">04</span><div class="ic"><svg viewBox="0 0 24 24" width="21" height="21" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4" /><path d="M4 21c0-4 3.6-6.5 8-6.5s8 2.5 8 6.5" /></svg></div><h3>Zero Account Setup</h3><p>No secondary logins or new accounts. SuperK runs securely in your browser and automatically detects your active classroom session.</p></article>
+      <article class="card reveal"><span class="num" aria-hidden="true">05</span><div class="ic"><svg viewBox="0 0 24 24" width="21" height="21" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="10" width="16" height="11" rx="2" /><path d="M8 10V7a4 4 0 0 1 8 0v3" /></svg></div><h3>100% Private &amp; Client-Side</h3><p>Zero telemetry. Zero analytics. No remote servers. Your authentication tokens and PDF requests never leave your own machine.</p></article>
+      <article class="card reveal"><span class="num" aria-hidden="true">06</span><div class="ic"><svg viewBox="0 0 24 24" width="21" height="21" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7" /><path d="m20 20-3.5-3.5" /></svg></div><h3>Built-in Quick Filter (<code>⌘K</code> / <code>Ctrl+K</code>)</h3><p>Instant debounced search. Type any unit, topic, or document title to filter through hundreds of classroom documents in milliseconds.</p></article>
     </div>
   </section>
 
   <section class="block" aria-label="Before and after">
-    <p class="eyebrow rule">Before vs. after</p>
-    <h2>From faculty mess to your folder</h2>
-    <p class="sub">Uploaded files arrive named like inventory codes. SuperK renames, sorts, and packs them.</p>
-    <div class="pipe" aria-label="How SuperK renames files">
+    <p class="eyebrow rule reveal">Before vs. after</p>
+    <h2 class="reveal">From faculty mess to your folder</h2>
+    <p class="sub reveal">Uploaded files arrive named like inventory codes. SuperK renames, sorts, and packs them.</p>
+    <div class="pipe reveal" aria-label="How SuperK renames files">
       <div class="pipe-head"><img src="assets/logo.svg" alt="" aria-hidden="true" /><b>Rename engine</b><span class="cnt">4 in → 4 out</span></div>
       <div class="prow"><span class="old">8f9a2b-unit-1.pdf</span><span class="arr" aria-hidden="true">→</span><span class="new"><b>Unit 1.pdf</b><span>8. PPTs /</span></span></div>
       <div class="prow"><span class="old">PPT (1).pdf</span><span class="arr" aria-hidden="true">→</span><span class="new"><b>Unit 2.pdf</b><span>8. PPTs /</span></span></div>
@@ -471,7 +473,7 @@
   </section>
 
   <section class="block" aria-label="Interface preview">
-    <div class="preview">
+    <div class="preview reveal">
       <p class="eyebrow" style="color:#c9c5cf">Interface preview</p>
       <h2>Locked to your subject.<br />Ordered. Numbered. Zipped.</h2>
       <p class="sub">The popup detects the open subject from the page breadcrumb, lists its topics in syllabus order, resolves "PPT, PPT, PPT" into Unit 1–5, and packs it all into one ZIP.</p>
@@ -481,21 +483,21 @@
   </section>
 
   <section class="block" id="how" aria-label="How it works">
-    <p class="eyebrow rule">How it works</p>
-    <h2>Three steps, thirty seconds</h2>
-    <p class="sub">No accounts, no configuration, no tech skills needed.</p>
-    <div class="steps">
-      <div class="step"><span class="n">01</span><h3>Open your classroom</h3><p>Go to <code>elearning.paruluniversity.ac.in/classrooms/.../student</code> and log in with your university credentials.</p></div>
-      <div class="step"><span class="n">02</span><h3>Click the SuperK icon</h3><p>Open any subject in the page, then click SuperK in your browser extensions toolbar. It locks onto that subject automatically.</p></div>
-      <div class="step"><span class="n">03</span><h3>Download all</h3><p>Click <b>Download all</b> to get the entire subject in a neat ZIP, or tick specific files and click <b>Selected</b>.</p></div>
+    <p class="eyebrow rule reveal">How it works</p>
+    <h2 class="reveal">Three steps, thirty seconds</h2>
+    <p class="sub reveal">No accounts, no configuration, no tech skills needed.</p>
+    <div class="steps stagger">
+      <div class="step reveal"><span class="n">01</span><h3>Open your classroom</h3><p>Go to <code>elearning.paruluniversity.ac.in/classrooms/.../student</code> and log in with your university credentials.</p></div>
+      <div class="step reveal"><span class="n">02</span><h3>Click the SuperK icon</h3><p>Open any subject in the page, then click SuperK in your browser extensions toolbar. It locks onto that subject automatically.</p></div>
+      <div class="step reveal"><span class="n">03</span><h3>Download all</h3><p>Click <b>Download all</b> to get the entire subject in a neat ZIP, or tick specific files and click <b>Selected</b>.</p></div>
     </div>
   </section>
 
   <section class="block" aria-label="Install in 30 seconds">
-    <p class="eyebrow rule">Developer-mode install</p>
-    <h2>On your toolbar in 30 seconds</h2>
-    <p class="sub">Side-load the unpacked ZIP once — no store, no account, works in every Chromium browser.</p>
-    <div class="setup">
+    <p class="eyebrow rule reveal">Developer-mode install</p>
+    <h2 class="reveal">On your toolbar in 30 seconds</h2>
+    <p class="sub reveal">Side-load the unpacked ZIP once — no store, no account, works in every Chromium browser.</p>
+    <div class="setup reveal">
       <ol class="setup-steps">
         <li>
           <span class="setup-n" aria-hidden="true">1</span>
@@ -537,7 +539,7 @@
   </section>
 
   <section class="block" aria-label="Privacy and security">
-    <div class="trust">
+    <div class="trust reveal">
       <p class="eyebrow" style="margin-bottom:10px">Why students trust it</p>
       <h2 style="margin-top:0">Your login never leaves your machine.</h2>
       <div class="trust-badges">
@@ -550,10 +552,10 @@
   </section>
 
   <section class="block" id="faq" aria-label="Questions">
-    <p class="eyebrow rule">Quick answers</p>
-    <h2>Asked by every student</h2>
-    <p class="sub">Straight answers, no fine print.</p>
-    <div class="faq">
+    <p class="eyebrow rule reveal">Quick answers</p>
+    <h2 class="reveal">Asked by every student</h2>
+    <p class="sub reveal">Straight answers, no fine print.</p>
+    <div class="faq reveal">
       <details><summary>Why did my ZIP download say "Too Big"?</summary><p>Your browser tab only has so much RAM. SuperK measures every file first, and past ~150 MB it skips the single ZIP and downloads the files individually instead — same PDFs, zero crashes.</p></details>
       <details><summary>Why does it say "No Auth" or fallback mode?</summary><p>Your classroom login session hadn't loaded when SuperK scanned. Refresh the Edorer classroom tab once so the session token loads, then reopen SuperK.</p></details>
       <details><summary>Which browsers work?</summary><p>Chrome, Brave, Edge, Opera, and Arc — any Chromium browser that supports Manifest V3 extensions.</p></details>
@@ -561,7 +563,7 @@
   </section>
 
   <section class="block" aria-label="Feedback">
-    <div class="preview">
+    <div class="preview reveal">
       <p class="eyebrow" style="color:#c9c5cf">Feedback &amp; bug reports</p>
       <h2>Hit a bug? Tell us in 30 seconds.</h2>
       <p class="sub">No Auth, too-big ZIPs, wrong names, new ideas — reports land directly with the developers. No GitHub needed.</p>
@@ -571,11 +573,11 @@
     </div>
   </section>
 
-  <section class="final wrap" aria-label="Download">
-    <p class="pill">Free forever · No account · No tracking</p>
-    <h2 style="margin-top:16px">Get SuperK for your next exam.</h2>
-    <p>Install once. Download every subject, beautifully, all semester.</p>
-    <div class="ctas" style="justify-content:center"><a class="btn btn-ink" href="releases/superk-1.0.0.zip">Download SuperK (v1.0.0 ZIP)</a></div>
+  <section class="final wrap stagger" aria-label="Download">
+    <p class="pill reveal">Free forever · No account · No tracking</p>
+    <h2 class="reveal" style="margin-top:16px">Get SuperK for your next exam.</h2>
+    <p class="reveal">Install once. Download every subject, beautifully, all semester.</p>
+    <div class="ctas reveal" style="justify-content:center"><a class="btn btn-ink" href="releases/superk-1.0.0.zip">Download SuperK (v1.0.0 ZIP)</a></div>
   </section>
 
 </main>

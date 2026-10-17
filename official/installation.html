@@ -10,7 +10,9 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700;800&family=Montserrat:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet" />
 <link rel="stylesheet" href="tokens.css" />
-<link rel="stylesheet" href="site.css?v=7" />
+<link rel="stylesheet" href="site.css?v=9" />
+<script>(function () { var d = document.documentElement; if (!("IntersectionObserver" in window)) return; d.classList.add("js"); setTimeout(function () { if (!d.hasAttribute("data-reveal-ready")) d.classList.remove("js"); }, 2500); })();</script>
+<script src="site.js?v=1" defer></script>
 <style>
   .page-hero { padding: 56px 0 6px; }
   .page-hero h1 { font: 800 clamp(32px, 4.6vw, 48px)/1.05 var(--display); letter-spacing: -.03em; margin: 14px 0 12px; }
@@ -56,39 +58,39 @@
   </div>
 
   <section class="sec" aria-label="Quick install">
-    <h2>Quick install via unpacked extension</h2>
-    <p class="sub">Five steps, about thirty seconds.</p>
-    <div class="install">
-      <div class="istep"><h3>Download</h3><p>Click <b>Download SuperK.zip</b> and unzip it somewhere safe (e.g. <code>Documents/SuperK</code>).</p></div>
-      <div class="istep"><h3>Open extensions page</h3><p>Chrome: <code>chrome://extensions</code><br />Brave: <code>brave://extensions</code><br />Edge: <code>edge://extensions</code></p></div>
-      <div class="istep"><h3>Enable Developer mode</h3><p>Toggle the <b>Developer mode</b> switch in the top-right corner of the page.</p></div>
-      <div class="istep"><h3>Load unpacked</h3><p>Click <b>Load unpacked</b> (top-left) and select the unzipped <code>extension</code> folder.</p></div>
+    <h2 class="reveal">Quick install via unpacked extension</h2>
+    <p class="sub reveal">Five steps, about thirty seconds.</p>
+    <div class="install stagger">
+      <div class="istep reveal"><h3>Download</h3><p>Click <b>Download SuperK.zip</b> and unzip it somewhere safe (e.g. <code>Documents/SuperK</code>).</p></div>
+      <div class="istep reveal"><h3>Open extensions page</h3><p>Chrome: <code>chrome://extensions</code><br />Brave: <code>brave://extensions</code><br />Edge: <code>edge://extensions</code></p></div>
+      <div class="istep reveal"><h3>Enable Developer mode</h3><p>Toggle the <b>Developer mode</b> switch in the top-right corner of the page.</p></div>
+      <div class="istep reveal"><h3>Load unpacked</h3><p>Click <b>Load unpacked</b> (top-left) and select the unzipped <code>extension</code> folder.</p></div>
     </div>
-    <div class="install" style="margin-top:14px">
-      <div class="istep"><h3>Pin SuperK</h3><p>Click the puzzle icon in your toolbar, then pin <b>SuperK</b> so it's one click away.</p></div>
+    <div class="install stagger" style="margin-top:14px">
+      <div class="istep reveal"><h3>Pin SuperK</h3><p>Click the puzzle icon in your toolbar, then pin <b>SuperK</b> so it's one click away.</p></div>
     </div>
   </section>
 
   <section class="sec" aria-label="How to use">
-    <h2>How to use on the Parul LMS</h2>
-    <p class="sub">Your classroom session is detected automatically — nothing to configure.</p>
-    <div class="steps">
-      <div class="step"><span class="n">01</span><h3>Open your classroom</h3><p>Go to <code>elearning.paruluniversity.ac.in</code>, log in, and open any course: <code>/classrooms/&lt;id&gt;/student</code>.</p></div>
-      <div class="step"><span class="n">02</span><h3>Click the SuperK icon</h3><p>Open any subject in the page, then click SuperK in your toolbar. It locks onto that subject automatically.</p></div>
-      <div class="step"><span class="n">03</span><h3>Download all</h3><p>Click <b>Download all</b> for the whole subject as one ZIP, or tick files and click <b>Selected</b>.</p></div>
+    <h2 class="reveal">How to use on the Parul LMS</h2>
+    <p class="sub reveal">Your classroom session is detected automatically — nothing to configure.</p>
+    <div class="steps stagger">
+      <div class="step reveal"><span class="n">01</span><h3>Open your classroom</h3><p>Go to <code>elearning.paruluniversity.ac.in</code>, log in, and open any course: <code>/classrooms/&lt;id&gt;/student</code>.</p></div>
+      <div class="step reveal"><span class="n">02</span><h3>Click the SuperK icon</h3><p>Open any subject in the page, then click SuperK in your toolbar. It locks onto that subject automatically.</p></div>
+      <div class="step reveal"><span class="n">03</span><h3>Download all</h3><p>Click <b>Download all</b> for the whole subject as one ZIP, or tick files and click <b>Selected</b>.</p></div>
     </div>
   </section>
 
   <section class="sec" aria-label="Troubleshooting">
-    <h2>Common troubleshooting</h2>
-    <p class="sub">The two answers every student needs.</p>
-    <div class="faq">
+    <h2 class="reveal">Common troubleshooting</h2>
+    <p class="sub reveal">The two answers every student needs.</p>
+    <div class="faq reveal">
       <details><summary>The popup says "Page bridge is outdated — refresh tab"?</summary><p>This happens if you reloaded the extension while the LMS tab was already open. Simply press <code>F5</code> / Refresh on your LMS tab and reopen SuperK.</p></details>
       <details><summary>What if a subject has over 150MB of PDFs?</summary><p>SuperK has an automatic memory safeguard. Past ~150MB it skips the single ZIP and downloads the files individually instead — same PDFs, zero browser crashes.</p></details>
     </div>
   </section>
 
-  <div class="cta-row">
+  <div class="cta-row reveal">
     <a class="btn btn-ink" href="releases/superk-1.0.0.zip">Download SuperK (v1.0.0 ZIP)</a>
     <a class="btn btn-paper" href="story.html">Why SuperK exists
       <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14" /><path d="m13 6 6 6-6 6" /></svg></a>
