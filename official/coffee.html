@@ -24,7 +24,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700;800&family=Montserrat:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet" />
 <link rel="stylesheet" href="tokens.css" />
-<link rel="stylesheet" href="site.css?v=12" />
+<link rel="stylesheet" href="site.css?v=13" />
 <noscript>
   <style>#qrTileLive{display:none}</style>
 </noscript>
@@ -237,6 +237,7 @@
       <a href="privacy.html">Privacy</a>
       <a href="feedback.html">Feedback</a>
       <a href="coffee.html">Buy a coffee</a>
+      <a class="nav-dl" href="releases/superk-1.0.0.zip">Download</a>
     </div>
     <button class="menu-btn" id="menuBtn" aria-label="Open menu" aria-expanded="false" aria-controls="navLinks"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M4 7h16" /><path d="M4 12h16" /><path d="M4 17h16" /></svg></button>
     <a class="btn btn-ink btn-sm" href="releases/superk-1.0.0.zip">Download Extension</a>
@@ -446,6 +447,7 @@
       <a href="cookies.html">Cookie Statement</a>
       <a href="feedback.html">Bug Reports &amp; Feedback</a>
       <a href="coffee.html">Buy a coffee</a>
+      <a href="https://github.com/kabaliGamer-Dev2/superk" target="_blank" rel="noopener">Source on GitHub</a>
     </nav>
     <p class="disclaimer">SuperK is an independent student utility and is not officially affiliated with Parul University or Edorer.</p>
   </div>
@@ -625,11 +627,10 @@
 
   cards.forEach(function (card) {
     card.addEventListener("click", function () { select(card); });
-    card.addEventListener("keydown", function (e) {
-      var i = cards.indexOf(card);
-      if (e.key === "ArrowRight" || e.key === "ArrowDown") { e.preventDefault(); cards[(i + 1) % cards.length].querySelector("input").focus(); }
-      else if (e.key === "ArrowLeft" || e.key === "ArrowUp") { e.preventDefault(); cards[(i - 1 + cards.length) % cards.length].querySelector("input").focus(); }
-    });
+    /* Arrow-key navigation is left to the browser's native radio-group behaviour:
+       it moves focus AND checks the next radio, then fires 'change' -> select().
+       A custom handler here would suppress the native check and strand keyboard
+       users on a focused-but-unselected amount. */
   });
 
   customInput.addEventListener("input", function () {

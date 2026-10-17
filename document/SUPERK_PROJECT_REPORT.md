@@ -158,6 +158,25 @@ Friend's full-site brief, Priority A shipped and live-verified. **Note: item A4 
 - **A7b gate honesty:** Instagram is now genuinely optional (accepting the Terms alone unlocks the ZIP); the un-verifiable "Followed" pill became "Done"; heading/subtitle/badges rewritten (title "One quick agreement", optional step badged `?`); JSON-LD `downloadUrl` now points at the install page (the ZIP stays directly reachable and the gate is never described as protection); the page behind the gate gets `inert` + `aria-hidden` while open, cleared on close.
 - **B1 folded in:** `v1.0.0 Official` nav badge removed from all six pages (required for the brief's own "search the file" test).
 
+### 3.13 Support page (`coffee.html`) + Priority B (2026-10-17)
+New page + the consistency items from the same brief.
+- **Support page:** `official/coffee.html` — UPI-only V1 (no gateway, no backend, no secrets in client code). Amount picker (₹49/99/199/499 + custom, validated), `Pay via UPI` deep link, Copy UPI ID, and two honest QR paths: one live code that re-encodes on every amount change, plus one fixed code for visitors who want to type their own amount. Copy is neutral (no tax/refund/charity claims, no fake success states).
+- **Dynamic QR:** `qrcode-generator` v1.4.4 (MIT, Kazuhiko Arase) **vendored locally** at `official/assets/qrcode.min.js` — no CDN on a payment page. Recorded in `THIRD-PARTY-NOTICES.md`.
+- **B2 footer consistency:** GitHub footer link added to the six pages missing it; MIT chip added to the five missing it.
+- **B4 skip link + `<main id="main">`:** added to story/installation/terms/privacy/cookies.
+- **B5 mobile Download:** the nav Download button is hidden ≤860px and nothing replaced it — a Download link now sits inside the open mobile menu on all 8 pages (`.nav-dl`, hidden on desktop).
+- **B6 head tags + sitemap:** canonical + Open Graph + Twitter cards added to the five pages that had none; `sitemap.xml` now lists all 8 pages with `<lastmod>` and priorities (it had 7, no lastmod).
+- **B7 `.grain` z-index:** was 200, painting over the gate (150) and feedback modal (120) — lowered to 40 so dialogs sit above the texture.
+- **B3 still open:** the mobile menu logic is duplicated inline across all 8 pages. It is the reason `coffee.html` shipped with a dead hamburger (markup copied, script forgotten) — see below.
+
+#### Known bugs found and fixed during this pass
+- **`coffee.html` keyboard amount selection was broken.** Arrow keys moved focus but never changed the selected amount — a custom `keydown` handler called `e.preventDefault()` (suppressing the browser's native "arrow checks the next radio") and then only called `.focus()`. Removed the handler; native radio-group behaviour fires `change` → `select()` and the QR updates. Mouse/touch were never affected.
+- **Duplicate QR on `coffee.html`.** `.qr-frame img { display: block }` outranks the UA `[hidden]` rule, so the static fallback rendered on top of the live canvas. Fixed with `[hidden] { display: none !important; }` and by making both QR paths intentional.
+- **`coffee.html` menu button dead** — markup present, handler missing; added the same menu logic as index/feedback (aria-expanded, outside-click, Escape + focus restore).
+
+#### Verification note
+The Playwright MCP tools were removed from the runtime partway through this pass, so **live browser re-verification was unavailable** for the later edits. What was checked: all inline scripts parse, no duplicate ids, container tags balanced, all 8 pages serve 200 with current cache tokens, and live HTTP probes for sitemap/404/security.txt/headers. Items marked "verified" earlier in the session were checked with a real browser; the later mechanical edits were checked statically. **Recommend one browser pass before calling this done.**
+
 ---
 
 ## 4. Firebase (project `superk-official`)
