@@ -23,6 +23,8 @@
   .doc p strong { color: var(--ink); }
   .doc ul { margin: 0 0 14px; padding-left: 0; list-style: none; color: var(--ink2); font-size: 14.5px; }
   .doc li { margin-bottom: 10px; }
+  .doc a { color: var(--ink); font-weight: 600; text-decoration: underline; text-decoration-color: var(--mut); text-decoration-thickness: 1.5px; text-underline-offset: 2.5px; }
+  .doc a:hover { text-decoration-color: var(--ink); background: var(--paper2); }
   .doc code { font: 600 12px var(--mono); background: var(--paper2); border: 1px solid var(--line); border-radius: 6px; padding: 1px 6px; word-break: break-all; }
   @media (max-width: 640px) { .page-hero { padding-top: 40px; } }
 </style>
@@ -54,7 +56,12 @@
 
   <div class="doc reveal">
     <h2>1. Website Cookies</h2>
-    <p>The official SuperK landing website uses <strong>zero tracking cookies</strong>, no marketing cookies, and no third-party analytic trackers.</p>
+    <p>The official SuperK landing website uses <strong>zero tracking cookies</strong>, no marketing cookies, and no third-party analytic trackers. Some third-party resources can still connect your browser to their servers when a page loads or a feature is used:</p>
+    <ul>
+      <li><strong>Google Fonts</strong> — every page loads its typefaces from Google, so your IP address and standard request data reach Google.</li>
+      <li><strong>YouTube</strong> — the homepage embeds the demo video through a YouTube player, which may set its own cookies once loaded.</li>
+      <li><strong>Firebase (Cloud Firestore)</strong> — the Feedback page sends what you write there (name, email, optional phone, message, and the attached technical details — see our <a href="privacy.html">Privacy Policy</a>) to Google Firebase so the developer can read it. This uses no cookies.</li>
+    </ul>
     <h2>2. Browser Storage in Extension</h2>
     <ul>
       <li><strong><code>chrome.storage.local</code>:</strong> SuperK saves temporary session keys (<code>pu_items</code>, <code>pu_current</code>, <code>pu_classroomId</code>) exclusively in your browser's isolated local storage so the popup renders instantly without re-fetching data every second.</li>

@@ -4,7 +4,7 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Privacy Policy — SuperK by Kabali Gamer</title>
-<meta name="description" content="SuperK Zero-Data Collection Policy: what the extension accesses, why each permission exists, and the no-trackers guarantee." />
+<meta name="description" content="SuperK privacy: the extension's zero-collection design, what each permission accesses, and what the Feedback page sends to Firebase." />
 <link rel="icon" href="assets/favicon.ico?v=2" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -23,6 +23,8 @@
   .doc p strong, .doc li strong { color: var(--ink); }
   .doc ul { margin: 0 0 14px; padding-left: 22px; color: var(--ink2); font-size: 14.5px; list-style: none; padding-left: 0; }
   .doc li { margin-bottom: 10px; }
+  .doc a { color: var(--ink); font-weight: 600; text-decoration: underline; text-decoration-color: var(--mut); text-decoration-thickness: 1.5px; text-underline-offset: 2.5px; }
+  .doc a:hover { text-decoration-color: var(--ink); background: var(--paper2); }
   .doc code { font: 600 12px var(--mono); background: var(--paper2); border: 1px solid var(--line); border-radius: 6px; padding: 1px 6px; word-break: break-all; }
   .doc .eff { font: 600 12px var(--mono); color: var(--mut); letter-spacing: .08em; margin-bottom: 22px; }
   @media (max-width: 640px) { .page-hero { padding-top: 40px; } }
@@ -55,29 +57,40 @@
 
   <div class="doc reveal">
     <p class="eff">EFFECTIVE DATE: OCTOBER 17, 2026 · PRODUCT: SUPERK (CREATED BY KABALI GAMER)</p>
-    <h2>1. Our Commitment to Your Privacy</h2>
-    <p>SuperK was built by a student, for students. We believe privacy is a fundamental right. SuperK operates under a strict <strong>Zero-Data Collection Policy</strong>. We do not collect, store, transmit, track, or sell any personal data, usage metrics, or browsing activities.</p>
-    <h2>2. What Information SuperK Accesses &amp; Why</h2>
-    <p>To function, SuperK requires specific browser permissions. Here is transparently how each permission is used:</p>
+    <h2>1. Our Commitment</h2>
+    <p>SuperK was built by a student, for students. The developer does not collect, store, transmit, sell, or share any of your personal data, usage metrics, or browsing activity. The extension has no servers of its own, so there is nothing for the developer to collect.</p>
+    <h2>2. Scope</h2>
+    <p>This policy covers (a) the SuperK browser extension and (b) this website. Section 7 explains the website separately.</p>
+    <h2>3. What the Extension Accesses and Why</h2>
     <ul>
-      <li><strong>Active Tab (<code>activeTab</code>):</strong> Used solely when you click the extension popup to verify that you are currently viewing an authorized Parul University classroom page (<code>elearning.paruluniversity.ac.in</code>).</li>
-      <li><strong>Storage (<code>storage</code>):</strong> Used entirely locally on your device (<code>chrome.storage.local</code>) to cache the list of discovered PDF titles and download progress during your active session. No data is synchronized across external servers.</li>
-      <li><strong>Downloads (<code>downloads</code>):</strong> Used solely to save the requested PDF or ZIP files to your browser's local <code>Downloads/Parul/</code> folder.</li>
-      <li><strong>Host permissions:</strong> <code>elearning.paruluniversity.ac.in</code> bridges the classroom view; <code>platform-api.edorer.com</code> reads the subject syllabus using your existing local session token; <code>*.digitaloceanspaces.com</code> downloads the authorized PDF buffers from the university's cloud storage.</li>
+      <li><strong>a) Active Tab (<code>activeTab</code>):</strong> used only when you click the extension, to check that you are on an authorized Parul University classroom page (<code>elearning.paruluniversity.ac.in</code>).</li>
+      <li><strong>b) Storage (<code>storage</code>):</strong> used only on your device (<code>chrome.storage.local</code>) to keep the list of discovered PDF titles and download progress during your session. This data never leaves your device.</li>
+      <li><strong>c) Downloads (<code>downloads</code>):</strong> used only to save the PDF or ZIP files you request into your local <code>Downloads/Parul/</code> folder.</li>
+      <li><strong>d) Host permissions:</strong> <code>elearning.paruluniversity.ac.in</code> (to work with the classroom page); <code>platform-api.edorer.com</code> (to read your subject syllabus using your existing session); <code>*.digitaloceanspaces.com</code> (to download the authorized files from the university's cloud storage).</li>
     </ul>
-    <h2>3. Authentication &amp; Credential Security</h2>
-    <p>SuperK <strong>never</strong> sees or stores your password. When you log in to the university portal, your browser creates a local authentication session token in your browser's <code>localStorage</code>. SuperK merely passes this existing local token in memory to fetch your enrolled subjects list. Your credentials are never transmitted anywhere other than the official university API.</p>
-    <h2>4. Third-Party Analytics and Telemetry</h2>
-    <p>SuperK contains:</p>
-    <ul>
-      <li>❌ <strong>No Google Analytics or trackers</strong></li>
-      <li>❌ <strong>No user fingerprinting</strong></li>
-      <li>❌ <strong>No ad networks</strong></li>
-      <li>❌ <strong>No remote logging servers</strong></li>
-    </ul>
-    <p>All network communication takes place directly and exclusively between your browser and the official university LMS infrastructure.</p>
-    <h2>5. Contact</h2>
-    <p>If you have any questions or security disclosures regarding this policy, please reach out to the developer, <strong>Kabali Gamer</strong>, via the official project repository.</p>
+    <h2>4. Authentication and Credentials</h2>
+    <p>SuperK never sees or stores your password. When you log in to the university portal, your browser keeps a session token in its localStorage. SuperK uses that existing token in memory only to request your own subject list and files from the university's API. It does not copy, save, or send the token anywhere else.</p>
+    <h2>5. Third-Party Servers</h2>
+    <p>When you use SuperK, your browser connects directly to the university's learning portal, its API provider (Edorer), and its cloud file storage (DigitalOcean Spaces). Those parties may see standard technical information such as your IP address and request details, as they do whenever you use the portal normally. Their handling of that data is governed by their own policies, not this one. The developer receives none of it.</p>
+    <h2>6. No Analytics or Tracking</h2>
+    <p>SuperK contains: no Google Analytics or similar trackers, no user fingerprinting, no advertising networks, no remote logging or crash-report servers, and no accounts.</p>
+    <h2>7. This Website</h2>
+    <p>This website does not use analytics or advertising trackers. It loads fonts from Google Fonts, so your browser may send your IP address and standard request data to Google when you visit. Pages that show the demo video embed a YouTube player, which may set its own cookies once loaded. See our <a href="cookies.html">Cookie Statement</a> for details. Links to GitHub and Instagram lead to third-party sites with their own policies.</p>
+    <p><strong>Feedback form.</strong> When you send a report through our <a href="feedback.html">Feedback page</a>, the form sends the following to Google Firebase (Cloud Firestore), a database service used by the developer: your name, email address, optional WhatsApp/phone number, the message you write, an optional screenshot link, an optional star rating, and any symptom boxes you tick. Your browser and operating system, and the extension version (when you arrive from the extension), are attached automatically to help reproduce the issue. This is used solely to read and act on your report, and is visible only to the developer — never published. Reports are deleted once the issue is handled, and in any case within 6 months. You can ask for deletion at any time via the contact details below.</p>
+    <h2>8. Data Retention and Deletion</h2>
+    <p>All data SuperK stores lives on your device. You can remove it by clearing the extension's storage or uninstalling the extension. Downloaded files are saved in your Downloads/Parul/ folder, and you can delete them at any time.</p>
+    <h2>9. Children</h2>
+    <p>SuperK is intended for university students and instructors and is not directed at children under 13. The developer knowingly collects no data from children.</p>
+    <h2>10. Your Rights</h2>
+    <p>The extension collects nothing from you, so there is no extension data to access, correct, or erase. Reports you send through the Feedback page (Section 7) can be deleted on request at any time. If you still have a privacy question or request (including under India's Digital Personal Data Protection Act, 2023, where applicable), contact us and we will respond in good faith.</p>
+    <h2>11. Open Source and Transparency</h2>
+    <p>SuperK's source code is public at <a href="https://github.com/kabaliGamer-Dev2/superk">https://github.com/kabaliGamer-Dev2/superk</a> so you can verify what it does.</p>
+    <h2>12. Security</h2>
+    <p>Everything runs locally in your browser and uses the secure (HTTPS) connections of the university's own services. No method is 100% secure, so please keep your login details private.</p>
+    <h2>13. Changes to This Policy</h2>
+    <p>If SuperK's permissions or behavior change, this policy will be updated and the effective date changed. Check it when you update the extension.</p>
+    <h2>14. Contact</h2>
+    <p>Questions or security disclosures: <a href="mailto:kabaligamer.dev@proton.me">kabaligamer.dev@proton.me</a> or <a href="https://github.com/kabaliGamer-Dev2/superk/issues">https://github.com/kabaliGamer-Dev2/superk/issues</a></p>
   </div>
 </main>
 

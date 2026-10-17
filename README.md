@@ -40,4 +40,8 @@ firebase deploy --only hosting,firestore:rules   # site + rules
 
 ## Legal
 
-Independent student utility by **Kabali Gamer**. Not affiliated with Parul University or Edorer. Downloads are for personal, non-commercial study only — course materials remain their authors' property.
+Independent student utility by **Kabali Gamer**. Not affiliated with Parul University or Edorer. Downloads are for personal, non-commercial study only — course materials remain their authors' property. Full text: [Terms](https://superk-official.web.app/terms.html) · [Privacy](https://superk-official.web.app/privacy.html) · [Cookies](https://superk-official.web.app/cookies.html).
+
+## License
+
+MIT — see [`LICENSE`](LICENSE). The license covers the source code only.

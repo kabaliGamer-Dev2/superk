@@ -62,7 +62,7 @@ Design law: Warm Paper (`#F3F0E7` paper / `#2A2529` ink), Poppins display / Mont
 | `index.html` | Centered hero (eyebrow, H1, lede, download + install CTAs, trust line, meta chips), stats, marquee, origin quote, static feature cards, rename pipeline, dark video preview (YouTube embed, 16:9), how-it-works, developer-mode setup card (numbered checklist + copy-address pill), trust banner, FAQ, feedback teaser band, download finale |
 | `story.html` | Origin & mission, exact story copy, quote box, CTAs |
 | `installation.html` | 5-step install grid, LMS use steps, troubleshooting FAQ |
-| `terms.html` / `privacy.html` / `cookies.html` | Exact spec legal text in tactile doc cards |
+| `terms.html` / `privacy.html` / `cookies.html` | Full legal pack in tactile doc cards — 17-section Terms (incl. takedown + governing law: India), 14-section Privacy (incl. live feedback-data disclosure, 6-month retention), Cookie Statement (Google Fonts / YouTube / Firebase); root `LICENSE` = MIT (linked from Terms §7) |
 | `feedback.html` | Standalone form page (see §3.3): hero, form + roadmap + promise side, success/error modal |
 
 Shared chrome: announce bar, sticky nav (hamburger icon ≤860px, 44px touch target), dark footer with Instagram glyph, `?v=N` cache-busting (current `site.css?v=10` + `site.js?v=1`; favicon `assets/favicon.ico?v=2`, plus a root `favicon.ico` copy so the browser's default probe gets a 200).
