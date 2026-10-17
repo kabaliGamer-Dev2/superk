@@ -5,12 +5,12 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>SuperK — Grab every lecture PDF. Beautifully. | Created by Kabali Gamer</title>
 <meta name="description" content="SuperK is a free browser utility for Parul University students. One-click batch downloads, clean unit-based filenames, and instant topic ZIP archives." />
-<link rel="icon" href="assets/favicon.ico" />
+<link rel="icon" href="assets/favicon.ico?v=2" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700;800&family=Montserrat:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet" />
 <link rel="stylesheet" href="tokens.css" />
-<link rel="stylesheet" href="site.css?v=5" />
+<link rel="stylesheet" href="site.css?v=7" />
 <style>
   /* --- INDEX backdrop: Warm Paper dot-grid + top glow (behind everything) --- */
   body {
@@ -475,7 +475,7 @@
       <p class="eyebrow" style="color:#c9c5cf">Interface preview</p>
       <h2>Locked to your subject.<br />Ordered. Numbered. Zipped.</h2>
       <p class="sub">The popup detects the open subject from the page breadcrumb, lists its topics in syllabus order, resolves "PPT, PPT, PPT" into Unit 1–5, and packs it all into one ZIP.</p>
-      <figure class="demo-video"><iframe src="https://www.youtube.com/embed/fHB4gBzqxI8" title="SuperK walkthrough: open classroom, lock subject, download PDFs as ZIP" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe></figure>
+      <figure class="demo-video"><iframe src="https://www.youtube.com/embed/fHB4gBzqxI8?si=f_Z6BSeFU_SBS0Ok&amp;start=1" title="SuperK walkthrough: open classroom, lock subject, download PDFs as ZIP" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen loading="lazy"></iframe></figure>
       <div class="tags"><span>Search</span><span>Topic counters</span><span>Per-file download</span><span>Download all → ZIP</span></div>
     </div>
   </section>
@@ -494,14 +494,45 @@
   <section class="block" aria-label="Install in 30 seconds">
     <p class="eyebrow rule">Developer-mode install</p>
     <h2>On your toolbar in 30 seconds</h2>
-    <p class="sub">Side-load the unpacked ZIP once — full walkthrough with screenshots lives on the <a href="installation.html" style="color:var(--ink);font-weight:700">Installation Guide</a> page.</p>
-    <div class="term">
-      <div class="term-bar" aria-hidden="true"><i></i><i></i><i></i><span>terminal — install superk</span></div>
-      <ol>
-        <li>Download <code>superk-1.0.0.zip</code> and extract it somewhere safe</li>
-        <li>Open <code>chrome://extensions</code> <b>→</b> flip <b>Developer mode</b> on</li>
-        <li>Hit <b>Load unpacked</b>, pick the folder, pin SuperK. Done.</li>
+    <p class="sub">Side-load the unpacked ZIP once — no store, no account, works in every Chromium browser.</p>
+    <div class="setup">
+      <ol class="setup-steps">
+        <li>
+          <span class="setup-n" aria-hidden="true">1</span>
+          <div>
+            <h3>Unzip it somewhere safe</h3>
+            <p>Download <a class="code-chip" href="releases/superk-1.0.0.zip">superk-1.0.0.zip</a> and extract the folder — e.g. <code>Documents/SuperK</code>.</p>
+          </div>
+        </li>
+        <li>
+          <span class="setup-n" aria-hidden="true">2</span>
+          <div>
+            <h3>Open the extensions page</h3>
+            <div class="omni">
+              <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9" /><path d="M12 3a13 13 0 0 0 0 18 13 13 0 0 0 0-18" /><path d="M3 12h18" /></svg>
+              <span class="omni-url">chrome://extensions</span>
+              <button class="setup-copy" type="button" data-copy="chrome://extensions" aria-label="Copy chrome://extensions">
+                <svg class="ic-copy" viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="8" y="8" width="14" height="14" rx="2.5" /><path d="M16 8V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h2" /></svg>
+                <svg class="ic-check" viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 13 4 4L19 7" /></svg>
+                <span class="setup-copy-label" aria-live="polite">Copy</span>
+              </button>
+            </div>
+            <p>Paste it in your address bar, then switch <b>Developer mode</b> on — top-right corner.</p>
+          </div>
+        </li>
+        <li>
+          <span class="setup-n" aria-hidden="true">3</span>
+          <div>
+            <h3>Load unpacked &amp; pin it</h3>
+            <p>Click <b>Load unpacked</b> (top-left), pick the extracted folder, then pin SuperK from the puzzle icon. Done.</p>
+          </div>
+        </li>
       </ol>
+      <div class="setup-foot">
+        <span>Full walkthrough with screenshots</span>
+        <a class="setup-guide" href="installation.html">Installation Guide
+          <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14" /><path d="m13 6 6 6-6 6" /></svg></a>
+      </div>
     </div>
   </section>
 
@@ -593,6 +624,39 @@
       navLinks.classList.remove("open");
       menuBtn.setAttribute("aria-expanded", "false");
     }
+  });
+  document.querySelectorAll(".setup-copy").forEach((btn) => {
+    const url = btn.dataset.copy;
+    const label = btn.querySelector(".setup-copy-label");
+    const restore = () => {
+      btn.classList.remove("done");
+      if (label) label.textContent = "Copy";
+    };
+    btn.addEventListener("click", async () => {
+      let ok = true;
+      try {
+        await navigator.clipboard.writeText(url);
+      } catch (err) {
+        try {
+          const ta = document.createElement("textarea");
+          ta.value = url;
+          ta.setAttribute("readonly", "");
+          ta.style.position = "fixed";
+          ta.style.opacity = "0";
+          document.body.appendChild(ta);
+          ta.select();
+          ok = document.execCommand("copy");
+          ta.remove();
+        } catch (err2) {
+          ok = false;
+        }
+      }
+      if (!ok) return;
+      btn.classList.add("done");
+      if (label) label.textContent = "Copied";
+      clearTimeout(btn._ct);
+      btn._ct = setTimeout(restore, 1800);
+    });
   });
 </script>
 </body>

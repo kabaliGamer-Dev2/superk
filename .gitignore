@@ -4,3 +4,10 @@ temp/
 .playwright-mcp/
 *.out
 .firebase/
+
+# scratch QA screenshots (root - regenerate on demand, never commit)
+/final-static-check*.png
+/pattern-check.png
+/static-index.png
+/official-qa-pipe.png
+/extension-test-popup.png

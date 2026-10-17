@@ -59,13 +59,13 @@ Design law: Warm Paper (`#F3F0E7` paper / `#2A2529` ink), Poppins display / Mont
 ### 3.1 Pages (7 + shared `tokens.css`, `site.css`)
 | Page | Contents |
 |---|---|
-| `index.html` | Centered hero (eyebrow, H1, lede, download + install CTAs, trust line, meta chips), stats, marquee, origin quote, static feature cards, rename pipeline, dark video preview (YouTube embed, 16:9), how-it-works, install terminal, trust banner, FAQ, feedback teaser band, download finale |
+| `index.html` | Centered hero (eyebrow, H1, lede, download + install CTAs, trust line, meta chips), stats, marquee, origin quote, static feature cards, rename pipeline, dark video preview (YouTube embed, 16:9), how-it-works, developer-mode setup card (numbered checklist + copy-address pill), trust banner, FAQ, feedback teaser band, download finale |
 | `story.html` | Origin & mission, exact story copy, quote box, CTAs |
 | `installation.html` | 5-step install grid, LMS use steps, troubleshooting FAQ |
 | `terms.html` / `privacy.html` / `cookies.html` | Exact spec legal text in tactile doc cards |
 | `feedback.html` | Standalone form page (see §3.3): hero, form + roadmap + promise side, success/error modal |
 
-Shared chrome: announce bar, sticky nav (hamburger icon ≤860px, 44px touch target), dark footer with Instagram glyph, `?v=N` stylesheet cache-busting (current `site.css?v=5`).
+Shared chrome: announce bar, sticky nav (hamburger icon ≤860px, 44px touch target), dark footer with Instagram glyph, `?v=N` stylesheet cache-busting (current `site.css?v=7`; favicon `assets/favicon.ico?v=2`).
 
 ### 3.2 Hero iterations (decisions, newest last)
 1. Two-column + browser mock → removed (rotation/shadow caused mobile overflow).
@@ -88,11 +88,23 @@ Shared chrome: announce bar, sticky nav (hamburger icon ≤860px, 44px touch tar
 Local 86MB mp4 (poster frame, exact 16:9, excluded from deploys via `firebase.json` ignore — free-tier bandwidth protection) → Google Drive embed (rejected: unreliable) → **YouTube unlisted `fHB4gBzqxI8`** (`youtube.com/embed/…`, full 1080p60 after processing).
 
 ### 3.5 Motion system — REMOVED (2026-10-17)
-The whole reveal/fade system was deleted on user request because partial-opacity mid-scroll states (scroll-linked `view()` timeline + `.rv` observer fade + `rvEnter` page-entry cascade + `d1–d5` stagger delays + all per-page IntersectionObserver scripts) made elements look broken on phones. **Current state: all 7 pages are fully static** — every element paints at full opacity immediately, no scroll dependence, no load cascade. `site.css` cache token is `?v=5`.
+The whole reveal/fade system was deleted on user request because partial-opacity mid-scroll states (scroll-linked `view()` timeline + `.rv` observer fade + `rvEnter` page-entry cascade + `d1–d5` stagger delays + all per-page IntersectionObserver scripts) made elements look broken on phones. **Current state: all 7 pages are fully static** — every element paints at full opacity immediately, no scroll dependence, no load cascade. `site.css` cache token is `?v=7`.
 Kept (intentional micro-interactions, not fades): marquee ticker, send-button spinner, button hover/press, FAQ open/close, rename-arrow nudge, `prefers-reduced-motion` guard. No blur by rule.
 Do NOT re-add `.rv`, `rvView`, `rvEnter`, or IntersectionObserver reveal code — it is deliberately gone.
 
-### 3.6 Instagram
+### 3.6 Favicon & embed-params refresh (2026-10-17)
+- Favicon was stale (old circled-K from Oct 16, pre-logo-lock) — rebuilt from the locked orbit-K mark: 16/24/32px frames from `brand/gemini-small.svg` (heavy cut), 48px from `brand/gemini-master.svg` (standard cut), PNG-compressed ICO entries like the original file. All pages link `assets/favicon.ico?v=2` (favicon caches are sticky; bump to `?v=3` on the next icon change).
+- Index video iframe now uses the exact user-provided YouTube share embed (`?si=…&start=1`, `web-share` in the allow list, `referrerpolicy="strict-origin-when-cross-origin"`), still responsive 16:9 with `loading="lazy"`. Keep the video **Unlisted** — setting it Private breaks embeds.
+
+### 3.7 Install section: fake terminal → setup checklist card (2026-10-17)
+User callout: the old `.term` block dressed *instructions* in terminal costume (window dots, `$` prompts, mono body text) — mono belongs to code, not explanations. Replaced with a paper "side-load checklist" card built from the site's own vocabulary:
+- Numbered ink square badges; step title + one helper line; mono reserved for literal content only — `superk-1.0.0.zip` (now a clickable chip straight to the release ZIP), `Documents/SuperK`, `chrome://extensions`.
+- `chrome://` URLs cannot be hyperlinked (browsers block it), so the address renders as an address-bar pill with a **working Copy button**: hover lift / press like `.btn`, "Copied" state (check icon + `aria-live` label, reverts after 1.8s), clipboard API with `execCommand` fallback. ≤480px the button goes icon-only so the full URL stays visible.
+- Footer row: "Full walkthrough with screenshots → Installation Guide"; sub-line rewritten ("no store, no account, works in every Chromium browser").
+- `.term*` CSS deleted; new `.setup/.omni/.setup-copy` system in `site.css`. Bonus craft pass: themed `::selection` (ink highlight; light override on dark surfaces — announce/marquee/pipe-foot/foot/preview/road/trust badges).
+- Cache token now `site.css?v=7`. Live-verified at 393px and 1440px: zero horizontal overflow, copy click → "Copied" → revert, no console errors. Do not regress to terminal styling for this block.
+
+### 3.8 Instagram
 `https://www.instagram.com/kabali.gamer/` — hero attr link, follow card, footer glyph, feedback promise card.
 
 ---
@@ -120,7 +132,7 @@ Do NOT re-add `.rv`, `rvView`, `rvEnter`, or IntersectionObserver reveal code �
 1. **"SuperK Official" wording** — nav badge, page titles, extension strings still say Official (meaning your official release). Scrub to affiliation-safe copy on request.
 2. **Per-report notifications** (email/Discord on each feedback) — Phase 2 via Trigger Email extension or Cloud Function.
 3. **Video** — confirm Unlisted + finished HD processing on YouTube.
-4. **Cache discipline** — bump `site.css?v=N` on every style deploy; HTML can sit in cache ~1h (ask users to hard-refresh after big launches).
+4. **Cache discipline** — bump `site.css?v=N` (currently **v7**) on every style deploy; favicon token currently `?v=2` (sticky cache — bump on the next icon change); HTML can sit in cache ~1h (ask users to hard-refresh after big launches).
 5. **Local dev server** — `python -m http.server 8099` in `official/` (note: sandbox test browsers cannot reach this machine's localhost; verify via direct HTTP or the live URL).
 
 ## 7. Key Identifiers (public-safe)
