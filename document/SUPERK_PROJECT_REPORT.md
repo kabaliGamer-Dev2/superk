@@ -65,7 +65,7 @@ Design law: Warm Paper (`#F3F0E7` paper / `#2A2529` ink), Poppins display / Mont
 | `terms.html` / `privacy.html` / `cookies.html` | Exact spec legal text in tactile doc cards |
 | `feedback.html` | Standalone form page (see §3.3): hero, form + roadmap + promise side, success/error modal |
 
-Shared chrome: announce bar, sticky nav (hamburger icon ≤860px, 44px touch target), dark footer with Instagram glyph, `?v=N` stylesheet cache-busting (current `site.css?v=4`).
+Shared chrome: announce bar, sticky nav (hamburger icon ≤860px, 44px touch target), dark footer with Instagram glyph, `?v=N` stylesheet cache-busting (current `site.css?v=5`).
 
 ### 3.2 Hero iterations (decisions, newest last)
 1. Two-column + browser mock → removed (rotation/shadow caused mobile overflow).
@@ -75,6 +75,7 @@ Shared chrome: announce bar, sticky nav (hamburger icon ≤860px, 44px touch tar
 5. Pill claiming "Official LMS Utility" → replaced with "Student-built utility" eyebrow (no university endorsement implied; other "SuperK Official" wordings still exist — scrub on request).
 6. Sticky mobile download bar → deleted. `body{overflow-x:clip}` guard added.
 7. Index backdrop: dot-grid + top glow (page `<style>`, behind everything).
+8. **All reveal/fade motion removed** (user request): every page renders fully static — elements visible immediately, no fade, no scroll-linked opacity. See §3.5.
 
 ### 3.3 Feedback system (Firestore, zero server)
 - 4 SVG pill types (bug/feature/download/praise), conditional 1-tap issue checks, auto-fix tip box, dynamic placeholders, browser select + version chip, screenshot-link field (link only — file upload is a paid Formspree-tier concept, dropped with Formspree), optional contact, SVG star rating, inline validation.
@@ -86,11 +87,10 @@ Shared chrome: announce bar, sticky nav (hamburger icon ≤860px, 44px touch tar
 ### 3.4 Media journey
 Local 86MB mp4 (poster frame, exact 16:9, excluded from deploys via `firebase.json` ignore — free-tier bandwidth protection) → Google Drive embed (rejected: unreliable) → **YouTube unlisted `fHB4gBzqxI8`** (`youtube.com/embed/…`, full 1080p60 after processing).
 
-### 3.5 Motion system
-- Base: observer-driven `.rv` fade (0.7s, staggered d1–d4).
-- Where supported: scroll-linked `view()` timeline (64px rise + settle scale, entry→cover 48%) — slow scroll = slow fade.
-- Page-entry cascade `rvEnter` on hero children (staggered, once).
-- Reduced-motion: everything static. No blur anywhere by rule.
+### 3.5 Motion system — REMOVED (2026-10-17)
+The whole reveal/fade system was deleted on user request because partial-opacity mid-scroll states (scroll-linked `view()` timeline + `.rv` observer fade + `rvEnter` page-entry cascade + `d1–d5` stagger delays + all per-page IntersectionObserver scripts) made elements look broken on phones. **Current state: all 7 pages are fully static** — every element paints at full opacity immediately, no scroll dependence, no load cascade. `site.css` cache token is `?v=5`.
+Kept (intentional micro-interactions, not fades): marquee ticker, send-button spinner, button hover/press, FAQ open/close, rename-arrow nudge, `prefers-reduced-motion` guard. No blur by rule.
+Do NOT re-add `.rv`, `rvView`, `rvEnter`, or IntersectionObserver reveal code — it is deliberately gone.
 
 ### 3.6 Instagram
 `https://www.instagram.com/kabali.gamer/` — hero attr link, follow card, footer glyph, feedback promise card.

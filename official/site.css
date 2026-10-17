@@ -1,4 +1,4 @@
-/* SuperK official site — shared chrome: nav, buttons, pills, footer, reveal. */
+/* SuperK official site — shared chrome: nav, buttons, pills, footer. */
 * { box-sizing: border-box; }
 html { scroll-behavior: smooth; }
 html, body { margin: 0; padding: 0; }
@@ -64,35 +64,7 @@ body {
 .foot-links a:hover { color: #fff; background: rgba(243,240,231,.12); }
 .disclaimer { width: 100%; font: 400 11.5px/1.6 var(--body); color: #a49fa8; border-top: 1px solid rgba(243,240,231,.18); padding-top: 16px; }
 
-/* reveal fallback (older browsers): slow observer-driven fade */
-.rv { opacity: 0; transform: translateY(18px); transition: opacity .7s var(--ease), transform .7s var(--ease); will-change: opacity, transform; }
-.rv.in { opacity: 1; transform: none; will-change: auto; }
-/* scroll-linked slow fade: where supported, elements fade/rise in proportion
-   to actual scroll speed (slow scroll = slow fade). Elsewhere the .rv
-   observer + .7s transition above remains the fallback. */
-@keyframes rvView {
-  from { opacity: 0; transform: translateY(64px) scale(.985); }
-  to { opacity: 1; transform: none; }
-}
-@supports (animation-timeline: view()) {
-  .rv { opacity: 0; transition: none; animation: rvView linear both; animation-timeline: view(); animation-range: entry 0% cover 48%; }
-  .rv.in { opacity: 1; transform: none; }
-}
-/* page-entry: above-fold content rises from fade to position on load,
-   staggered — independent of scroll, plays once */
-@keyframes rvEnter {
-  from { opacity: 0; transform: translateY(30px); }
-  to { opacity: 1; transform: none; }
-}
-.page-hero > *, .hero-copy > * { animation: rvEnter .9s var(--ease) both; }
-.page-hero > *:nth-child(2), .hero-copy > *:nth-child(2) { animation-delay: .1s; }
-.page-hero > *:nth-child(3), .hero-copy > *:nth-child(3) { animation-delay: .2s; }
-.page-hero > *:nth-child(4), .hero-copy > *:nth-child(4) { animation-delay: .3s; }
-.page-hero > *:nth-child(5), .hero-copy > *:nth-child(5) { animation-delay: .4s; }
-.page-hero > *:nth-child(n+6), .hero-copy > *:nth-child(n+6) { animation-delay: .5s; }
-.rv.d1 { transition-delay: .07s; } .rv.d2 { transition-delay: .14s; }
-.rv.d3 { transition-delay: .21s; } .rv.d4 { transition-delay: .28s; }
-.rv.d5 { transition-delay: .35s; }
+/* Reveal/fade animations removed on request — all pages render fully static. */
 
 @media (max-width: 860px) {
   .links { display: none; position: absolute; top: 100%; left: 0; right: 0; background: var(--paper); border-bottom: 1.5px solid var(--ink); flex-direction: column; padding: 10px 18px 16px; }
@@ -102,7 +74,6 @@ body {
 }
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation: none !important; transition: none !important; }
-  .rv { opacity: 1; transform: none; }
   html { scroll-behavior: auto; }
 }
 

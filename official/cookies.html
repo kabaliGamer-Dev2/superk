@@ -10,7 +10,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700;800&family=Montserrat:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet" />
 <link rel="stylesheet" href="tokens.css" />
-<link rel="stylesheet" href="site.css?v=4" />
+<link rel="stylesheet" href="site.css?v=5" />
 <style>
   .page-hero { padding: 56px 0 6px; }
   .page-hero h1 { font: 800 clamp(32px, 4.6vw, 48px)/1.05 var(--display); letter-spacing: -.03em; margin: 14px 0 12px; }
@@ -81,8 +81,6 @@
 
 <script>
   document.getElementById("menuBtn").onclick = () => document.getElementById("navLinks").classList.toggle("open");
-  const io = new IntersectionObserver((es) => es.forEach((e) => { if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); } }), { threshold: .1, rootMargin: "0px 0px -6% 0px" });
-  [...document.querySelectorAll("main .page-hero, main section, main .doc, main .fb-layout, main .cta-row")].forEach((el, i) => { el.classList.add("rv", "d" + ((i % 4) + 1)); io.observe(el); });
 </script>
 </body>
 </html>
