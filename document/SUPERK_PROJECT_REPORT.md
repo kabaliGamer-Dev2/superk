@@ -59,10 +59,10 @@ Design law: Warm Paper (`#F3F0E7` paper / `#2A2529` ink), Poppins display / Mont
 ### 3.1 Pages (7 + shared `tokens.css`, `site.css`)
 | Page | Contents |
 |---|---|
-| `index.html` | Centered hero (eyebrow, H1, lede, download + install CTAs, trust line, meta chips), stats, marquee, origin quote, static feature cards, rename pipeline, dark video preview (YouTube embed, 16:9), how-it-works, developer-mode setup card (numbered checklist + copy-address pill), trust banner, FAQ, feedback teaser band, download finale |
+| `index.html` | Centered hero (eyebrow, H1, lede, download + install CTAs, GitHub button + MIT chip, trust line, meta chips, non-affiliation note), stats, marquee, origin quote, static feature cards, rename pipeline, dark video preview (YouTube privacy-enhanced embed, 16:9), how-it-works, safety & requirements cards (SHA-256 verify / limits / update & remove), developer-mode setup card (numbered checklist + copy-address pill), trust banner, 9-item FAQ, feedback teaser band, download finale (responsible-use + faculty contact lines), once-per-browser UPI tip card |
 | `story.html` | Origin & mission, exact story copy, quote box, CTAs |
 | `installation.html` | 5-step install grid, LMS use steps, troubleshooting FAQ |
-| `terms.html` / `privacy.html` / `cookies.html` | Full legal pack in tactile doc cards — 17-section Terms (incl. takedown + governing law: India), 14-section Privacy (incl. live feedback-data disclosure, 6-month retention), Cookie Statement (Google Fonts / YouTube / Firebase); root `LICENSE` = MIT (linked from Terms §7) |
+| `terms.html` / `privacy.html` / `cookies.html` | Full legal pack in tactile doc cards — 17-section Terms (incl. takedown + governing law: India; §15 voluntary-tips clause), 14-section Privacy (incl. live feedback-data disclosure now covering the submitted page URL, 6-month retention), Cookie Statement (Google Fonts / privacy-enhanced YouTube / Firebase); root `LICENSE` = MIT (linked from Terms §7) |
 | `feedback.html` | Standalone form page (see §3.3): hero, form + roadmap + promise side, success/error modal |
 
 Shared chrome: announce bar, sticky nav (hamburger icon ≤860px, 44px touch target), dark footer with Instagram glyph, `?v=N` cache-busting (current `site.css?v=10` + `site.js?v=1`; favicon `assets/favicon.ico?v=2`, plus a root `favicon.ico` copy so the browser's default probe gets a 200).
@@ -72,7 +72,7 @@ Shared chrome: announce bar, sticky nav (hamburger icon ≤860px, 44px touch tar
 2. Full invert card hovers → removed (flash); cards fully static.
 3. H1 triple-decoration → single ink chip; `.hl` forced `inline` on mobile (inline-block chip was the 500px overflow bug).
 4. Buttons: full-bleed slabs → centered grid, max 300px, 44px floor.
-5. Pill claiming "Official LMS Utility" → replaced with "Student-built utility" eyebrow (no university endorsement implied; other "SuperK Official" wordings still exist — scrub on request).
+5. Pill claiming "Official LMS Utility" → replaced with "Student-built utility" eyebrow (no university endorsement implied. 2026-10-17 page-1 review: index nav badge is now plain `v1.0.0`, hero carries a non-affiliation note, and the FAQ answers independence outright; the six inner pages still show "v1.0.0 Official" badges and `story.html` has an "Official Release" heading — queued for their own page-by-page passes).
 6. Sticky mobile download bar → deleted. `body{overflow-x:clip}` guard added.
 7. Index backdrop: dot-grid + top glow (page `<style>`, behind everything).
 8. ~~All reveal/fade motion removed~~ — superseded 2026-10-17: scroll-linked fades stay banned, but a one-shot on-entry reveal system was later requested and added (§3.5).
@@ -88,7 +88,7 @@ Shared chrome: announce bar, sticky nav (hamburger icon ≤860px, 44px touch tar
 - Started as homepage section → moved to separate page; homepage keeps a dark teaser band; all navs/footers + extension deep-links point to `feedback.html`.
 
 ### 3.4 Media journey
-Local 86MB mp4 (poster frame, exact 16:9, excluded from deploys via `firebase.json` ignore — free-tier bandwidth protection) → Google Drive embed (rejected: unreliable) → **YouTube unlisted `fHB4gBzqxI8`** (`youtube.com/embed/…`, full 1080p60 after processing).
+Local 86MB mp4 (poster frame, exact 16:9, excluded from deploys via `firebase.json` ignore — free-tier bandwidth protection) → Google Drive embed (rejected: unreliable) → **YouTube unlisted `fHB4gBzqxI8`** (embedded via `youtube-nocookie.com` privacy-enhanced mode with `loading="lazy"`, full 1080p60 after processing).
 
 ### 3.5 Motion system — one-shot scroll reveal (2026-10-17; reverses the earlier removal)
 History: the original motion system was deleted because scroll-linked partial opacity (a `view()` timeline + `.rv` observer fade + `rvEnter` cascade + `d1–d5` delays) made elements look broken while scrolling on phones. The user then requested a premium *one-shot* reveal on entry — so the rule is now: **one-shot IntersectionObserver reveals only, never scroll-linked opacity.** Rules that keep it safe (do not regress):
@@ -148,7 +148,7 @@ Every ZIP link site-wide (announce bar, nav, hero, setup-card chip, install/stor
 
 ## 6. Open Items / Standing Offers
 
-1. **"SuperK Official" wording** — nav badge, page titles, extension strings still say Official (meaning your official release). Scrub to affiliation-safe copy on request.
+1. **"SuperK Official" wording** — index.html scrubbed (badge → `v1.0.0`, hero note, FAQ independence answer). Remaining: six inner-page nav badges + `story.html` "From Prototype to Official Release" heading (each handled in its own page-by-page review pass). The extension's internal strings keep "Official" meaning "official release" — no affiliation advertised to users.
 2. **Per-report notifications** (email/Discord on each feedback) — Phase 2 via Trigger Email extension or Cloud Function.
 3. **Video** — confirm Unlisted + finished HD processing on YouTube.
 4. **Cache discipline** — bump `site.css?v=N` (currently **v10**) and `site.js?v=N` (currently **v1**) on every deploy of those files; favicon token currently `?v=2` (sticky cache — bump on the next icon change); HTML can sit in cache ~1h (ask users to hard-refresh after big launches).
