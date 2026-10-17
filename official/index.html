@@ -144,7 +144,7 @@
     align-items: center;
     justify-content: center;
     width: 100%;
-    max-width: 540px;
+    max-width: 780px;
     margin: 0 auto;
   }
   .hero-cta-primary {
@@ -329,6 +329,8 @@
   .preview figure img { display: block; width: 100%; height: auto; }
   .demo-video { aspect-ratio: 16 / 9; }
   .demo-video video, .demo-video iframe { display: block; width: 100%; height: 100%; object-fit: cover; background: #000; border: 0; }
+  .preview .shot img { display: block; width: auto; max-width: min(320px, 88%); max-height: 500px; margin: 0 auto; }
+  .preview .shot figcaption { font: 600 12px/1.55 var(--mono); letter-spacing: .05em; color: #c9c5cf; background: rgba(243,240,231,.06); padding: 10px 14px; border-top: 1px solid rgba(243,240,231,.22); text-align: center; }
   .follow { background: var(--card); border: 1.5px solid var(--ink); border-radius: 20px; box-shadow: var(--tactile); padding: clamp(22px, 3.4vw, 32px); display: grid; grid-template-columns: auto 1fr auto; gap: 20px; align-items: center; }
   .follow-mark { width: 52px; height: 52px; border-radius: 16px; display: grid; place-items: center; background: var(--ink); color: var(--acc-ink); }
   .follow .eyebrow { margin: 0 0 6px; }
@@ -348,9 +350,6 @@
   .final p { color: var(--ink2); margin: 0 0 26px; }
   @media (max-width: 900px) {
     .grid, .steps { grid-template-columns: 1fr; }
-    .steps::before { display: none; }
-    .compare { grid-template-columns: 1fr; }
-    .vs { justify-self: center; transform: rotate(90deg); }
     .quote { grid-template-columns: 1fr; }
     .quote-mark { padding: 10px; font-size: 56px; }
   }
@@ -375,7 +374,7 @@
   .final p.final-contact { font-size: 12.5px; color: var(--ink2); margin: 26px auto 0; max-width: 50em; }
   .final p.final-contact a { color: var(--ink); font-weight: 700; text-decoration: underline; text-decoration-color: var(--mut); text-decoration-thickness: 1.5px; text-underline-offset: 2.5px; }
   .final p.final-contact a:hover { text-decoration-color: var(--ink); }
-  .coffee { position: fixed; right: 16px; bottom: 16px; max-width: 340px; background: var(--card); border: 1.5px solid var(--ink); border-radius: 16px; box-shadow: var(--tactile); padding: 18px; z-index: 60; }
+  .coffee { position: fixed; right: 16px; bottom: 16px; max-width: 340px; max-height: calc(100vh - 32px); overflow: auto; background: var(--card); border: 1.5px solid var(--ink); border-radius: 16px; box-shadow: var(--tactile); padding: 18px; z-index: 80; }
   .coffee[hidden] { display: none; }
   .coffee h3 { font: 700 17px var(--display); margin: 0 22px 6px 0; letter-spacing: -.01em; }
   .coffee p { font-size: 13.5px; line-height: 1.5; color: var(--ink2); margin: 0 0 12px; }
@@ -389,7 +388,17 @@
   .coffee-copy:hover { background: var(--paper2); }
   .coffee p.coffee-note { font-size: 11.5px; color: var(--mut); margin: 10px 0 0; }
   .coffee-qr { display: block; width: 132px; height: 132px; margin: 12px auto 0; border: 1.5px solid var(--ink); border-radius: 12px; background: #fff; }
-  @media (max-width: 600px) { .coffee { left: 12px; right: 12px; max-width: none; bottom: max(12px, env(safe-area-inset-bottom)); } .coffee-x { width: 40px; height: 40px; } }
+  .coffee-pay, .note-mob { display: none; }
+  @media (hover: none) and (pointer: coarse) {
+    .coffee-pay { display: inline-flex; }
+    .note-mob { display: inline; }
+    .coffee-qr, .note-desk { display: none; }
+  }
+  .coffee-fab { position: fixed; right: 16px; bottom: 16px; z-index: 70; display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 44px; background: var(--ink); color: var(--acc-ink); border: 1.5px solid var(--ink); border-radius: 99px; padding: 10px 16px; font: 700 12.5px var(--body); box-shadow: var(--tactile); cursor: pointer; transition: transform .12s var(--ease), box-shadow .14s var(--ease); }
+  .coffee-fab[hidden] { display: none; }
+  .coffee-fab:hover { transform: translate(-1px, -1px); box-shadow: 3.5px 3.5px 0 rgba(42,37,41,.55); }
+  .coffee-fab:active { transform: translate(1px, 1px); box-shadow: 1px 1px 0 rgba(42,37,41,.55); }
+  @media (max-width: 600px) { .coffee { left: 12px; right: 12px; max-width: none; bottom: max(12px, env(safe-area-inset-bottom)); } .coffee-x { width: 40px; height: 40px; } .coffee-fab { right: 12px; bottom: max(12px, env(safe-area-inset-bottom)); width: 48px; height: 48px; padding: 0; } .coffee-fab span { display: none; } }
 </style>
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"SoftwareApplication","name":"SuperK","operatingSystem":"Chrome, Brave, Edge, Opera, Arc","applicationCategory":"BrowserApplication","softwareVersion":"1.0.0","isAccessibleForFree":true,"license":"https://github.com/kabaliGamer-Dev2/superk/blob/main/LICENSE","description":"Free, open-source browser extension for Parul University students: one-click batch PDF downloads and subject ZIP archives that run entirely in your own browser.","url":"https://superk-official.web.app/","downloadUrl":"https://superk-official.web.app/releases/superk-1.0.0.zip","offers":{"@type":"Offer","price":"0","priceCurrency":"INR"},"author":{"@type":"Person","name":"Kabali Gamer","url":"https://www.instagram.com/kabali.gamer/"}}
@@ -409,6 +418,7 @@
       <a href="terms.html">Terms</a>
       <a href="privacy.html">Privacy</a>
       <a href="feedback.html">Feedback</a>
+      <a href="#support" id="navCoffee">Buy a coffee</a>
     </div>
     <button class="menu-btn" id="menuBtn" aria-label="Open menu" aria-expanded="false" aria-controls="navLinks"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M4 7h16" /><path d="M4 12h16" /><path d="M4 17h16" /></svg></button>
     <a class="btn btn-ink btn-sm" href="releases/superk-1.0.0.zip">Download Extension</a>
@@ -430,7 +440,7 @@
         <span class="hero-subline">In one single click.</span>
       </h1>
       <p class="lede">
-        When our university LMS was updated and removed all direct download options, SuperK was engineered to solve it. One-click batch downloads, clean unit-based filenames, and instant topic ZIP archives.
+        Saving your own lecture materials for offline study shouldn't take 30 clicks. SuperK makes it one — batch downloads, clean unit-based filenames, and instant topic ZIP archives.
       </p>
       <div class="ctas">
         <a class="btn btn-ink hero-cta-primary" href="releases/superk-1.0.0.zip" download="superk-1.0.0.zip">
@@ -448,7 +458,7 @@
         </a>
       </div>
       <div class="hero-trust">
-        <span class="trust-item"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 13 4 4L19 7" /></svg> 100% Free Forever</span>
+        <span class="trust-item"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 13 4 4L19 7" /></svg> Free to use</span>
         <span class="trust-sep" aria-hidden="true">·</span>
         <span class="trust-item"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 13 4 4L19 7" /></svg> Tips optional</span>
         <span class="trust-sep" aria-hidden="true">·</span>
@@ -479,7 +489,7 @@
 
   <div class="stats reveal" aria-label="SuperK at a glance">
     <div class="stat"><b>1-click</b><span>Subject ZIP</span></div>
-    <div class="stat"><b>Up to 100+</b><span>PDFs per class</span></div>
+    <div class="stat"><b>Whole subject</b><span>One ZIP</span></div>
     <div class="stat"><b>0</b><span>Trackers in extension</span></div>
     <div class="stat"><b>30s</b><span>Install time</span></div>
   </div>
@@ -513,8 +523,8 @@
     <p class="sub reveal">Everything runs inside your browser, on your machine, using the classroom session you already have open.</p>
     <div class="grid stagger">
       <article class="card reveal"><span class="num" aria-hidden="true">01</span><div class="ic"><svg viewBox="0 0 24 24" width="21" height="21" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v11" /><path d="m7 11 5 5 5-5" /><path d="M4 20h16" /></svg></div><h3>One-Click Subject ZIP Packaging</h3><p>Why download 30 files one-by-one? SuperK groups all PPTs, Lecture Notes, Lab Manuals, and Question Papers into topic folders (<code>8. PPTs/</code>, <code>6. Assignments/</code>) and generates an organized <code>.zip</code> file instantly.</p></article>
-      <article class="card reveal"><span class="num" aria-hidden="true">02</span><div class="ic"><svg viewBox="0 0 24 24" width="21" height="21" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7V5h16v2" /><path d="M9 5v14" /><path d="M18 9l-6 3 6 3" /></svg></div><h3>Smart Automatic Filename Resolution</h3><p>Faculty frequently title every document generically as "PPT" or "Assignment". SuperK automatically inspects the cloud storage slug, detects the real unit name (e.g. <code>Unit 1 - Graph Theory</code>), and numbers duplicates neatly.</p></article>
-      <article class="card reveal"><span class="num" aria-hidden="true">03</span><div class="ic"><svg viewBox="0 0 24 24" width="21" height="21" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 4 14h6l-1 8 9-12h-6l1-8z" /></svg></div><h3>Paced &amp; Safe Downloads</h3><p>Never trigger browser crashes or cloud rate-limits. SuperK uses an intelligent 350ms throttle queue that guarantees smooth, reliable disk writes.</p></article>
+      <article class="card reveal"><span class="num" aria-hidden="true">02</span><div class="ic"><svg viewBox="0 0 24 24" width="21" height="21" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7V5h16v2" /><path d="M9 5v14" /><path d="M18 9l-6 3 6 3" /></svg></div><h3>Smart Automatic Filename Resolution</h3><p>Files are often titled generically, like "PPT" or "Assignment". SuperK automatically inspects the cloud storage slug, detects the real unit name (e.g. <code>Unit 1 - Graph Theory</code>), and numbers duplicates neatly.</p></article>
+      <article class="card reveal"><span class="num" aria-hidden="true">03</span><div class="ic"><svg viewBox="0 0 24 24" width="21" height="21" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 4 14h6l-1 8 9-12h-6l1-8z" /></svg></div><h3>Paced &amp; Safe Downloads</h3><p>Designed to avoid browser crashes and cloud rate-limits with a 350ms paced queue that keeps disk writes smooth and steady.</p></article>
       <article class="card reveal"><span class="num" aria-hidden="true">04</span><div class="ic"><svg viewBox="0 0 24 24" width="21" height="21" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4" /><path d="M4 21c0-4 3.6-6.5 8-6.5s8 2.5 8 6.5" /></svg></div><h3>Zero Account Setup</h3><p>No secondary logins or new accounts. SuperK runs securely in your browser and automatically detects your active classroom session.</p></article>
       <article class="card reveal"><span class="num" aria-hidden="true">05</span><div class="ic"><svg viewBox="0 0 24 24" width="21" height="21" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="10" width="16" height="11" rx="2" /><path d="M8 10V7a4 4 0 0 1 8 0v3" /></svg></div><h3>Private &amp; Client-Side</h3><p>No telemetry, no analytics, no servers of our own — requests go only to your university's own portal services, and your authentication token is never sent to us.</p></article>
       <article class="card reveal"><span class="num" aria-hidden="true">06</span><div class="ic"><svg viewBox="0 0 24 24" width="21" height="21" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7" /><path d="m20 20-3.5-3.5" /></svg></div><h3>Built-in Quick Filter (<code>⌘K</code> / <code>Ctrl+K</code>)</h3><p>Instant debounced search. Type any unit, topic, or document title to filter through hundreds of classroom documents in milliseconds.</p></article>
@@ -540,7 +550,11 @@
       <p class="eyebrow" style="color:#c9c5cf">Interface preview</p>
       <h2>Locked to your subject.<br />Ordered. Numbered. Zipped.</h2>
       <p class="sub">The popup detects the open subject from the page breadcrumb, lists its topics in syllabus order, resolves "PPT, PPT, PPT" into Unit 1–5, and packs it all into one ZIP.</p>
-      <figure class="demo-video"><iframe src="https://www.youtube-nocookie.com/embed/fHB4gBzqxI8?start=1" title="SuperK walkthrough: open classroom, lock subject, download PDFs as ZIP" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen loading="lazy"></iframe></figure>
+      <figure class="demo-video"><iframe src="https://www.youtube-nocookie.com/embed/fHB4gBzqxI8?start=1" title="SuperK walkthrough: open classroom, lock subject, download PDFs as ZIP" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen loading="lazy"></iframe></figure>
+      <figure class="shot reveal">
+        <img src="assets/popup-preview.png" width="392" height="600" alt="Screenshot of the SuperK popup: a search bar, the detected subject chip (Discrete Mathematics, 28 PDFs below, in order), topic groups like Course Outcomes with per-file Download buttons, and a bottom bar with Selected and Download all." loading="lazy" />
+        <figcaption>Prefer reading over watching? The real popup — detection, search, and per-file or whole-subject download.</figcaption>
+      </figure>
       <div class="tags"><span>Search</span><span>Topic counters</span><span>Per-file download</span><span>Download all → ZIP</span></div>
     </div>
   </section>
@@ -563,7 +577,7 @@
     <div class="grid stagger">
       <article class="card reveal">
         <h3>Install from here only</h3>
-        <p>Only install SuperK from this site or the official GitHub repository. Fake copies of extensions can steal your data — and your session.</p>
+        <p>Only install SuperK from this site or the project's own GitHub repository. Fake copies of extensions can steal your data — and your session.</p>
         <p class="hash-note">SHA-256 of <b>superk-1.0.0.zip</b>:</p>
         <div class="omni omni-hash">
           <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3 4 6v6c0 4.4 3.4 8.4 8 9.5 4.6-1.1 8-5.1 8-9.5V6l-8-3z" /><path d="m9 12 2 2 4-5" /></svg>
@@ -575,6 +589,7 @@
           </button>
         </div>
         <p class="hash-note">Windows: <code>Get-FileHash superk-1.0.0.zip -Algorithm SHA256</code> — the hash must match exactly.</p>
+        <p class="hash-note"><b>Browser or Windows warning?</b> Chrome and Windows sometimes flag an "uncommon" ZIP like this one — that is normal for side-loaded extensions. Verify the SHA-256 above, then keep the file.</p>
       </article>
       <article class="card reveal">
         <h3>Requirements &amp; limits</h3>
@@ -582,7 +597,7 @@
           <li>Desktop Chromium browsers only — Chrome, Brave, Edge, Opera, or Arc.</li>
           <li>Not supported on Firefox, Safari, or phones.</li>
           <li>Needs an active classroom login while you use it.</li>
-          <li>Works only for Parul University's elearning portal.</li>
+          <li>Works only for Parul University's elearning portal — built and tested on the developer's own enrolled courses.</li>
         </ul>
       </article>
       <article class="card reveal">
@@ -590,7 +605,8 @@
         <ul>
           <li><b>Update:</b> download the new ZIP, extract it over your existing folder, then click <b>Reload</b> on <code>chrome://extensions</code>.</li>
           <li><b>Remove:</b> right-click the SuperK icon, or open <code>chrome://extensions</code>, and choose <b>Remove from Chrome</b>.</li>
-          <li><b>Version history:</b> v1.0.0 — first public release (Oct 2026). See <a href="https://github.com/kabaliGamer-Dev2/superk/commits/main" target="_blank" rel="noopener">full history on GitHub</a>.</li>
+          <li><b>Version history:</b> v1.0.0 — first public release (Oct 2026). See the <a href="https://github.com/kabaliGamer-Dev2/superk/blob/main/CHANGELOG.md" target="_blank" rel="noopener">Changelog</a> or <a href="https://github.com/kabaliGamer-Dev2/superk/commits/main" target="_blank" rel="noopener">full history on GitHub</a>.</li>
+          <li><b>Startup note:</b> after a restart Chrome may show a <b>"Disable developer mode extensions"</b> bubble — close it with the X. Clicking <b>Disable</b> would switch SuperK off.</li>
         </ul>
       </article>
     </div>
@@ -641,6 +657,39 @@
     </div>
   </section>
 
+  <section class="block" aria-label="Permissions">
+    <p class="eyebrow rule reveal">No mystery permissions</p>
+    <h2 class="reveal">What Chrome asks for — and why</h2>
+    <p class="sub reveal">Chrome lists permission warnings when you side-load an extension. Here is every item SuperK asks for, and exactly what it is used for.</p>
+    <div class="grid stagger">
+      <article class="card reveal">
+        <h3>Standard permissions</h3>
+        <ul>
+          <li><b>activeTab</b> — read the classroom tab you are on, only when you open SuperK.</li>
+          <li><b>scripting</b> — run the one-time scan that lists the files on the page you are viewing.</li>
+          <li><b>downloads</b> — hand the PDFs and ZIPs to Chrome's own download manager.</li>
+          <li><b>storage</b> — keep your options on your own device, nothing more.</li>
+        </ul>
+      </article>
+      <article class="card reveal">
+        <h3>Site access (3 hosts)</h3>
+        <ul>
+          <li><b>elearning.paruluniversity.ac.in</b> — the university's classroom portal itself.</li>
+          <li><b>platform-api.edorer.com</b> — the university's own API that lists your enrolled files.</li>
+          <li><b>*.digitaloceanspaces.com</b> — the cloud storage where the university hosts the PDFs.</li>
+        </ul>
+      </article>
+      <article class="card reveal">
+        <h3>What it never asks for</h3>
+        <ul>
+          <li>No <b>"read all sites"</b> access — only the three hosts above.</li>
+          <li>No passwords, history, bookmarks, or payment data — ever.</li>
+          <li>Full details are in the <a href="privacy.html">Privacy Policy</a>.</li>
+        </ul>
+      </article>
+    </div>
+  </section>
+
   <section class="block" aria-label="Privacy and security">
     <div class="trust reveal">
       <p class="eyebrow" style="margin-bottom:10px">Why students trust it</p>
@@ -670,6 +719,7 @@
       <details><summary>Does it work on mobile or Firefox?</summary><p>No — desktop Chromium browsers only (Chrome, Brave, Edge, Opera, Arc). Firefox, Safari, and phones aren't supported.</p></details>
       <details><summary>How do I update it?</summary><p>Download the new ZIP, extract it over your existing folder, then click <b>Reload</b> on <code>chrome://extensions</code>. Your extension stays set up — nothing else to do.</p></details>
       <details><summary>Is it really free?</summary><p>Yes — free and open source (MIT). No account, no paywall, no tracking. If SuperK saves you time, tips are optional and go straight to development.</p></details>
+      <details><summary>What if it stops working?</summary><p>The university can change its portal at any time, and that can break SuperK until it is updated. If your subject list stops loading or downloads fail, report it on the <a href="feedback.html">feedback page</a> — fixes ship quickly.</p></details>
     </div>
   </section>
 
@@ -681,11 +731,12 @@
       <div class="ctas"><a class="btn btn-paper" href="feedback.html">Open the feedback form
         <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14" /><path d="m13 6 6 6-6 6" /></svg></a></div>
       <div class="tags"><span>Bug reports</span><span>Feature ideas</span><span>Download errors</span></div>
+      <p class="sub" style="margin-top:14px;font-size:12.5px">What's next: <a href="feedback.html#roadmap" style="color:inherit;text-decoration:underline;text-underline-offset:2.5px">public roadmap</a> · <a href="https://github.com/kabaliGamer-Dev2/superk/blob/main/CHANGELOG.md" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;text-underline-offset:2.5px">short changelog</a></p>
     </div>
   </section>
 
-  <section class="final wrap stagger" aria-label="Download">
-    <p class="pill reveal">Free forever · No account · Extension: zero trackers</p>
+  <section class="final stagger" aria-label="Download">
+    <p class="pill reveal">Free to use · No account · Extension: zero trackers</p>
     <h2 class="reveal" style="margin-top:16px">Get SuperK for your next exam.</h2>
     <p class="reveal">Install once. Download every subject, beautifully, all semester.</p>
     <p class="final-rules reveal">Use only for your own enrolled subjects, for personal study. Don't redistribute materials. Follow your university's rules.</p>
@@ -777,18 +828,22 @@
   });
 </script>
 
-<aside class="coffee" id="coffee" role="dialog" aria-labelledby="coffeeTitle" hidden>
+<button class="coffee-fab" type="button" id="coffeeFab" aria-controls="coffee" aria-expanded="false" aria-label="Buy a coffee — support SuperK">
+  <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 9h12v5a5 5 0 0 1-5 5H9a5 5 0 0 1-5-5V9z" /><path d="M16 10h1.5a2.5 2.5 0 0 1 0 5H16" /><path d="M8 5.5c0-1 .8-1 .8-2" /><path d="M12 5.5c0-1 .8-1 .8-2" /></svg>
+  <span>Buy a coffee</span>
+</button>
+<aside class="coffee" id="coffee" role="region" aria-label="Support SuperK" hidden>
   <button class="coffee-x" type="button" id="coffeeClose" aria-label="Close">
     <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12" /><path d="M18 6 6 18" /></svg>
   </button>
-  <h3 id="coffeeTitle">SuperK saved you time?</h3>
-  <p>SuperK stays free for everyone. If it helped, a small tip is a thank-you for my time — never payment for access. This is the only time I'll ask.</p>
+  <h3>SuperK saved you time?</h3>
+  <p>SuperK stays free for everyone. If it helped, a small tip is a thank-you for my time — never payment for access. This pop-up only appears once — the corner button is there if you ever change your mind.</p>
   <div class="coffee-actions">
-    <a class="btn btn-ink btn-sm" href="upi://pay?pa=9347007497%40ybl&amp;pn=Kabali%20Gamer&amp;cu=INR&amp;tn=SuperK%20support">Pay via UPI</a>
+    <a class="btn btn-ink btn-sm coffee-pay" href="upi://pay?pa=9347007497%40ybl&amp;pn=Kabali%20Gamer&amp;cu=INR&amp;tn=SuperK%20support">Pay via UPI</a>
   </div>
   <p class="coffee-upi">UPI ID: <code>9347007497@ybl</code> <button class="coffee-copy" type="button" id="coffeeCopy">Copy UPI ID</button></p>
-  <img class="coffee-qr" src="assets/upi-qr.png" alt="UPI QR code to tip SuperK" width="132" height="132" loading="lazy" />
-  <p class="coffee-note">Opens your UPI app on phones — or scan the QR. SuperK stays free either way; thanks for reading this far.</p>
+  <img class="coffee-qr" src="assets/upi-qr.png" alt="UPI QR code to tip SuperK" width="132" height="132" />
+  <p class="coffee-note"><span class="note-desk">Scan the QR with any UPI app.</span><span class="note-mob">Opens your UPI app.</span> SuperK stays free either way — thanks for reading this far.</p>
 </aside>
 
 <script>
@@ -799,8 +854,14 @@
   if (!card) return;
   function seen() { try { return localStorage.getItem(KEY) === "1"; } catch (e) { return true; } }
   function mark() { try { localStorage.setItem(KEY, "1"); } catch (e) {} }
-  function show(force) { if (!force && seen()) return; card.hidden = false; mark(); }
-  function hide() { card.hidden = true; }
+  function show(force) { if (!force && seen()) return; card.hidden = false; if (!force) mark(); syncFab(); }
+  function hide() { card.hidden = true; syncFab(); }
+  var fab = document.getElementById("coffeeFab");
+  function syncFab() { if (fab) { fab.hidden = !card.hidden; fab.setAttribute("aria-expanded", card.hidden ? "false" : "true"); } }
+  if (/[?&]tip=1\b/.test(location.search)) setTimeout(function () { show(true); }, 600);
+  if (fab) fab.addEventListener("click", function () { show(true); });
+  var navCoffee = document.getElementById("navCoffee");
+  if (navCoffee) navCoffee.addEventListener("click", function (e) { e.preventDefault(); show(true); });
   var timer = null;
   document.querySelectorAll('a[href$=".zip"]').forEach(function (a) {
     a.addEventListener("click", function () {
