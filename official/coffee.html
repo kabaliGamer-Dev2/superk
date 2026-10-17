@@ -1,0 +1,632 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Buy Us a Coffee — Support SuperK by Kabali Gamer</title>
+<meta name="description" content="SuperK is free and open source. If it saved you time, buy us a coffee — voluntary, one-time UPI support that keeps development moving." />
+<meta name="theme-color" content="#F3F0E7" />
+<link rel="canonical" href="https://superk-official.web.app/coffee.html" />
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="SuperK" />
+<meta property="og:title" content="Buy Us a Coffee — Support SuperK" />
+<meta property="og:description" content="SuperK is free and open source. Voluntary UPI support that keeps development moving." />
+<meta property="og:url" content="https://superk-official.web.app/coffee.html" />
+<meta property="og:image" content="https://superk-official.web.app/assets/og-card.png" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Buy Us a Coffee — Support SuperK" />
+<meta name="twitter:description" content="SuperK is free and open source. Voluntary UPI support that keeps development moving." />
+<meta name="twitter:image" content="https://superk-official.web.app/assets/og-card.png" />
+<link rel="icon" href="assets/favicon.ico?v=2" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700;800&family=Montserrat:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="tokens.css" />
+<link rel="stylesheet" href="site.css?v=12" />
+<noscript>
+  <style>#qrTileLive{display:none}</style>
+</noscript>
+<script>(function () { var d = document.documentElement; if (!("IntersectionObserver" in window)) return; d.classList.add("js"); setTimeout(function () { if (!d.hasAttribute("data-reveal-ready")) d.classList.remove("js"); }, 2500); })();</script>
+<script src="site.js?v=3" defer></script>
+<script src="assets/qrcode.min.js?v=1.4.4" defer></script>
+<style>
+  .skip { position: fixed; left: 12px; top: -64px; z-index: 300; background: var(--ink); color: var(--acc-ink); padding: 12px 18px; border-radius: 11px; font: 700 13px var(--body); text-decoration: none; transition: top .15s var(--ease); }
+  .skip:focus { top: 12px; }
+  /* component rules below set display:grid/block, which outranks the UA [hidden]
+     rule — so state toggles need this to actually take effect */
+  [hidden] { display: none !important; }
+
+  /* ---------- section rhythm: every band breathes on both sides ---------- */
+  .band { padding: clamp(56px, 7vw, 96px) 0; }
+  .band + .band { padding-top: 0; }
+  .band-head { max-width: 44em; margin: 0 0 32px; }
+  .band-head h2 { font: 700 clamp(26px, 3.4vw, 34px)/1.12 var(--display); letter-spacing: -.02em; margin: 0 0 10px; text-wrap: balance; }
+  .band-head p { color: var(--ink2); margin: 0; font-size: 15px; text-wrap: pretty; }
+  .band-head.center { margin-left: auto; margin-right: auto; text-align: center; }
+
+  /* ---------- hero ---------- */
+  .hero-coffee { padding: clamp(40px, 5vw, 72px) 0 clamp(8px, 2vw, 20px); text-align: center; }
+  .cup-badge {
+    display: inline-grid; place-items: center; width: 56px; height: 56px; border-radius: 16px;
+    background: var(--ink); color: var(--acc-ink); box-shadow: var(--tactile); margin-bottom: 18px;
+  }
+  .hero-coffee h1 { font: 800 clamp(30px, 4.6vw, 48px)/1.04 var(--display); letter-spacing: -.03em; margin: 0 0 14px; text-wrap: balance; }
+  .hero-coffee .lede { font: 500 clamp(14px, 1.6vw, 16.5px)/1.65 var(--body); color: var(--ink2); max-width: 40em; margin: 0 auto 26px; text-wrap: pretty; }
+  .hero-coffee .ctas { display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; }
+
+  /* ---------- the one contribution unit ---------- */
+  .give {
+    background: var(--card); border: 1.5px solid var(--ink); border-radius: 22px;
+    box-shadow: var(--tactile); overflow: hidden;
+  }
+  .give-top { padding: clamp(24px, 3.4vw, 40px) clamp(22px, 3.4vw, 44px) clamp(20px, 2.6vw, 30px); border-bottom: 1.5px solid var(--line); }
+  .give-top .eyebrow { margin: 0 0 8px; }
+  .give-top h2 { font: 700 clamp(21px, 2.4vw, 27px)/1.2 var(--display); letter-spacing: -.015em; margin: 0 0 6px; }
+  .give-top .sub { color: var(--ink2); margin: 0; font-size: 14px; text-wrap: pretty; }
+
+  /* amount chips */
+  .amount-grid { display: grid; grid-template-columns: repeat(4, 1fr) auto; gap: 10px; margin: 0; }
+  .amount-card {
+    position: relative; display: grid; place-items: center; gap: 2px;
+    background: var(--paper); border: 1.5px solid var(--line); border-radius: 14px;
+    padding: 16px 10px; cursor: pointer; text-align: center; min-height: 78px;
+    transition: background var(--t-fast) var(--ease), border-color var(--t-fast) var(--ease),
+                color var(--t-fast) var(--ease), transform var(--t-fast) var(--ease),
+                box-shadow var(--t-fast) var(--ease);
+  }
+  .amount-card:hover { border-color: var(--ink); transform: translateY(-2px); box-shadow: 0 6px 14px -10px rgba(42,37,41,.8); }
+  .amount-card:focus-within { outline: 2.5px solid var(--ink); outline-offset: 3px; }
+  .amount-card input[type="radio"] { position: absolute; inset: 0; opacity: 0; cursor: pointer; margin: 0; }
+  .amount-card .amount-value { font: 800 27px/1 var(--display); letter-spacing: -.02em; color: var(--ink); transition: color var(--t-fast) var(--ease); }
+  .amount-card .amount-label { font: 600 10px var(--mono); letter-spacing: .09em; text-transform: uppercase; color: var(--mut); transition: color var(--t-fast) var(--ease); }
+  .amount-card .amount-cur { font: 700 13px var(--mono); color: var(--mut); margin-right: 1px; transition: color var(--t-fast) var(--ease); }
+  .amount-card .amount-val-wrap { display: flex; align-items: baseline; }
+  .amount-card.is-selected { background: var(--ink); border-color: var(--ink); box-shadow: var(--tactile); transform: translateY(-2px); }
+  .amount-card.is-selected .amount-value,
+  .amount-card.is-selected .amount-cur,
+  .amount-card.is-selected .amount-label { color: var(--acc-ink); }
+  .amount-card.is-selected .amount-label { opacity: .68; }
+  .amount-card--custom { min-width: 96px; border-style: dashed; }
+  .amount-card--custom .amount-value { font-size: 15px; letter-spacing: .01em; }
+
+  /* custom input row */
+  .custom-row {
+    display: grid; grid-template-columns: auto 1fr; gap: 12px; align-items: center;
+    margin-top: 14px; padding: 14px 16px; background: var(--paper2);
+    border: 1.5px dashed var(--line); border-radius: 14px;
+  }
+  .custom-row[hidden] { display: none; }
+  .custom-row label { font: 700 13px var(--body); color: var(--ink); white-space: nowrap; }
+  .custom-field { display: flex; align-items: center; gap: 8px; }
+  .custom-field .cur { font: 700 17px var(--display); color: var(--ink2); }
+  .custom-field input {
+    font: 700 17px var(--display); width: 100%; min-width: 0; padding: 8px 12px;
+    border: 1.5px solid var(--ink); border-radius: 10px; background: var(--card); color: var(--ink);
+  }
+  .custom-field input:focus { outline: none; box-shadow: 2.5px 2.5px 0 rgba(42,37,41,.9); }
+  .amount-error { grid-column: 1 / -1; font: 600 12.5px var(--body); color: #8f1d1d; min-height: 16px; }
+
+  /* payment row: actions left, two QR paths right */
+  .give-body { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: clamp(22px, 3vw, 40px); padding: clamp(22px, 3.4vw, 40px) clamp(22px, 3.4vw, 44px); align-items: start; }
+  .amount-display { display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap; margin-bottom: 4px; }
+  .amount-display .amt { font: 800 clamp(38px, 5vw, 54px)/1 var(--display); letter-spacing: -.035em; color: var(--ink); }
+  .amount-display .note { font: 600 11.5px var(--mono); letter-spacing: .07em; text-transform: uppercase; color: var(--mut); }
+  .amount-sub { font: 500 13.5px/1.6 var(--body); color: var(--ink2); margin: 0 0 18px; }
+  .pay-actions { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 16px; }
+  .pay-actions .btn { min-height: 48px; flex: 1 1 165px; justify-content: center; }
+  .upi-line { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; padding-top: 14px; border-top: 1px solid var(--line-soft); font-size: 13px; color: var(--ink2); }
+  .upi-line code { font: 600 12.5px var(--mono); background: var(--paper2); border: 1px solid var(--line); border-radius: 7px; padding: 3px 9px; color: var(--ink); }
+  .copy-upi { display: inline-flex; align-items: center; gap: 6px; border: 1.5px solid var(--ink); background: var(--card); color: var(--ink); border-radius: 9px; padding: 7px 13px; font: 700 12px var(--body); cursor: pointer; transition: background var(--t-fast) var(--ease), color var(--t-fast) var(--ease); min-height: 34px; }
+  .copy-upi:hover { background: var(--paper2); }
+  .copy-upi.is-done { background: var(--ink); color: var(--acc-ink); }
+  .reassure { list-style: none; margin: 16px 0 0; padding: 0; display: grid; gap: 7px; }
+  .reassure li { position: relative; padding-left: 20px; font: 500 12.5px/1.55 var(--body); color: var(--ink2); }
+  .reassure li::before {
+    content: ""; position: absolute; left: 2px; top: 7px; width: 8px; height: 4px;
+    border-left: 2px solid var(--ink); border-bottom: 2px solid var(--ink);
+    transform: rotate(-45deg);
+  }
+
+  /* two honest QR paths, side by side */
+  .qr-pair { display: grid; grid-template-columns: repeat(2, auto); gap: 16px; }
+  .qr-tile { margin: 0; text-align: center; }
+  .qr-tile-head { margin-bottom: 9px; }
+  .qr-tile-title { display: block; font: 700 13.5px var(--display); color: var(--ink); letter-spacing: -.01em; }
+  .qr-tile-sub { display: block; font: 500 10px var(--mono); letter-spacing: .07em; text-transform: uppercase; color: var(--mut); margin-top: 3px; }
+  .qr-frame {
+    display: grid; place-items: center; width: 170px; height: 170px;
+    background: #fff; border: 1.5px solid var(--ink); border-radius: 14px;
+    box-shadow: 2.5px 2.5px 0 rgba(42,37,41,.55);
+  }
+  .qr-frame canvas, .qr-frame img { display: block; width: 148px; height: 148px; }
+  .qr-empty { padding: 0 16px; font: 500 11.5px/1.5 var(--body); color: var(--mut); text-align: center; text-wrap: pretty; }
+  .qr-tile-note { font: 500 11px/1.5 var(--body); color: var(--mut); margin: 9px auto 0; max-width: 172px; text-wrap: pretty; }
+
+  .give-foot { padding: 16px clamp(22px, 3.4vw, 44px) clamp(20px, 2.6vw, 26px); background: var(--paper2); border-top: 1px solid var(--line-soft); }
+  .give-foot p { font: 500 11.5px/1.65 var(--body); color: var(--mut); margin: 0; max-width: 74ch; text-wrap: pretty; }
+
+  /* ---------- benefits ---------- */
+  .benefit-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+  .benefit { background: var(--card); border: 1.5px solid var(--ink); border-radius: 16px; padding: 22px 20px; box-shadow: var(--soft-shadow); }
+  .benefit .ic { width: 38px; height: 38px; border-radius: 11px; background: var(--ink); color: var(--acc-ink); display: grid; place-items: center; margin-bottom: 14px; }
+  .benefit h3 { font: 600 15px var(--display); margin: 0 0 6px; }
+  .benefit p { font: 500 13px/1.55 var(--body); color: var(--ink2); margin: 0; }
+  .band-foot { font: 500 12.5px/1.6 var(--body); color: var(--mut); margin: 22px 0 0; max-width: 62ch; }
+
+  /* ---------- thanks ---------- */
+  .thanks-panel { background: var(--ink); color: var(--acc-ink); border-radius: 22px; padding: clamp(32px, 5vw, 56px) clamp(24px, 4vw, 60px); text-align: center; }
+  .thanks-panel .eyebrow { color: var(--acc-ink); opacity: .6; margin: 0 0 12px; }
+  .thanks-panel h2 { font: 800 clamp(23px, 3vw, 34px)/1.14 var(--display); letter-spacing: -.022em; margin: 0 0 14px; text-wrap: balance; }
+  .thanks-panel p { font: 500 15px/1.65 var(--body); color: #d9d5cb; margin: 0 auto; max-width: 42em; text-wrap: pretty; }
+
+  /* ---------- faq ---------- */
+  /* uses the site's own .faq system from site.css (card + +/- badge + smooth open) */
+  .faq { max-width: 64em; }
+
+  /* ---------- final cta ---------- */
+  .final-cta { text-align: center; }
+  .final-cta h2 { font: 800 clamp(26px, 3.6vw, 40px)/1.1 var(--display); letter-spacing: -.028em; margin: 0 0 12px; text-wrap: balance; }
+  .final-cta p { color: var(--ink2); margin: 0 auto 26px; max-width: 40em; text-wrap: pretty; }
+  .final-cta .ctas { display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; }
+
+  @media (max-width: 1080px) {
+    .give-body { grid-template-columns: 1fr; }
+    .qr-pair { justify-content: start; }
+    .benefit-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (max-width: 1000px) {
+    .amount-grid { grid-template-columns: repeat(2, 1fr); }
+    .amount-card--custom { grid-column: 1 / -1; min-width: 0; }
+  }
+  @media (max-width: 640px) {
+    .band { padding: clamp(40px, 9vw, 60px) 0; }
+    .hero-coffee { padding-top: 28px; }
+    .hero-coffee .ctas { flex-direction: column; align-items: stretch; }
+    .hero-coffee .ctas .btn { width: 100%; justify-content: center; }
+    .pay-actions { flex-direction: column; }
+    .pay-actions .btn { width: 100%; }
+    .custom-row { grid-template-columns: 1fr; gap: 8px; }
+    .benefit-grid { grid-template-columns: 1fr; }
+    .amount-card { min-height: 70px; }
+    .amount-card .amount-value { font-size: 24px; }
+    .qr-pair { grid-template-columns: 1fr; justify-items: center; gap: 26px; }
+    .qr-frame { width: 158px; height: 158px; }
+    .qr-frame canvas, .qr-frame img { width: 136px; height: 136px; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .amount-card, .amount-card .amount-value, .amount-card .amount-cur, .amount-card .amount-label, .faq summary::after { transition: none; }
+    .amount-card:hover, .amount-card.is-selected { transform: none; }
+  }
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<div class="grain" aria-hidden="true"></div>
+<div class="announce"><div class="wrap"><span>SuperK is free to use — tips are optional and go straight to development</span><a href="feedback.html">Send feedback</a></div></div>
+<nav class="nav" aria-label="Primary">
+  <div class="wrap nav-row">
+    <a class="brand" href="index.html"><img src="assets/logo.svg" alt="SuperK logo" /><b>SuperK</b><span class="ver">v1.0.0</span></a>
+    <div class="links" id="navLinks">
+      <a href="index.html#features">Features</a>
+      <a href="story.html">Story</a>
+      <a href="installation.html">Installation Guide</a>
+      <a href="terms.html">Terms</a>
+      <a href="privacy.html">Privacy</a>
+      <a href="feedback.html">Feedback</a>
+      <a href="coffee.html">Buy a coffee</a>
+    </div>
+    <button class="menu-btn" id="menuBtn" aria-label="Open menu" aria-expanded="false" aria-controls="navLinks"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M4 7h16" /><path d="M4 12h16" /><path d="M4 17h16" /></svg></button>
+    <a class="btn btn-ink btn-sm" href="releases/superk-1.0.0.zip">Download Extension</a>
+  </div>
+</nav>
+
+<main class="wrap" id="main">
+
+  <section class="hero-coffee reveal">
+    <span class="cup-badge" aria-hidden="true">
+      <svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9h12v5a5 5 0 0 1-5 5H9a5 5 0 0 1-5-5V9z" /><path d="M16 10h1.5a2.5 2.5 0 0 1 0 5H16" /><path d="M8 5.5c0-1 .8-1 .8-2" /><path d="M12 5.5c0-1 .8-1 .8-2" /></svg>
+    </span>
+    <h1>Enjoying SuperK?<br />Buy Us a Coffee.</h1>
+    <p class="lede">SuperK is free and always will be. If it saved you time this semester, a small voluntary contribution keeps the bug fixes, compatibility work and new ideas coming.</p>
+    <div class="ctas">
+      <a class="btn btn-ink" href="#give">Choose an amount
+        <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14" /><path d="m13 6 6 6-6 6" /></svg></a>
+      <a class="btn btn-paper" href="index.html">Explore SuperK</a>
+    </div>
+  </section>
+
+  <section class="band" id="give" aria-label="Make a contribution">
+    <div class="give reveal">
+      <div class="give-top">
+        <p class="eyebrow rule">Voluntary support</p>
+        <h2>Pick an amount</h2>
+        <p class="sub">One-time payments through UPI. Nothing is unlocked by paying — SuperK stays free either way.</p>
+
+        <div class="amount-grid" role="radiogroup" aria-label="Contribution amount">
+          <label class="amount-card" data-amount="49">
+            <input type="radio" name="amount" value="49" checked />
+            <span class="amount-val-wrap"><span class="amount-cur">₹</span><span class="amount-value">49</span></span>
+            <span class="amount-label">One coffee</span>
+          </label>
+          <label class="amount-card" data-amount="99">
+            <input type="radio" name="amount" value="99" />
+            <span class="amount-val-wrap"><span class="amount-cur">₹</span><span class="amount-value">99</span></span>
+            <span class="amount-label">Most chosen</span>
+          </label>
+          <label class="amount-card" data-amount="199">
+            <input type="radio" name="amount" value="199" />
+            <span class="amount-val-wrap"><span class="amount-cur">₹</span><span class="amount-value">199</span></span>
+            <span class="amount-label">Two coffees</span>
+          </label>
+          <label class="amount-card" data-amount="499">
+            <input type="radio" name="amount" value="499" />
+            <span class="amount-val-wrap"><span class="amount-cur">₹</span><span class="amount-value">499</span></span>
+            <span class="amount-label">Big thanks</span>
+          </label>
+          <label class="amount-card amount-card--custom" data-amount="custom">
+            <input type="radio" name="amount" value="custom" />
+            <span class="amount-value">Other amount</span>
+            <span class="amount-label">Enter below</span>
+          </label>
+        </div>
+
+        <div class="custom-row" id="customWrap" hidden>
+          <label for="customAmount">Your amount</label>
+          <div class="custom-field">
+            <span class="cur" aria-hidden="true">₹</span>
+            <input type="number" id="customAmount" min="1" max="100000" step="1" placeholder="e.g. 250" inputmode="numeric" aria-describedby="amountErr" />
+          </div>
+          <p class="amount-error" id="amountErr" aria-live="polite"></p>
+        </div>
+      </div>
+
+      <div class="give-body">
+        <div class="pay-col">
+          <div class="amount-display">
+            <span class="amt" id="selectedAmt">₹49</span>
+            <span class="note" id="selectedNote">One-time</span>
+          </div>
+          <p class="amount-sub">Paying <span id="selectedWords">₹49</span> — every rupee is optional and goes to the project.</p>
+
+          <div class="pay-actions">
+            <a class="btn btn-ink" id="payBtn" href="upi://pay?pa=9347007497%40ybl&amp;pn=Kabali%20Gamer&amp;am=49&amp;cu=INR&amp;tn=SuperK%20support">
+              <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 9h12v5a5 5 0 0 1-5 5H9a5 5 0 0 1-5-5V9z" /><path d="M16 10h1.5a2.5 2.5 0 0 1 0 5H16" /></svg>
+              Pay via UPI
+            </a>
+            <button class="btn btn-paper" type="button" id="copyUpi">
+              <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="8" y="8" width="14" height="14" rx="2.5" /><path d="M16 8V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h2" /></svg>
+              <span id="copyUpiLabel">Copy UPI ID</span>
+            </button>
+          </div>
+
+          <div class="upi-line">
+            <span>UPI ID</span>
+            <code>9347007497@ybl</code>
+            <button class="copy-upi" type="button" id="copyUpi2"><span id="copyUpi2Label">Copy</span></button>
+          </div>
+
+          <ul class="reassure">
+            <li>Nothing unlocks — SuperK stays free whether you contribute or not.</li>
+            <li>Your UPI app handles the payment; this site never sees your PIN.</li>
+            <li>Roughly what one coffee costs, going straight to development time.</li>
+          </ul>
+        </div>
+
+        <div class="qr-pair">
+          <figure class="qr-tile" id="qrTileLive">
+            <figcaption class="qr-tile-head">
+              <span class="qr-tile-title" id="qrAmount">Your ₹49 code</span>
+              <span class="qr-tile-sub">Amount pre-filled</span>
+            </figcaption>
+            <span class="qr-frame">
+              <canvas id="qrCanvas" width="312" height="312" role="img" aria-labelledby="qrAlt"></canvas>
+              <span id="qrAlt" hidden>QR code that opens a UPI payment for the amount selected above. The same payment is available from the Pay via UPI button.</span>
+              <span class="qr-empty" id="qrEmpty" hidden>Pick an amount above to generate your code.</span>
+            </span>
+            <p class="qr-tile-note">Opens your UPI app with the amount already filled in.</p>
+          </figure>
+          <figure class="qr-tile">
+            <figcaption class="qr-tile-head">
+              <span class="qr-tile-title">Any amount</span>
+              <span class="qr-tile-sub">You decide</span>
+            </figcaption>
+            <span class="qr-frame">
+              <img src="assets/upi-qr.png" alt="Static UPI QR code. Scan with any UPI app, then enter the amount you want to pay before confirming." width="148" height="148" />
+            </span>
+            <p class="qr-tile-note">Scans the same ID — type any amount in your app.</p>
+          </figure>
+        </div>
+      </div>
+
+      <div class="give-foot">
+        <p>Payments are completed inside your own UPI app and handled by your bank. SuperK never sees or stores your UPI PIN or payment password, and cannot independently confirm that a payment completed. This site records no payment data.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="band" aria-label="Where your support goes">
+    <div class="band-head reveal">
+      <p class="eyebrow rule">Where your support goes</p>
+      <h2>Every contribution helps us keep building.</h2>
+      <p>Contributions are voluntary and may go toward any of these.</p>
+    </div>
+    <div class="benefit-grid stagger">
+      <article class="benefit reveal">
+        <span class="ic" aria-hidden="true"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 4 14h6l-1 8 9-12h-6l1-8z" /></svg></span>
+        <h3>Development</h3>
+        <p>Time spent improving what exists and building features people actually ask for.</p>
+      </article>
+      <article class="benefit reveal">
+        <span class="ic" aria-hidden="true"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v4" /><path d="m4.93 4.93 2.83 2.83" /><path d="M2 12h4" /><path d="m4.93 19.07 2.83-2.83" /><path d="M12 18v4" /><path d="m19.07 19.07-2.83-2.83" /><path d="M22 12h-4" /><path d="m19.07 4.93-2.83 2.83" /></svg></span>
+        <h3>Bug fixes</h3>
+        <p>Reproducing reports and making the extension more reliable after portal changes.</p>
+      </article>
+      <article class="benefit reveal">
+        <span class="ic" aria-hidden="true"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9" /><path d="M12 3a13 13 0 0 0 0 18" /><path d="M3 12h18" /></svg></span>
+        <h3>Compatibility</h3>
+        <p>Testing across Chromium browsers and their updates over time.</p>
+      </article>
+      <article class="benefit reveal">
+        <span class="ic" aria-hidden="true"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="3" /><path d="M3 9h18" /><path d="M9 21V9" /></svg></span>
+        <h3>Infrastructure</h3>
+        <p>Legitimate project hosting, domain and tooling costs where applicable.</p>
+      </article>
+    </div>
+    <p class="band-foot">These are potential uses of support, not guaranteed allocations. SuperK is not a charity and contributions carry no donor rights, refund promise or tax benefit.</p>
+  </section>
+
+  <section class="band" aria-label="Thank you">
+    <div class="thanks-panel reveal">
+      <p class="eyebrow">Thank you</p>
+      <h2>Built with curiosity. Supported by you.</h2>
+      <p>Whether you contribute today, share SuperK with a classmate, or simply keep using it, thank you for being part of this.</p>
+    </div>
+  </section>
+
+  <section class="band" id="faq" aria-label="Questions">
+    <div class="band-head reveal">
+      <p class="eyebrow rule">Good questions</p>
+      <h2>Before you tap pay</h2>
+    </div>
+    <div class="faq reveal">
+      <details><summary>Is contributing required to use SuperK?</summary><p>No. Contributions are entirely optional and every SuperK feature stays available under the project's normal terms. Nothing is gated behind payment.</p></details>
+      <details><summary>Where does my contribution go?</summary><p>It may go toward development, bug fixes, browser compatibility, or legitimate project costs. These are potential uses, not a fixed allocation, and no donor receives anything in return.</p></details>
+      <details><summary>Is my payment secure?</summary><p>Payment happens entirely inside your own UPI app with your bank — SuperK's website never handles your UPI PIN, payment password or card details. This site stores no payment records and cannot confirm that a payment completed.</p></details>
+      <details><summary>Can I contribute more than once?</summary><p>Yes. Each payment is a separate one-time transaction handled by your UPI app. Contribute as often as you'd like.</p></details>
+      <details><summary>What if my payment fails or I change my mind?</summary><p>If the payment fails, retry through your UPI app. If you paid by mistake, contact <a href="mailto:kabaligamer.dev@proton.me">kabaligamer.dev@proton.me</a> and we will help. Terms §17 applies to all contributions.</p></details>
+      <details><summary>Can I suggest a feature instead?</summary><p>Absolutely — that costs nothing. The <a href="feedback.html">feedback page</a> is where ideas and bug reports go, and they are read either way.</p></details>
+    </div>
+  </section>
+
+  <section class="band" aria-label="Final call to action">
+    <div class="final-cta reveal">
+      <h2>One coffee. A little more momentum.</h2>
+      <p>If SuperK made your study life a little easier, a contribution helps keep it that way.</p>
+      <div class="ctas">
+        <a class="btn btn-ink" href="#give">Buy a Coffee</a>
+        <a class="btn btn-paper" href="feedback.html">Send feedback instead</a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="foot">
+  <div class="wrap foot-row">
+    <div class="foot-brand"><img src="assets/logo-white.svg" alt="SuperK logo" /><span>© 2026 SuperK · v1.0.0 · Created by Kabali Gamer.</span><a class="ig" href="https://www.instagram.com/kabali.gamer/" target="_blank" rel="noopener" aria-label="SuperK on Instagram"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="5" /><circle cx="12" cy="12" r="4" /><circle cx="17.2" cy="6.8" r="1.1" fill="currentColor" stroke="none" /></svg></a><span class="ver" style="font:600 10px var(--mono);letter-spacing:.1em;border:1px solid rgba(243,240,231,.45);border-radius:99px;padding:3px 9px;">v1.0.0</span><span class="ver" style="font:600 10px var(--mono);letter-spacing:.1em;border:1px solid rgba(243,240,231,.45);border-radius:99px;padding:3px 9px;">MIT</span></div>
+    <nav class="foot-links" aria-label="Footer">
+      <a href="index.html">Home</a>
+      <a href="story.html">Story</a>
+      <a href="installation.html">Installation Guide</a>
+      <a href="terms.html">Terms &amp; Conditions</a>
+      <a href="privacy.html">Privacy Policy</a>
+      <a href="cookies.html">Cookie Statement</a>
+      <a href="feedback.html">Bug Reports &amp; Feedback</a>
+      <a href="coffee.html">Buy a coffee</a>
+    </nav>
+    <p class="disclaimer">SuperK is an independent student utility and is not officially affiliated with Parul University or Edorer.</p>
+  </div>
+</footer>
+
+<script>
+(function () {
+  "use strict";
+  var UPI = "9347007497@ybl";
+  var PAYEE = "Kabali Gamer";
+  var NOTE = "SuperK support";
+  var CURRENCY = "INR";
+  var MAX = 100000;
+  var WORDS = { 49: "One coffee", 99: "Most chosen", 199: "Two coffees", 499: "Big thanks" };
+
+  var cards = Array.prototype.slice.call(document.querySelectorAll(".amount-card"));
+  var customWrap = document.getElementById("customWrap");
+  var customInput = document.getElementById("customAmount");
+  var amountErr = document.getElementById("amountErr");
+  var selectedAmt = document.getElementById("selectedAmt");
+  var selectedNote = document.getElementById("selectedNote");
+  var selectedWords = document.getElementById("selectedWords");
+  var qrAmount = document.getElementById("qrAmount");
+  var payBtn = document.getElementById("payBtn");
+  var copyUpi = document.getElementById("copyUpi");
+  var copyUpiLabel = document.getElementById("copyUpiLabel");
+  var copyUpi2 = document.getElementById("copyUpi2");
+  var copyUpi2Label = document.getElementById("copyUpi2Label");
+
+  var qrCanvas = document.getElementById("qrCanvas");
+  var qrEmpty = document.getElementById("qrEmpty");
+  var qrTileLive = document.getElementById("qrTileLive");
+
+  /* ---- dynamic QR: re-encoded whenever the amount changes ---- */
+  var qrFailed = false;
+
+  function drawQR(uri) {
+    if (qrFailed) return;
+    var gen = window.qrcode;
+    if (typeof gen !== "function" || !qrCanvas || !qrCanvas.getContext) { qrFailed = true; return; }
+    try {
+      // typeNumber 0 = auto-select the smallest version that fits
+      var qr = gen(0, "M");
+      qr.addData(uri);
+      qr.make();
+
+      var count = qr.getModuleCount();
+      var quiet = 4;                       // quiet zone required by the spec
+      var total = count + quiet * 2;
+      var cssSize = 148;
+      var scale = Math.max(1, Math.floor((cssSize * 4) / total)); // 4x for crispness
+      var px = total * scale;
+
+      qrCanvas.width = px;
+      qrCanvas.height = px;
+      qrCanvas.style.width = cssSize + "px";
+      qrCanvas.style.height = cssSize + "px";
+
+      var ctx = qrCanvas.getContext("2d");
+      ctx.fillStyle = "#ffffff";
+      ctx.fillRect(0, 0, px, px);
+      ctx.fillStyle = "#2A2529";
+      for (var row = 0; row < count; row++) {
+        for (var col = 0; col < count; col++) {
+          if (qr.isDark(row, col)) ctx.fillRect((col + quiet) * scale, (row + quiet) * scale, scale, scale);
+        }
+      }
+      qrCanvas.hidden = false;
+      qrEmpty.hidden = true;
+    } catch (err) {
+      qrFailed = true;
+      qrCanvas.hidden = true;
+      qrEmpty.hidden = false;
+      qrEmpty.textContent = "Use the Pay via UPI button or copy the UPI ID below.";
+    }
+  }
+
+  /* no amount chosen yet: explain instead of showing a wrong code */
+  function showQrEmpty() {
+    qrEmpty.textContent = "Pick an amount above to generate your code.";
+    if (qrFailed) {
+      qrEmpty.textContent = "Use the Pay via UPI button or copy the UPI ID below.";
+    }
+    qrCanvas.hidden = true;
+    qrEmpty.hidden = false;
+  }
+
+  function money(n) {
+    return "₹" + (Math.round(n * 100) / 100).toLocaleString("en-IN", { maximumFractionDigits: 2 });
+  }
+
+  function upiUri(amount) {
+    var parts = ["pa=" + encodeURIComponent(UPI), "pn=" + encodeURIComponent(PAYEE)];
+    if (amount) parts.push("am=" + amount);
+    parts.push("cu=" + CURRENCY, "tn=" + encodeURIComponent(NOTE));
+    return "upi://pay?" + parts.join("&");
+  }
+
+  function paint(amount, word) {
+    var label = money(amount);
+    selectedAmt.textContent = label;
+    selectedWords.textContent = label;
+    qrAmount.textContent = "Your " + label + " code";
+    selectedNote.textContent = word ? "One-time · " + word : "One-time";
+    var uri = upiUri(amount);
+    payBtn.setAttribute("href", uri);
+    payBtn.setAttribute("aria-label", "Pay " + label + " via UPI");
+    drawQR(uri);          // the QR always matches the selected amount
+  }
+
+  function blank() {
+    selectedAmt.textContent = "₹—";
+    selectedWords.textContent = "your amount";
+    qrAmount.textContent = "Your code";
+    selectedNote.textContent = "One-time";
+    payBtn.setAttribute("href", upiUri(null));
+    payBtn.removeAttribute("aria-label");
+    showQrEmpty();          // no amount yet -> explain, don't show a wrong code
+  }
+
+  function validate(raw) {
+    var v = String(raw == null ? "" : raw).trim();
+    if (!v) return { ok: false, msg: "Enter an amount to continue." };
+    if (!/^\d+(\.\d{1,2})?$/.test(v)) return { ok: false, msg: "Use digits only, up to two decimal places." };
+    var n = parseFloat(v);
+    if (!isFinite(n) || n <= 0) return { ok: false, msg: "Amount must be more than zero." };
+    if (n > MAX) return { ok: false, msg: "For amounts above ₹" + MAX.toLocaleString("en-IN") + ", please email us instead." };
+    return { ok: true, value: n };
+  }
+
+  function select(card) {
+    var radio = card.querySelector('input[type="radio"]');
+    radio.checked = true;
+    cards.forEach(function (c) { c.classList.toggle("is-selected", c === card); });
+    if (card.dataset.amount === "custom") {
+      customWrap.hidden = false;
+      blank();
+      if (!amountErr.textContent) amountErr.textContent = "";
+      try { customInput.focus({ preventScroll: true }); } catch (e) { customInput.focus(); }
+    } else {
+      customWrap.hidden = true;
+      amountErr.textContent = "";
+      var v = parseInt(card.dataset.amount, 10);
+      paint(v, WORDS[v]);
+    }
+  }
+
+  cards.forEach(function (card) {
+    card.addEventListener("click", function () { select(card); });
+    card.addEventListener("keydown", function (e) {
+      var i = cards.indexOf(card);
+      if (e.key === "ArrowRight" || e.key === "ArrowDown") { e.preventDefault(); cards[(i + 1) % cards.length].querySelector("input").focus(); }
+      else if (e.key === "ArrowLeft" || e.key === "ArrowUp") { e.preventDefault(); cards[(i - 1 + cards.length) % cards.length].querySelector("input").focus(); }
+    });
+  });
+
+  customInput.addEventListener("input", function () {
+    var r = validate(customInput.value);
+    if (!r.ok) { amountErr.textContent = r.msg; blank(); return; }
+    amountErr.textContent = "";
+    paint(r.value, "Custom amount");
+  });
+
+  // guard against double-initiating a payment
+  var busy = false;
+  payBtn.addEventListener("click", function () {
+    if (busy) { return; }
+    busy = true;
+    payBtn.style.opacity = ".65";
+    setTimeout(function () { busy = false; payBtn.style.opacity = ""; }, 2500);
+  });
+
+  function copyUpiId(btn, label, restore) {
+    function done() {
+      label.textContent = "Copied";
+      btn.classList.add("is-done");
+      setTimeout(function () { label.textContent = restore; btn.classList.remove("is-done"); }, 1800);
+    }
+    function fallback() {
+      try {
+        var ta = document.createElement("textarea");
+        ta.value = UPI; ta.setAttribute("readonly", "");
+        ta.style.position = "fixed"; ta.style.opacity = "0";
+        document.body.appendChild(ta); ta.select();
+        document.execCommand("copy"); ta.remove();
+        done();
+      } catch (err) {}
+    }
+    if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(UPI).then(done, fallback);
+    else fallback();
+  }
+  copyUpi.addEventListener("click", function () { copyUpiId(copyUpi, copyUpiLabel, "Copy UPI ID"); });
+  copyUpi2.addEventListener("click", function () { copyUpiId(copyUpi2, copyUpi2Label, "Copy"); });
+
+  /* boot after deferred scripts (the QR library) have executed */
+  function boot() {
+    cards[0].classList.add("is-selected");
+    paint(49, WORDS[49]);
+  }
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", boot);
+  else boot();
+})();
+</script>
+</body>
+</html>

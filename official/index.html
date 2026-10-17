@@ -419,7 +419,7 @@
       <a href="terms.html">Terms</a>
       <a href="privacy.html">Privacy</a>
       <a href="feedback.html">Feedback</a>
-      <a href="#support" id="navCoffee">Buy a coffee</a>
+      <a href="coffee.html">Buy a coffee</a>
     </div>
     <button class="menu-btn" id="menuBtn" aria-label="Open menu" aria-expanded="false" aria-controls="navLinks"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M4 7h16" /><path d="M4 12h16" /><path d="M4 17h16" /></svg></button>
     <a class="btn btn-ink btn-sm" href="releases/superk-1.0.0.zip">Download Extension</a>
@@ -758,8 +758,9 @@
       <a href="privacy.html">Privacy Policy</a>
       <a href="cookies.html">Cookie Statement</a>
       <a href="feedback.html">Bug Reports &amp; Feedback</a>
+      <a href="coffee.html">Buy a coffee</a>
       <a href="https://github.com/kabaliGamer-Dev2/superk" target="_blank" rel="noopener">Source on GitHub</a>
-      <a href="#support" id="footSupport">Support SuperK</a>
+      <a href="coffee.html">Support SuperK</a>
     </nav>
     <p class="disclaimer">SuperK is an independent student utility and is not officially affiliated with Parul University or Edorer.</p>
   </div>
@@ -829,10 +830,10 @@
   });
 </script>
 
-<button class="coffee-fab" type="button" id="coffeeFab" aria-controls="coffee" aria-expanded="false" aria-label="Buy a coffee — support SuperK">
+<a class="coffee-fab" id="coffeeFab" href="coffee.html" aria-label="Buy a coffee — support SuperK">
   <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 9h12v5a5 5 0 0 1-5 5H9a5 5 0 0 1-5-5V9z" /><path d="M16 10h1.5a2.5 2.5 0 0 1 0 5H16" /><path d="M8 5.5c0-1 .8-1 .8-2" /><path d="M12 5.5c0-1 .8-1 .8-2" /></svg>
   <span>Buy a coffee</span>
-</button>
+</a>
 <aside class="coffee" id="coffee" role="region" aria-label="Support SuperK" hidden>
   <button class="coffee-x" type="button" id="coffeeClose" aria-label="Close">
     <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12" /><path d="M18 6 6 18" /></svg>
@@ -858,11 +859,8 @@
   function show(force) { if (!force && seen()) return; card.hidden = false; if (!force) mark(); syncFab(); }
   function hide() { card.hidden = true; syncFab(); }
   var fab = document.getElementById("coffeeFab");
-  function syncFab() { if (fab) { fab.hidden = !card.hidden; fab.setAttribute("aria-expanded", card.hidden ? "false" : "true"); } }
+  function syncFab() { if (fab) fab.hidden = !card.hidden; }
   if (/[?&]tip=1\b/.test(location.search)) setTimeout(function () { show(true); }, 600);
-  if (fab) fab.addEventListener("click", function () { show(true); });
-  var navCoffee = document.getElementById("navCoffee");
-  if (navCoffee) navCoffee.addEventListener("click", function (e) { e.preventDefault(); show(true); });
   var timer = null;
   document.addEventListener("superk:download", function () {
     clearTimeout(timer);
@@ -900,8 +898,6 @@
       fallback();
     }
   });
-  var foot = document.getElementById("footSupport");
-  if (foot) foot.addEventListener("click", function (e) { e.preventDefault(); show(true); });
 })();
 </script>
 </body>
