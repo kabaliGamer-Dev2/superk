@@ -78,12 +78,14 @@ Shared chrome: announce bar, sticky nav (hamburger icon ≤860px, 44px touch tar
 8. ~~All reveal/fade motion removed~~ — superseded 2026-10-17: scroll-linked fades stay banned, but a one-shot on-entry reveal system was later requested and added (§3.5).
 
 ### 3.3 Feedback system (Firestore, zero server)
-- 4 SVG pill types (bug/feature/download/praise), conditional 1-tap symptom checks (5th "Other — none of these fit" option added 2026-10-17; ≥1 required for bug/download so reports are classified), auto-fix tip box per symptom, dynamic placeholders per type, star rating.
-- **Strict validation (2026-10-17 upgrade):** Full name (2–80, must contain a letter), email (format-checked), and details (10–2000 chars) required; WhatsApp/phone optional (10–13 digits, +91-friendly) and screenshot link optional (full http(s) URL). Invalid fields get red border/tint + inline message (`aria-describedby`), and the form auto-scrolls to + focuses the first invalid control; once flagged, fields re-validate live on input. Mobile inputs render at 16px so iOS never zooms on focus.
+- 5 SVG pill types — Bug Report, Feature Request, Download Error, Question, General Praise (grid 2×2 + full-width last). **No type is preselected** and nothing type-specific shows until one is picked: the choice reveals that type's 1-tap issue list (bug/feature/download — each ends with "Other (explain in Details)"; question/praise show none), a per-type auto-fix tip (e.g. signed-out session, oversized ZIP), the matching placeholder, and clears any "type" error.
+- **Strict validation:** Full name (2–80, must contain a letter), email (format-checked; stored lowercased), details (max 2000, minimum **20** chars — praise minimum **10**); WhatsApp/phone optional (10–13 digits, +91-friendly), screenshot link optional (**https:// only**, inline hint). Invalid fields get red border/tint + inline message (`aria-describedby`); the form focuses the first invalid control and shows an error summary ("Please fix N fields.", `role="alert"`); fields re-validate live once flagged. Details has a `0 / 2000` counter (`aria-hidden`), auto-resizes, and uses `enterkeyhint` next/next/done. Mobile inputs render at 16px so iOS never zooms on focus.
+- **Consent (round 3):** required checkbox ("I agree that SuperK stores my name, email and this report…", links Privacy) — client blocks with "Please tick to agree before sending." and the Firestore rule independently requires `consent == true`.
 - **Context capture:** browser + OS auto-detected ("Chrome 155 · Windows" chip) and attached to every report alongside the extension-version chip (still prefilled by the popup's `?v=` deep link).
-- **Anti-spam:** off-screen honeypot field + minimum 2s fill-time (bots get a fake success, nothing is written) + 60s duplicate-message guard via localStorage.
-- Submit: spinner button (`aria-busy`), success modal ("Feedback sent successfully.", echoes the reply email) with **"Send another"** (resets + scrolls back to the form) and "Close" buttons; failure modal keeps the mapped human reason + raw code. Deep-link prefill unchanged: `feedback.html?type=&error=&v=`.
-- Collection `feedback`; rules: public create-only with field validation (type allowlist, message 10–2000, name 2–80, email format via `matches`, phone/browser/platform/extVersion/screenshot/page size-capped, issues list ≤10, rating 0–5 int); all reads/writes denied (console-only viewing). Rules ship with hosting: `firebase deploy --only hosting,firestore:rules`.
+- **Anti-spam (layered):** off-screen honeypot + min 2s fill-time (bots get a fake success, nothing written, no "Send another"); submitting <3s after load/reset gets a gentle "Please review your report once more, then press Send." (one more click sends); 60s duplicate-message guard stores a **content hash only** (`superk.fb.last` — never the text) and the **rate limit is 3 reports / 24h** (`superk.fb.rate`, timestamps only); offline check runs before a doomed write.
+- Submit: spinner button (`aria-busy`); success modal shows the Firestore **reference ID + Copy button**, echoes the reply email, offers "Send another" (resets + scrolls to form) and "Close"; failure modal keeps the mapped human reason + raw code. Database/CDN blocked (adblock, offline) → warning banner above the form at load + "The form can't reach the database right now…" on submit, plus a `<noscript>` line for JS-off visitors. Deep-link prefill unchanged: `feedback.html?type=&error=&v=`.
+- **A11y:** real radio groups (arrow-key navigable), star radios + "Clear rating" that refocuses the first star, live regions on errors, modal focus trap + `inert` background + `html.gate-lock` scroll lock + focus restore, skip-to-content link, `aria-expanded`/`aria-controls` mobile menu.
+- Collection `feedback`; rules: public create-only with field validation (type allowlist incl. `question`, message 10–2000, name 2–80, email format via `matches`, **`consent == true`**, phone/browser/platform/extVersion/screenshot/page size-capped, issues list ≤10, rating 0–5 int); all reads/writes denied (console-only viewing). Round-3 rules deployed in **two phases** — soft immediately (cached older forms keep working), strict `consent == true` ~1h later via a delayed job (verification note in §6); normally: `firebase deploy --only hosting,firestore:rules`.
 - Roadmap card (Auto Subject Detection live / Custom Folder Naming soon / Split ZIPs planned) + response-promise card with Instagram link.
 - Started as homepage section → moved to separate page; homepage keeps a dark teaser band; all navs/footers + extension deep-links point to `feedback.html`.
 
@@ -136,6 +138,14 @@ Voluntary tips + a per-page review pass (friend's brief). Index went first; inne
 - **Live-verified (Playwright at 1440/1280/1024/393/360):** single CTA row at all desktop widths; auto tip marks once + never returns after reload; forced opens (button/nav/footer/`?tip=1`) never mark; Esc + X close; FAB lifecycle + aria sync; mobile menu entry works; zero horizontal overflow; 0 console errors; popup image loads; release SHA-256 matches the page.
 - **User-side follow-ups:** scan-test the QR with a real UPI app; confirm the Pay-button variant on a real phone; (optional) capture a ZIP-result screenshot to add beside the popup preview; consider a non-number UPI ID and ask a CA about tip income/tax.
 
+### 3.11 Feedback page-by-page review — Round 3 (2026-10-17)
+Friend's 14-item brief + test list, shipped same day and verified live with Playwright (393×852 / 360×800 / 1440×900):
+- **Copy & meta:** wording pass across the page, canonical + OG tags, footer shows GitHub + MIT badges, GitHub Issues link beside an honest known-issues list (ZIPs >150MB fall back to file-by-file downloads · no dark mode yet · Auto Subject Detection needs an open topic page).
+- **Approved P3 extras:** `beforeunload` unsaved-work warning (fired for real during QA when navigating away from a dirty form), textarea auto-resize, `enterkeyhint` chain; draft autosave was considered and declined.
+- **QA (all live-verified):** empty submit → "Please fix 5 fields." + focus on the type group; per-field validation matrix with exact error strings; per-type lists/tips/placeholders incl. "Other" last; consent gate; fast-submit prompt → second press sends; success modal (reference ID + Copy, lowercased email, hash-only localStorage); dedupe, rate-limit, offline and gstatic-blocked paths all wrote nothing; keyboard-only pass (skip link, radio/star arrows, clear-rating, menu open/outside/Escape); 360px zero horizontal overflow; 0 console errors.
+- One QA find fixed same day: "Clear rating" dropped focus to `<body>` (the button hides itself) → now refocuses the first star radio; hosting redeployed.
+- Test data: the QA run wrote one report ("QA Automated Test — delete me") — deleted via `firebase-tools firestore:delete`; older builder docs still await console cleanup (§4).
+
 ---
 
 ## 4. Firebase (project `superk-official`)
@@ -143,8 +153,8 @@ Voluntary tips + a per-page review pass (friend's brief). Index went first; inne
 - **Account/CLI:** firebase-tools (v15.33.0 seen), logged in; project created via `projects:create`; web app "SuperK Site", App ID `1:486363490825:web:ad14cf58a120f8b32ae6d8`.
 - **Firestore:** Native mode, region `asia-south1` (Mumbai — permanent, do not change); created via console (CLI cannot enable the API without gcloud).
 - **Files:** `firebase.json` (public `official/`, mp4 ignored, css/js cache 1h), `.firebaserc` (default project), `firestore.rules` (see §3.3).
-- **Deploy:** `firebase deploy --only hosting` (site) / add `,firestore:rules` when rules change. Verify live with `?v=`-busted fetches; test-browser cache lies — always re-check with a fresh query string.
-- **Console reads:** `console.firebase.google.com/project/superk-official/firestore` → `feedback` collection. Three builder test docs were submitted during verification (two from the reveal/gate pass + "Aditi Sharma" from the feedback-upgrade pass) — delete them when convenient.
+- **Deploy:** `firebase deploy --only hosting` (site) / add `,firestore:rules` when rules change. Verify live with `?v=`-busted fetches; test-browser cache lies — always re-check with a fresh query string. Round-3 rules went in two phases (soft → strict ~1h later, see §3.3).
+- **Console reads:** `console.firebase.google.com/project/superk-official/firestore` → `feedback` collection. Builder/QA test docs submitted during verification — two from the reveal/gate pass + "Aditi Sharma" (feedback pass) + possibly one extra Round-3 QA report — delete when convenient (client rules deny delete; console only). The confirmed Round-3 QA doc (ref `UxEnqkGmvxwSaXNMwsEO`) was already removed via `firebase-tools firestore:delete`.
 
 ---
 
@@ -163,6 +173,8 @@ Voluntary tips + a per-page review pass (friend's brief). Index went first; inne
 3. **Video** — confirm Unlisted + finished HD processing on YouTube.
 4. **Cache discipline** — bump `site.css?v=N` (currently **v10**) and `site.js?v=N` (currently **v1**) on every deploy of those files; favicon token currently `?v=2` (sticky cache — bump on the next icon change); HTML can sit in cache ~1h (ask users to hard-refresh after big launches).
 5. **Local dev server** — `python -m http.server 8099` in `official/` (note: sandbox test browsers cannot reach this machine's localhost; verify via direct HTTP or the live URL).
+6. **Firestore test-doc cleanup** — delete the remaining builder/QA reports in the console (§4); reads are console-only.
+7. **Round-3 strict rules** — the delayed strict deploy adds `consent == true` (~1h after hosting). After it lands, verify a raw no-consent write returns `permission-denied` (the anti-spam backbone — do not skip).
 
 ## 7. Key Identifiers (public-safe)
 

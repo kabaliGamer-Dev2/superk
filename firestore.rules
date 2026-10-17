@@ -1,11 +1,14 @@
 rules_version = '2';
 
-// SuperK feedback: public create-only, validated. Reads/writes restricted
-// to the Firebase Console (project owners). Everything else denied.
+// SuperK feedback: public create-only, validated. Type allowlist includes
+// 'question', and reports must carry an explicit consent:true flag. Reads and
+// writes are restricted to the Firebase Console (project owners). Everything
+// else denied.
 service cloud.firestore {
   match /databases/{database}/documents {
     match /feedback/{doc} {
-      allow create: if request.resource.data.type in ['bug', 'feature', 'download', 'praise']
+      allow create: if request.resource.data.type in ['bug', 'feature', 'download', 'praise', 'question']
+        && request.resource.data.consent == true
         && request.resource.data.message is string
         && request.resource.data.message.size() >= 10
         && request.resource.data.message.size() <= 2000

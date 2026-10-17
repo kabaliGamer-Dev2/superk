@@ -5,6 +5,19 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Feedback &amp; Bug Reports — SuperK by Kabali Gamer</title>
 <meta name="description" content="Report a SuperK bug, request a feature, or tell us what broke. No GitHub needed — reports land directly with the developers." />
+<link rel="canonical" href="https://superk-official.web.app/feedback.html" />
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="SuperK" />
+<meta property="og:title" content="Feedback &amp; Bug Reports — SuperK" />
+<meta property="og:description" content="Report a SuperK bug, request a feature, or ask a question. Reports land directly with the developers." />
+<meta property="og:url" content="https://superk-official.web.app/feedback.html" />
+<meta property="og:image" content="https://superk-official.web.app/assets/og-card.png" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Feedback &amp; Bug Reports — SuperK" />
+<meta name="twitter:description" content="Report a SuperK bug, request a feature, or ask a question. Reports land directly with the developers." />
+<meta name="twitter:image" content="https://superk-official.web.app/assets/og-card.png" />
 <link rel="icon" href="assets/favicon.ico?v=2" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -19,14 +32,39 @@
   .page-hero .sub { margin-bottom: 0; }
   #feedback { padding: 30px 0 0; }
   @media (max-width: 640px) { .page-hero { padding-top: 40px; } }
+  /* round-3 pass: skip link, connect banner, radio-cards, counters, ref copy */
+  .skip { position: fixed; left: 12px; top: -64px; z-index: 300; background: var(--ink); color: var(--acc-ink); padding: 12px 18px; border-radius: 11px; font: 700 13px var(--body); text-decoration: none; transition: top .15s var(--ease); }
+  .skip:focus { top: 12px; }
+  .fb-banner { background: #f6e8e5; border: 1.5px solid #8f1d1d; color: #8f1d1d; border-radius: 14px; padding: 12px 16px; font: 600 13px/1.5 var(--body); margin: 18px 0 0; }
+  .fb-banner a { color: inherit; }
+  .fb-sum { margin: 0 0 14px; }
+  .fb-typefield, .fb-ratefield { border: 0; margin: 0 0 16px; padding: 0; min-width: 0; }
+  .fb-typefield legend, .fb-ratefield legend { display: block; width: 100%; font: 600 11px var(--mono); letter-spacing: .14em; text-transform: uppercase; color: var(--ink2); margin-bottom: 8px; padding: 0; }
+  .fb-typefield.bad legend { color: #8f1d1d; }
+  .fb-typefield.bad .fb-pill { border-color: #8f1d1d; }
+  .fb-typefield .fb-pills { margin-bottom: 0; }
+  .fb-pill { position: relative; }
+  .fb-pill input, .fb-star input { position: absolute; width: 1px; height: 1px; opacity: 0; pointer-events: none; margin: 0; }
+  .fb-pill:has(input:focus-visible), .fb-star:has(input:focus-visible) { outline: 2.5px solid var(--ink); outline-offset: 2px; }
+  .fb-pills .fb-pill:last-child { grid-column: 1 / -1; }
+  .fb-star { position: relative; display: block; padding: 4px; cursor: pointer; color: var(--line); }
+  .fb-star.lit { color: var(--ink); }
+  .fb-star svg { display: block; }
+  .fb-clear { margin-top: 6px; background: none; border: 0; padding: 0; font: 600 12px var(--body); color: var(--ink2); text-decoration: underline; text-underline-offset: 2.5px; cursor: pointer; }
+  .fb-count { text-align: right; font: 600 11px var(--mono); letter-spacing: .06em; color: var(--mut); margin: 6px 0 0; }
+  .fb-ref { display: inline-flex; align-items: center; justify-content: center; gap: 8px; flex-wrap: wrap; margin-top: 10px; font: 500 12px var(--mono); color: var(--ink2); }
+  .fb-copy { background: var(--paper); color: var(--ink); border: 1.5px solid var(--ink); border-radius: 99px; padding: 5px 13px; font: 700 11px var(--body); cursor: pointer; }
+  .road .fb-known { font: 500 11.5px/1.6 var(--body); color: #c9c5cf; margin: 14px 0 0; }
+  .road .fb-known b { color: var(--acc-ink); }
 </style>
 </head>
 <body>
 <div class="grain" aria-hidden="true"></div>
+<a class="skip" href="#main">Skip to content</a>
 <div class="announce"><div class="wrap"><span>v1.0.0 is here — one-click subject ZIPs are live</span><a href="releases/superk-1.0.0.zip">Get the ZIP</a></div></div>
 <nav class="nav" aria-label="Primary">
   <div class="wrap nav-row">
-    <a class="brand" href="index.html"><img src="assets/logo.svg" alt="SuperK logo" /><b>SuperK</b><span class="ver">v1.0.0 Official</span></a>
+    <a class="brand" href="index.html"><img src="assets/logo.svg" alt="SuperK logo" /><b>SuperK</b><span class="ver">v1.0.0</span></a>
     <div class="links" id="navLinks">
       <a href="index.html#features">Features</a>
       <a href="story.html">Story</a>
@@ -35,115 +73,128 @@
       <a href="privacy.html">Privacy</a>
       <a href="feedback.html">Feedback</a>
     </div>
-    <button class="menu-btn" id="menuBtn" aria-label="Open menu"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M4 7h16" /><path d="M4 12h16" /><path d="M4 17h16" /></svg></button>
+    <button class="menu-btn" id="menuBtn" aria-label="Open menu" aria-expanded="false" aria-controls="navLinks"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M4 7h16" /><path d="M4 12h16" /><path d="M4 17h16" /></svg></button>
     <a class="btn btn-ink btn-sm" href="releases/superk-1.0.0.zip">Download Extension</a>
   </div>
 </nav>
 
-<main class="wrap">
+<main class="wrap" id="main">
   <div class="page-hero">
     <p class="eyebrow rule">Feedback &amp; bug reports</p>
     <h1>Tell us what broke. Or what is next.</h1>
-    <p class="sub">No GitHub needed. Pick a type, describe it in a line or two, and it lands directly with the developers.</p>
+    <p class="sub">No GitHub needed. Pick a type, describe it in a line or two, and it lands directly with the developers. Name and email are required so we can follow up.</p>
   </div>
+
+  <p class="fb-banner" id="fbBanner" role="status" hidden>The form can't connect right now. Email us instead: <a href="mailto:kabaligamer.dev@proton.me">kabaligamer.dev@proton.me</a>.</p>
+  <noscript><p class="fb-banner">The form needs JavaScript to send. Email us instead: <a href="mailto:kabaligamer.dev@proton.me">kabaligamer.dev@proton.me</a>.</p></noscript>
 
   <div class="fb-layout" id="feedback">
     <form class="fb-form reveal" id="fbForm" novalidate>
+      <p class="fb-err fb-sum" id="fbSum" role="alert" hidden></p>
       <div class="fb-hp" aria-hidden="true"><label for="fbSite">Website</label><input type="text" id="fbSite" name="website" tabindex="-1" autocomplete="off" /></div>
-      <div class="fb-pills" role="radiogroup" aria-label="Feedback type">
-        <button type="button" class="fb-pill on" data-type="bug" aria-pressed="true"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="13" r="7" /><path d="M12 9v4" /><path d="M12 16.5h.01" /><path d="M9 2 7.5 5M15 2l1.5 3M4 8l3 1M20 8l-3 1" /></svg><span>Bug Report<small>Something is not working</small></span></button>
-        <button type="button" class="fb-pill" data-type="feature" aria-pressed="false"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6" /><path d="M10 21h4" /><path d="M12 3a6 6 0 0 0-4 10.5c.8.7 1 1.5 1 2.5h6c0-1 .2-1.8 1-2.5A6 6 0 0 0 12 3z" /><path d="M18 4l.7 1.8 1.8.7-1.8.7L18 9l-.7-1.8-1.8-.7 1.8-.7z" /></svg><span>Feature Request<small>Make SuperK better</small></span></button>
-        <button type="button" class="fb-pill" data-type="download" aria-pressed="false"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v11" /><path d="m7 11 5 5 5-5" /><path d="M4 20h16" /></svg><span>Download Error<small>ZIP failed · No Auth · names</small></span></button>
-        <button type="button" class="fb-pill" data-type="praise" aria-pressed="false"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20.5s-8-4.7-8-11a4.6 4.6 0 0 1 8-3 4.6 4.6 0 0 1 8 3c0 6.3-8 11-8 11z" /></svg><span>General Praise<small>SuperK saved my exam</small></span></button>
-      </div>
-      <div class="fb-field" id="fbIssuesWrap">
-        <span>Quick tap — which of these matches?</span>
-        <div class="fb-checks">
-          <label class="fb-check"><input type="checkbox" value="noAuth" />Showing "No Auth" even though I am logged in</label>
-          <label class="fb-check"><input type="checkbox" value="tooBig" />ZIP download says "Too Big" (over 150 MB)</label>
-          <label class="fb-check"><input type="checkbox" value="genericNames" />PDF names still generic (PPT / Assignment)</label>
-          <label class="fb-check"><input type="checkbox" value="noSubject" />Subject name was not detected automatically</label>
-          <label class="fb-check"><input type="checkbox" value="other" />Other — none of these fit (explain in Details)</label>
+      <fieldset class="fb-field fb-typefield" id="fbTypeWrap" aria-describedby="fbTypeErr">
+        <legend>What is this about?</legend>
+        <div class="fb-pills">
+          <label class="fb-pill"><input type="radio" name="fbType" value="bug" /><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="13" r="7" /><path d="M12 9v4" /><path d="M12 16.5h.01" /><path d="M9 2 7.5 5M15 2l1.5 3M4 8l3 1M20 8l-3 1" /></svg><span>Bug Report<small>Something is not working</small></span></label>
+          <label class="fb-pill"><input type="radio" name="fbType" value="feature" /><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6" /><path d="M10 21h4" /><path d="M12 3a6 6 0 0 0-4 10.5c.8.7 1 1.5 1 2.5h6c0-1 .2-1.8 1-2.5A6 6 0 0 0 12 3z" /><path d="M18 4l.7 1.8 1.8.7-1.8.7L18 9l-.7-1.8-1.8-.7 1.8-.7z" /></svg><span>Feature Request<small>Make SuperK better</small></span></label>
+          <label class="fb-pill"><input type="radio" name="fbType" value="download" /><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v11" /><path d="m7 11 5 5 5-5" /><path d="M4 20h16" /></svg><span>Download Error<small>ZIP failed · No Auth · names</small></span></label>
+          <label class="fb-pill"><input type="radio" name="fbType" value="question" /><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9" /><path d="M9.4 9.2a2.6 2.6 0 0 1 5.1.8c0 1.7-2.5 2.1-2.5 3.5" /><path d="M12 17h.01" /></svg><span>Question<small>Ask us anything</small></span></label>
+          <label class="fb-pill"><input type="radio" name="fbType" value="praise" /><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20.5s-8-4.7-8-11a4.6 4.6 0 0 1 8-3 4.6 4.6 0 0 1 8 3c0 6.3-8 11-8 11z" /></svg><span>General Praise<small>SuperK saved my exam</small></span></label>
         </div>
-        <p class="fb-fielderr" id="fbIssuesErr" hidden></p>
+        <p class="fb-fielderr" id="fbTypeErr" aria-live="polite" hidden></p>
+      </fieldset>
+      <div class="fb-field" id="fbIssuesWrap" style="display:none">
+        <span>Quick tap — which of these matches?</span>
+        <div class="fb-checks"></div>
+        <p class="fb-fielderr" id="fbIssuesErr" aria-live="polite" hidden></p>
       </div>
       <div class="fb-tip" id="fbTip" hidden></div>
       <div class="fb-field" id="fbMsgWrap">
         <span><label for="fbMsg">Details</label></span>
+        <p class="fb-note" style="margin:0 0 8px">Never paste your password, session token or university ID, and crop them out of screenshots.</p>
         <textarea id="fbMsg" required maxlength="2000" aria-describedby="fbMsgErr" placeholder="Which subject were you downloading? What happened when you clicked Download?"></textarea>
-        <p class="fb-fielderr" id="fbMsgErr" hidden></p>
+        <p class="fb-count" id="fbCount" aria-hidden="true">0 / 2000</p>
+        <p class="fb-fielderr" id="fbMsgErr" aria-live="polite" hidden></p>
       </div>
       <div class="fb-field" id="fbNameWrap">
         <span><label for="fbName">Full name</label></span>
-        <input type="text" id="fbName" maxlength="80" autocomplete="name" aria-describedby="fbNameErr" placeholder="The name we should reply to" />
-        <p class="fb-fielderr" id="fbNameErr" hidden></p>
+        <input type="text" id="fbName" maxlength="80" autocomplete="name" enterkeyhint="next" aria-describedby="fbNameErr" placeholder="The name we should reply to" />
+        <p class="fb-fielderr" id="fbNameErr" aria-live="polite" hidden></p>
       </div>
       <div class="fb-field" id="fbEmailWrap">
         <span><label for="fbEmail">Email address</label></span>
-        <input type="email" id="fbEmail" maxlength="120" autocomplete="email" inputmode="email" aria-describedby="fbEmailErr" placeholder="you@example.com" />
-        <p class="fb-fielderr" id="fbEmailErr" hidden></p>
+        <input type="email" id="fbEmail" maxlength="120" autocomplete="email" inputmode="email" enterkeyhint="next" aria-describedby="fbEmailErr" placeholder="you@example.com" />
+        <p class="fb-fielderr" id="fbEmailErr" aria-live="polite" hidden></p>
       </div>
       <div class="fb-field" id="fbPhoneWrap">
         <span><label for="fbPhone">WhatsApp / phone <span style="text-transform:none;letter-spacing:0">(optional)</span></label></span>
-        <input type="tel" id="fbPhone" maxlength="24" autocomplete="tel" inputmode="tel" aria-describedby="fbPhoneErr" placeholder="+91 98765 43210" />
-        <p class="fb-fielderr" id="fbPhoneErr" hidden></p>
+        <input type="tel" id="fbPhone" maxlength="24" autocomplete="tel" inputmode="tel" enterkeyhint="next" aria-describedby="fbPhoneErr" placeholder="+91 98765 43210" />
+        <p class="fb-fielderr" id="fbPhoneErr" aria-live="polite" hidden></p>
       </div>
       <div class="fb-field" id="fbShotWrap">
         <span><label for="fbShot">Screenshot link <span style="text-transform:none;letter-spacing:0">(optional)</span></label></span>
-        <input type="url" id="fbShot" inputmode="url" maxlength="500" aria-describedby="fbShotErr" placeholder="Paste an image link if the popup looks broken" />
-        <p class="fb-fielderr" id="fbShotErr" hidden></p>
+        <input type="url" id="fbShot" inputmode="url" maxlength="500" enterkeyhint="done" aria-describedby="fbShotErr" placeholder="Paste an image link if the popup looks broken" />
+        <p class="fb-note" style="margin:8px 0 0">Upload to Google Drive or Imgur, set link sharing, paste the link. Don't include personal info.</p>
+        <p class="fb-fielderr" id="fbShotErr" aria-live="polite" hidden></p>
       </div>
       <div class="fb-field">
         <span>Detected from your browser</span>
         <div class="fb-meta"><span class="fb-ver" id="fbBrowserMeta">Detecting…</span><span class="fb-ver" id="fbVer">v1.0.0</span></div>
         <p class="fb-note">Sent with your report so we can reproduce issues without guessing your setup.</p>
       </div>
-      <div class="fb-field">
-        <span>How much time did SuperK save you today?</span>
-        <div class="fb-stars" id="fbStars" role="radiogroup" aria-label="Rating">
-          <button type="button" data-n="1" aria-label="1 star"><svg viewBox="0 0 24 24" width="26" height="26" fill="currentColor"><path d="M12 2.5l2.9 6 6.6.9-4.8 4.6 1.2 6.5L12 17.4 6.1 20.5l1.2-6.5L2.5 9.4l6.6-.9z" /></svg></button>
-          <button type="button" data-n="2" aria-label="2 stars"><svg viewBox="0 0 24 24" width="26" height="26" fill="currentColor"><path d="M12 2.5l2.9 6 6.6.9-4.8 4.6 1.2 6.5L12 17.4 6.1 20.5l1.2-6.5L2.5 9.4l6.6-.9z" /></svg></button>
-          <button type="button" data-n="3" aria-label="3 stars"><svg viewBox="0 0 24 24" width="26" height="26" fill="currentColor"><path d="M12 2.5l2.9 6 6.6.9-4.8 4.6 1.2 6.5L12 17.4 6.1 20.5l1.2-6.5L2.5 9.4l6.6-.9z" /></svg></button>
-          <button type="button" data-n="4" aria-label="4 stars"><svg viewBox="0 0 24 24" width="26" height="26" fill="currentColor"><path d="M12 2.5l2.9 6 6.6.9-4.8 4.6 1.2 6.5L12 17.4 6.1 20.5l1.2-6.5L2.5 9.4l6.6-.9z" /></svg></button>
-          <button type="button" data-n="5" aria-label="5 stars"><svg viewBox="0 0 24 24" width="26" height="26" fill="currentColor"><path d="M12 2.5l2.9 6 6.6.9-4.8 4.6 1.2 6.5L12 17.4 6.1 20.5l1.2-6.5L2.5 9.4l6.6-.9z" /></svg></button>
+      <fieldset class="fb-field fb-ratefield">
+        <legend>How useful is SuperK for you? <span style="text-transform:none;letter-spacing:0">(optional)</span></legend>
+        <div class="fb-stars" id="fbStars">
+          <label class="fb-star"><input type="radio" name="fbRating" value="1" aria-label="1 star" /><svg viewBox="0 0 24 24" width="26" height="26" fill="currentColor"><path d="M12 2.5l2.9 6 6.6.9-4.8 4.6 1.2 6.5L12 17.4 6.1 20.5l1.2-6.5L2.5 9.4l6.6-.9z" /></svg></label>
+          <label class="fb-star"><input type="radio" name="fbRating" value="2" aria-label="2 stars" /><svg viewBox="0 0 24 24" width="26" height="26" fill="currentColor"><path d="M12 2.5l2.9 6 6.6.9-4.8 4.6 1.2 6.5L12 17.4 6.1 20.5l1.2-6.5L2.5 9.4l6.6-.9z" /></svg></label>
+          <label class="fb-star"><input type="radio" name="fbRating" value="3" aria-label="3 stars" /><svg viewBox="0 0 24 24" width="26" height="26" fill="currentColor"><path d="M12 2.5l2.9 6 6.6.9-4.8 4.6 1.2 6.5L12 17.4 6.1 20.5l1.2-6.5L2.5 9.4l6.6-.9z" /></svg></label>
+          <label class="fb-star"><input type="radio" name="fbRating" value="4" aria-label="4 stars" /><svg viewBox="0 0 24 24" width="26" height="26" fill="currentColor"><path d="M12 2.5l2.9 6 6.6.9-4.8 4.6 1.2 6.5L12 17.4 6.1 20.5l1.2-6.5L2.5 9.4l6.6-.9z" /></svg></label>
+          <label class="fb-star"><input type="radio" name="fbRating" value="5" aria-label="5 stars" /><svg viewBox="0 0 24 24" width="26" height="26" fill="currentColor"><path d="M12 2.5l2.9 6 6.6.9-4.8 4.6 1.2 6.5L12 17.4 6.1 20.5l1.2-6.5L2.5 9.4l6.6-.9z" /></svg></label>
         </div>
+        <button type="button" class="fb-clear" id="fbClear" hidden>Clear rating</button>
+      </fieldset>
+      <div class="fb-field" id="fbConsentField">
+        <label class="fb-check"><input type="checkbox" id="fbConsent" aria-describedby="fbConsentErr" />I agree that SuperK stores my name, email and this report to read it and reply if needed. See the <a href="privacy.html" target="_blank" rel="noopener">Privacy Policy</a>.</label>
+        <p class="fb-fielderr" id="fbConsentErr" aria-live="polite" hidden></p>
       </div>
-      <p class="fb-err" id="fbErr" hidden></p>
+      <p class="fb-err" id="fbErr" role="alert" hidden></p>
       <button class="btn btn-ink" type="submit" id="fbSend" style="width:100%;justify-content:center">Send Feedback</button>
+      <p class="fb-note">Stored in Google Firebase, used only to fix and reply. To delete your report, email <a href="mailto:kabaligamer.dev@proton.me">kabaligamer.dev@proton.me</a>.</p>
     </form>
     <div>
       <aside class="road reveal" id="roadmap" aria-label="Roadmap">
-        <h3>Roadmap — vote by reporting</h3>
-        <p>Already tracked. Skip re-reporting these:</p>
+        <h3>Planned improvements</h3>
+        <p>Plans may change — no dates promised. Already tracked:</p>
         <ul>
           <li><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m5 13 4 4L19 7" /></svg><div><b>Auto Subject Detection</b><span>LIVE IN V1.0.0</span></div></li>
           <li><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a4 4 0 0 0-5.4 5.4L4 17l3 3 5.3-5.3a4 4 0 0 0 5.4-5.4l-2.6 2.6-2.5-2.5z" /></svg><div><b>Custom Folder Naming</b><span>COMING SOON</span></div></li>
           <li><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9" /><path d="M12 7v5l3 2" /></svg><div><b>Split ZIPs over 150MB</b><span>PLANNED</span></div></li>
         </ul>
+        <p class="fb-known"><b>Known issues:</b> ZIPs over ~150MB download file-by-file · Dark mode not available yet · Subject detection needs an open topic page.</p>
       </aside>
       <aside class="promise reveal" aria-label="Response promise">
-        <h3>Read by a human, fixed in days.</h3>
-        <p>Every report lands directly with the developers — no ticket queues, no bots. Prefer public? Message <a href="https://www.instagram.com/kabali.gamer/" target="_blank" rel="noopener">@kabali.gamer</a> with your issue.</p>
+        <h3>We read every report. Fix times vary.</h3>
+        <p>Every report lands directly with the developers. If we need more details, we will reply by email. Prefer another channel? <a href="mailto:kabaligamer.dev@proton.me">Email us</a> · <a href="https://github.com/kabaliGamer-Dev2/superk/issues" target="_blank" rel="noopener">GitHub issues</a> · <a href="https://www.instagram.com/kabali.gamer/" target="_blank" rel="noopener">@kabali.gamer</a>.</p>
       </aside>
-    </div>
-  </div>
-
-  <div class="fb-modal" id="fbModal" hidden role="dialog" aria-modal="true" aria-labelledby="fbModalTitle">
-    <div class="fb-dialog">
-      <div class="ok" id="fbModalIcon"><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m5 13 4 4L19 7" /></svg></div>
-      <h3 id="fbModalTitle">Feedback sent successfully.</h3>
-      <p id="fbModalMsg">Thanks for helping improve SuperK.</p>
-      <div class="fb-modal-actions">
-        <button class="btn btn-ink" id="fbModalAgain">Send another</button>
-        <button class="btn btn-quiet" id="fbModalClose">Close</button>
-      </div>
     </div>
   </div>
 </main>
 
+<div class="fb-modal" id="fbModal" hidden role="dialog" aria-modal="true" aria-labelledby="fbModalTitle">
+  <div class="fb-dialog">
+    <div class="ok" id="fbModalIcon"><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m5 13 4 4L19 7" /></svg></div>
+    <h3 id="fbModalTitle">Feedback sent successfully.</h3>
+    <p id="fbModalMsg">Thanks for helping improve SuperK.</p>
+    <div class="fb-modal-actions">
+      <button class="btn btn-ink" id="fbModalAgain">Send another</button>
+      <button class="btn btn-quiet" id="fbModalClose">Close</button>
+    </div>
+  </div>
+</div>
+
 <footer class="foot">
   <div class="wrap foot-row">
-    <div class="foot-brand"><img src="assets/logo-white.svg" alt="SuperK logo" /><span>© 2026 SuperK · v1.0.0 · Created by Kabali Gamer.</span><a class="ig" href="https://www.instagram.com/kabali.gamer/" target="_blank" rel="noopener" aria-label="SuperK on Instagram"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="5" /><circle cx="12" cy="12" r="4" /><circle cx="17.2" cy="6.8" r="1.1" fill="currentColor" stroke="none" /></svg></a><span class="ver" style="font:600 10px var(--mono);letter-spacing:.1em;border:1px solid rgba(243,240,231,.45);border-radius:99px;padding:3px 9px;">v1.0.0</span></div>
+    <div class="foot-brand"><img src="assets/logo-white.svg" alt="SuperK logo" /><span>© 2026 SuperK · v1.0.0 · Created by Kabali Gamer.</span><a class="ig" href="https://www.instagram.com/kabali.gamer/" target="_blank" rel="noopener" aria-label="SuperK on Instagram"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="5" /><circle cx="12" cy="12" r="4" /><circle cx="17.2" cy="6.8" r="1.1" fill="currentColor" stroke="none" /></svg></a><span class="ver" style="font:600 10px var(--mono);letter-spacing:.1em;border:1px solid rgba(243,240,231,.45);border-radius:99px;padding:3px 9px;">v1.0.0</span><span class="ver" style="font:600 10px var(--mono);letter-spacing:.1em;border:1px solid rgba(243,240,231,.45);border-radius:99px;padding:3px 9px;">MIT</span></div>
     <nav class="foot-links" aria-label="Footer">
       <a href="index.html">Home</a>
       <a href="story.html">Story</a>
@@ -152,6 +203,7 @@
       <a href="privacy.html">Privacy Policy</a>
       <a href="cookies.html">Cookie Statement</a>
       <a href="feedback.html">Bug Reports &amp; Feedback</a>
+      <a href="https://github.com/kabaliGamer-Dev2/superk" target="_blank" rel="noopener">Source on GitHub</a>
     </nav>
     <p class="disclaimer">SuperK is an independent student utility and is not officially affiliated with Parul University or Edorer.</p>
   </div>
@@ -168,20 +220,54 @@
     messagingSenderId: "486363490825",
     appId: "1:486363490825:web:ad14cf58a120f8b32ae6d8"
   };
-  document.getElementById("menuBtn").onclick = () => document.getElementById("navLinks").classList.toggle("open");
+  /* Menu: aria state + outside-click + Escape (same pattern as index.html). */
+  const navLinks = document.getElementById("navLinks");
+  const menuBtn = document.getElementById("menuBtn");
+  menuBtn.onclick = (e) => {
+    e.stopPropagation();
+    const open = navLinks.classList.toggle("open");
+    menuBtn.setAttribute("aria-expanded", open ? "true" : "false");
+  };
+  navLinks.querySelectorAll("a").forEach((a) => {
+    a.onclick = () => {
+      navLinks.classList.remove("open");
+      menuBtn.setAttribute("aria-expanded", "false");
+    };
+  });
+  document.addEventListener("click", (e) => {
+    if (!navLinks.contains(e.target) && e.target !== menuBtn) {
+      navLinks.classList.remove("open");
+      menuBtn.setAttribute("aria-expanded", "false");
+    }
+  });
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") {
+      navLinks.classList.remove("open");
+      menuBtn.setAttribute("aria-expanded", "false");
+    }
+  });
 
   /* Feedback form → Firestore (zero-server). */
   (function feedback() {
     const form = document.getElementById("fbForm");
     if (!form) return;
-    const pills = [...form.querySelectorAll(".fb-pill")];
+    const typeWrap = document.getElementById("fbTypeWrap");
+    const radios = [...form.querySelectorAll('input[name="fbType"]')];
+    const pillLabels = radios.map((r) => r.closest(".fb-pill"));
+    const typeErr = document.getElementById("fbTypeErr");
     const issuesWrap = document.getElementById("fbIssuesWrap");
+    const issuesBox = issuesWrap.querySelector(".fb-checks");
     const issuesErr = document.getElementById("fbIssuesErr");
-    const checks = [...issuesWrap.querySelectorAll("input[type=checkbox]")];
     const tip = document.getElementById("fbTip");
     const msg = document.getElementById("fbMsg");
+    const counter = document.getElementById("fbCount");
     const err = document.getElementById("fbErr");
+    const sum = document.getElementById("fbSum");
     const send = document.getElementById("fbSend");
+    const banner = document.getElementById("fbBanner");
+    const consent = document.getElementById("fbConsent");
+    const consentField = document.getElementById("fbConsentField");
+    const consentErr = document.getElementById("fbConsentErr");
     const modal = document.getElementById("fbModal");
     const modalIcon = document.getElementById("fbModalIcon");
     const modalTitle = document.getElementById("fbModalTitle");
@@ -190,7 +276,9 @@
     const modalClose = document.getElementById("fbModalClose");
     const honeypot = document.getElementById("fbSite");
     const browserMeta = document.getElementById("fbBrowserMeta");
-    const stars = [...document.querySelectorAll("#fbStars button")];
+    const starRadios = [...form.querySelectorAll('input[name="fbRating"]')];
+    const starLabels = starRadios.map((r) => r.closest(".fb-star"));
+    const clearRating = document.getElementById("fbClear");
     const fields = {
       msg: { wrap: "fbMsgWrap", err: "fbMsgErr", input: msg },
       name: { wrap: "fbNameWrap", err: "fbNameErr", input: document.getElementById("fbName") },
@@ -198,56 +286,127 @@
       phone: { wrap: "fbPhoneWrap", err: "fbPhoneErr", input: document.getElementById("fbPhone") },
       shot: { wrap: "fbShotWrap", err: "fbShotErr", input: document.getElementById("fbShot") }
     };
-    let type = "bug", rating = 0, loadedAt = Date.now();
+    let type = "";
+    let rating = 0;
+    let reviewed = false;
+    let loadedAt = Date.now();
+    let checks = [];
     const PH = {
       bug: "Which subject were you downloading? What happened when you clicked Download?",
       feature: "What should SuperK do next? (e.g. dark mode, custom folder names...)",
       download: "Which subject + topic failed? Paste the exact error text you saw.",
+      question: "What would you like to know about SuperK?",
       praise: "What did SuperK save for you today?"
     };
+    const PH_DEFAULT = "Which subject were you downloading? What happened when you clicked Download?";
     const TIPS = {
       noAuth: "<b>Quick fix:</b> refresh your classroom tab once so the session token loads, then reopen SuperK. Still stuck? Send this report below.",
       tooBig: "<b>By design:</b> browser memory caps single ZIPs at ~150 MB — SuperK then downloads files individually instead. Same PDFs, zero crashes.",
       genericNames: "<b>Heads up:</b> SuperK resolves most generic titles from cloud slugs automatically. If some still show PPT/Assignment, tell us the subject below.",
-      noSubject: "<b>Quick fix:</b> open any subject topic page first — SuperK locks onto the open subject from the page breadcrumb.",
-      other: "<b>No problem:</b> describe it below in your own words — every report is read by a human."
+      noSubject: "<b>Quick fix:</b> open any subject topic page first — SuperK locks onto the open subject from the page breadcrumb."
     };
-    const TYPES = ["bug", "feature", "download", "praise"];
+    const TYPES = ["bug", "feature", "download", "question", "praise"];
+    /* Quick-tap lists per type — every list ends with an "Other" escape hatch. */
+    const ISSUES = {
+      bug: [
+        { v: "noAuth", t: 'Showing "No Auth" even though I am logged in' },
+        { v: "popupBlank", t: "Popup blank or won't open" },
+        { v: "noSubject", t: "Subject not detected" },
+        { v: "genericNames", t: "Wrong or generic file names" },
+        { v: "other", t: "Other (explain in Details)" }
+      ],
+      download: [
+        { v: "tooBig", t: 'ZIP says "Too Big"' },
+        { v: "zipFailed", t: "ZIP failed or stuck" },
+        { v: "filesMissing", t: "Some files missing" },
+        { v: "blocked", t: "Browser blocked the download" },
+        { v: "other", t: "Other (explain in Details)" }
+      ],
+      feature: [
+        { v: "folderNaming", t: "Custom folder naming" },
+        { v: "splitZips", t: "Split ZIPs over 150MB" },
+        { v: "darkMode", t: "Dark mode" },
+        { v: "otherPlatform", t: "Other browser or platform" },
+        { v: "other", t: "Other (explain in Details)" }
+      ]
+    };
+    const RATE_KEY = "superk.fb.rate";
+    const RATE_MAX = 3;
+    const RATE_WINDOW = 24 * 60 * 60 * 1000;
+
+    function setTypeErr(text) {
+      typeWrap.classList.toggle("bad", !!text);
+      typeErr.textContent = text || "";
+      typeErr.hidden = !text;
+      radios.forEach((r) => { if (text) r.setAttribute("aria-invalid", "true"); else r.removeAttribute("aria-invalid"); });
+    }
+    function setIssuesErr(text) {
+      issuesWrap.classList.toggle("bad", !!text);
+      issuesErr.textContent = text || "";
+      issuesErr.hidden = !text;
+    }
+    function setConsentErr(text) {
+      consentField.classList.toggle("bad", !!text);
+      consentErr.textContent = text || "";
+      consentErr.hidden = !text;
+      if (text) consent.setAttribute("aria-invalid", "true"); else consent.removeAttribute("aria-invalid");
+    }
+    function renderIssues(t) {
+      const list = ISSUES[t] || [];
+      issuesBox.innerHTML = list.map((o) => '<label class="fb-check"><input type="checkbox" value="' + o.v + '" aria-describedby="fbIssuesErr" />' + o.t + "</label>").join("");
+      checks = [...issuesBox.querySelectorAll("input[type=checkbox]")];
+      checks.forEach((c) => c.addEventListener("change", onCheck));
+      issuesWrap.style.display = list.length ? "" : "none";
+      tip.hidden = true;
+      setIssuesErr("");
+    }
+    function onCheck() {
+      if (issuesWrap.classList.contains("bad") && checks.some((x) => x.checked)) setIssuesErr("");
+      const hit = checks.find((x) => x.checked);
+      if (!hit || !TIPS[hit.value]) { tip.hidden = true; return; }
+      tip.innerHTML = TIPS[hit.value];
+      tip.hidden = false;
+    }
     function setType(t) {
       if (!TYPES.includes(t)) return;
       type = t;
-      pills.forEach((p) => {
-        const on = p.dataset.type === t;
-        p.classList.toggle("on", on);
-        p.setAttribute("aria-pressed", on ? "true" : "false");
-      });
-      const showChecks = (t === "bug" || t === "download");
-      issuesWrap.style.display = showChecks ? "" : "none";
-      if (!showChecks) { checks.forEach((c) => { c.checked = false; }); tip.hidden = true; setIssuesErr(""); }
+      radios.forEach((r) => { r.checked = r.value === t; });
+      pillLabels.forEach((l) => l.classList.toggle("on", l.querySelector("input").value === t));
+      setTypeErr("");
+      renderIssues(t);
       msg.placeholder = PH[t];
     }
-    pills.forEach((p) => p.addEventListener("click", () => setType(p.dataset.type)));
-    checks.forEach((c) => c.addEventListener("change", () => {
-      if (issuesWrap.classList.contains("bad") && checks.some((x) => x.checked)) setIssuesErr("");
-      const hit = checks.find((x) => x.checked);
-      if (!hit) { tip.hidden = true; return; }
-      tip.innerHTML = TIPS[hit.value] || "";
-      tip.hidden = false;
-    }));
-    stars.forEach((s) => s.addEventListener("click", () => {
-      rating = parseInt(s.dataset.n, 10);
-      stars.forEach((x) => x.classList.toggle("lit", parseInt(x.dataset.n, 10) <= rating));
-    }));
+    function updateStars() {
+      starLabels.forEach((l) => l.classList.toggle("lit", parseInt(l.querySelector("input").value, 10) <= rating));
+      clearRating.hidden = !rating;
+    }
+    function autosize() {
+      msg.style.height = "auto";
+      msg.style.height = Math.min(msg.scrollHeight, 420) + "px";
+    }
+
+    radios.forEach((r) => r.addEventListener("change", () => setType(r.value)));
+    starRadios.forEach((r) => r.addEventListener("change", () => { rating = parseInt(r.value, 10); updateStars(); }));
+    clearRating.addEventListener("click", () => { rating = 0; starRadios.forEach((r) => { r.checked = false; }); updateStars(); starRadios[0].focus(); });
+    consent.addEventListener("change", () => { if (consent.checked) setConsentErr(""); });
+    msg.addEventListener("input", () => { counter.textContent = msg.value.length + " / 2000"; autosize(); });
+
     /* Deep-link prefill from the extension popup: feedback.html?type=&error=&v= */
     try {
       const q = new URLSearchParams(location.search);
-      if (q.get("type")) setType(q.get("type"));
-      if (q.get("error")) {
-        const box = checks.find((x) => x.value === q.get("error"));
-        if (box) { box.checked = true; box.dispatchEvent(new Event("change")); }
+      const qType = q.get("type") || "";
+      if (TYPES.includes(qType)) {
+        setType(qType);
+        const qErr = q.get("error");
+        if (qErr) {
+          const box = checks.find((x) => x.value === qErr);
+          if (box) { box.checked = true; onCheck(); }
+        }
       }
-      if (q.get("v")) document.getElementById("fbVer").textContent = "v" + q.get("v");
+      const ver = q.get("v") || "";
+      if (/^\d+(\.\d+){0,2}$/.test(ver)) document.getElementById("fbVer").textContent = "v" + ver;
     } catch { /* static page still works without prefill */ }
+
     /* Context capture: browser + platform detected once, attached to every report. */
     function detectBrowser() {
       const ua = navigator.userAgent || "";
@@ -280,6 +439,7 @@
         db = firebase.firestore();
       }
     } catch { db = null; }
+    if (!db) banner.hidden = false;
     function fail(t) { err.textContent = t; err.hidden = false; }
     function setSending(on) {
       send.disabled = on;
@@ -292,7 +452,8 @@
       if (k === "msg") {
         const v = msg.value.trim();
         if (!v) return "Please describe what happened — the details box cannot be empty.";
-        if (v.length < 10) return "Add a few more words (at least 10 characters) so we can reproduce it.";
+        const min = type === "praise" ? 10 : 20;
+        if (v.length < min) return "Add a few more words (at least " + min + " characters) so we can work with it.";
         return "";
       }
       if (k === "name") {
@@ -317,14 +478,14 @@
       if (k === "shot") {
         const v = fields.shot.input.value.trim();
         if (!v) return "";
-        if (!/^https?:\/\/\S+$/i.test(v)) return "Paste the full link, starting with https://";
+        if (!/^https:\/\/\S+$/i.test(v)) return "Paste a full https:// link (Google Drive, Imgur, …).";
         return "";
       }
       return "";
     }
     function issuesError() {
-      if (type !== "bug" && type !== "download") return "";
-      return checks.some((c) => c.checked) ? "" : "Pick at least one symptom above, or choose \"Other — none of these fit\".";
+      if (!ISSUES[type]) return "";
+      return checks.some((c) => c.checked) ? "" : 'Pick at least one above — or "Other (explain in Details)".';
     }
     function setErr(k, text) {
       const f = fields[k];
@@ -333,21 +494,25 @@
       if (text) { wrap.classList.add("bad"); e.textContent = text; e.hidden = false; f.input.setAttribute("aria-invalid", "true"); }
       else { wrap.classList.remove("bad"); e.hidden = true; f.input.removeAttribute("aria-invalid"); }
     }
-    function setIssuesErr(text) {
-      issuesWrap.classList.toggle("bad", !!text);
-      issuesErr.textContent = text || "";
-      issuesErr.hidden = !text;
-    }
     function validateAll() {
       let first = null;
+      let bads = 0;
+      const te = type ? "" : "Choose what this is about.";
+      setTypeErr(te);
+      if (te) { bads++; first = radios[0]; }
       const ie = issuesError();
       setIssuesErr(ie);
-      if (ie) first = checks[0];
+      if (ie) { bads++; if (!first) first = checks[0] || issuesBox; }
       ["msg", "name", "email", "phone", "shot"].forEach((k) => {
         const e = fieldError(k);
         setErr(k, e);
-        if (e && !first) first = fields[k].input;
+        if (e) { bads++; if (!first) first = fields[k].input; }
       });
+      const ce = consent.checked ? "" : "Please tick to agree before sending.";
+      setConsentErr(ce);
+      if (ce) { bads++; if (!first) first = consent; }
+      sum.textContent = bads ? "Please fix " + bads + (bads === 1 ? " field" : " fields") + "." : "";
+      sum.hidden = !bads;
       return first;
     }
     function focusField(el) {
@@ -359,32 +524,109 @@
     }));
     const OK_SVG = '<svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m5 13 4 4L19 7" /></svg>';
     const BAD_SVG = '<svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 8v5" /><path d="M12 16.5h.01" /><circle cx="12" cy="12" r="9" /></svg>';
+    const behind = () => [document.querySelector(".announce"), document.querySelector(".nav"), document.querySelector("main"), document.querySelector(".foot")];
+    function setBehind(hide) {
+      behind().forEach((el) => {
+        if (!el) return;
+        if ("inert" in el) el.inert = hide;
+        else { if (hide) el.setAttribute("aria-hidden", "true"); else el.removeAttribute("aria-hidden"); }
+      });
+    }
+    let lastFocus = null;
     function showModal(ok, title, msgHtml, withAgain) {
       modalIcon.className = ok ? "ok" : "bad";
       modalIcon.innerHTML = ok ? OK_SVG : BAD_SVG;
       modalTitle.textContent = title;
       modalMsg.innerHTML = msgHtml;
       modalAgain.hidden = !withAgain;
+      lastFocus = document.activeElement;
       modal.hidden = false;
+      document.documentElement.classList.add("gate-lock");
+      setBehind(true);
       (withAgain ? modalAgain : modalClose).focus();
     }
-    function closeModal(refocusTo) { modal.hidden = true; if (refocusTo) refocusTo.focus({ preventScroll: true }); }
+    function closeModal(refocusTo) {
+      modal.hidden = true;
+      document.documentElement.classList.remove("gate-lock");
+      setBehind(false);
+      const t = refocusTo || lastFocus;
+      if (t && typeof t.focus === "function") t.focus({ preventScroll: true });
+    }
+    modal.addEventListener("keydown", (e) => {
+      if (e.key !== "Tab") return;
+      const items = [...modal.querySelectorAll("button, a[href]")].filter((el) => el.offsetParent !== null && !el.disabled);
+      if (!items.length) return;
+      const firstEl = items[0];
+      const lastEl = items[items.length - 1];
+      if (e.shiftKey && document.activeElement === firstEl) { e.preventDefault(); lastEl.focus(); }
+      else if (!e.shiftKey && document.activeElement === lastEl) { e.preventDefault(); firstEl.focus(); }
+    });
     function resetForm() {
       form.reset();
-      setType("bug");
+      type = "";
       rating = 0;
-      stars.forEach((x) => x.classList.remove("lit"));
-      tip.hidden = true;
-      Object.entries(fields).forEach(([k]) => setErr(k, ""));
-      setIssuesErr("");
-      err.hidden = true;
+      reviewed = false;
       loadedAt = Date.now();
+      pillLabels.forEach((l) => l.classList.remove("on"));
+      starLabels.forEach((l) => l.classList.remove("lit"));
+      clearRating.hidden = true;
+      renderIssues("");
+      msg.placeholder = PH_DEFAULT;
+      msg.style.height = "";
+      counter.textContent = "0 / 2000";
+      Object.entries(fields).forEach(([k]) => setErr(k, ""));
+      setTypeErr("");
+      setConsentErr("");
+      sum.hidden = true;
+      err.hidden = true;
     }
     const esc = (s) => String(s).replace(/[&<>"']/g, (ch) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[ch]));
     const smooth = () => (window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth");
+    function hashText(s) {
+      let h = 5381;
+      for (let i = 0; i < s.length; i++) h = ((h << 5) + h + s.charCodeAt(i)) | 0;
+      return (h >>> 0).toString(36);
+    }
+    function rateState() {
+      try {
+        const arr = JSON.parse(localStorage.getItem(RATE_KEY) || "[]");
+        const now = Date.now();
+        const recent = (Array.isArray(arr) ? arr : []).filter((t) => typeof t === "number" && now - t < RATE_WINDOW);
+        return { recent, blocked: recent.length >= RATE_MAX };
+      } catch { return { recent: [], blocked: false }; }
+    }
+    function rateAdd(recent) {
+      try { localStorage.setItem(RATE_KEY, JSON.stringify(recent.concat(Date.now()).slice(-RATE_MAX))); } catch { /* ignore */ }
+    }
+    function copyText(text, btn) {
+      const done = () => {
+        const old = btn.textContent;
+        btn.textContent = "Copied";
+        btn.disabled = true;
+        setTimeout(() => { btn.textContent = old; btn.disabled = false; }, 1600);
+      };
+      const fallback = () => {
+        try {
+          const ta = document.createElement("textarea");
+          ta.value = text;
+          ta.style.cssText = "position:fixed;top:-9999px;opacity:0";
+          document.body.appendChild(ta);
+          ta.select();
+          const ok = document.execCommand("copy");
+          ta.remove();
+          if (ok) done();
+        } catch { /* clipboard unavailable */ }
+      };
+      if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(text).then(done).catch(fallback);
+      else fallback();
+    }
+    function wireRefCopy(id) {
+      const b = document.getElementById("fbRefCopy");
+      if (b) b.onclick = () => copyText(id, b);
+    }
     function reasonFor(ex) {
       const code = (ex && ex.code) || "";
-      if (code === "permission-denied") return "The database refused the write — the site's security rules need a fix on our side. Your report mattered; tell us on Instagram so we see it.";
+      if (code === "permission-denied") return "The database refused the write. Hard-refresh the page and try again — if it repeats, email kabaligamer.dev@proton.me.";
       if (code === "unavailable" || code === "deadline-exceeded") return "No connection to the database. Check your internet and retry.";
       if (code === "invalid-argument") return "The database rejected a field in the report. Retry once — if it repeats, tell us exactly what you typed.";
       if (code === "resource-exhausted") return "Today's free database quota is used up. Try again tomorrow.";
@@ -396,25 +638,37 @@
       err.hidden = true;
       const first = validateAll();
       if (first) { focusField(first); return; }
-      /* Bot traps: honeypot filled or an impossibly fast submit → pretend success, write nothing. */
-      if (honeypot.value.trim() !== "" || Date.now() - loadedAt < 2000) {
+      /* Bot trap: a filled honeypot gets a fake success — nothing is written. */
+      if (honeypot.value.trim() !== "") {
         resetForm();
         showModal(true, "Feedback sent successfully.", "Thanks — your report is on its way to the developers.", false);
         return;
       }
-      if (!db) { fail("Could not reach the database. Check your connection and retry."); return; }
+      /* Fast-fill trap: ask for one deliberate extra click instead of dropping the report. */
+      if (!reviewed && Date.now() - loadedAt < 3000) {
+        reviewed = true;
+        fail("Please review your report once more, then press Send.");
+        return;
+      }
+      if (navigator.onLine === false) { fail("You appear to be offline. Reconnect, then press Send again."); return; }
+      if (!db) { banner.hidden = false; fail("The form can't reach the database right now. Email kabaligamer.dev@proton.me instead."); return; }
       const text = msg.value.trim();
-      const email = fields.email.input.value.trim();
+      const email = fields.email.input.value.trim().toLowerCase();
       try {
         const last = JSON.parse(localStorage.getItem("superk.fb.last") || "null");
-        if (last && last.sig === text.toLowerCase() && Date.now() - last.at < 60000) {
+        if (last && last.h === hashText(text.toLowerCase()) && Date.now() - last.at < 60000) {
           fail("This exact report was sent a moment ago — give it a minute before sending again.");
           return;
         }
       } catch { /* storage unavailable — skip dedupe */ }
+      const rl = rateState();
+      if (rl.blocked) {
+        fail("You've sent " + RATE_MAX + " reports in the last 24 hours — please give it a day. Urgent? Email kabaligamer.dev@proton.me.");
+        return;
+      }
       setSending(true);
       try {
-        await db.collection("feedback").add({
+        const ref = await db.collection("feedback").add({
           type,
           issues: checks.filter((c) => c.checked).map((c) => c.value),
           message: text.slice(0, 2000),
@@ -427,21 +681,29 @@
           screenshot: fields.shot.input.value.trim().slice(0, 500),
           rating,
           page: location.href.slice(0, 300),
+          consent: true,
           createdAt: firebase.firestore.FieldValue.serverTimestamp()
         });
-        try { localStorage.setItem("superk.fb.last", JSON.stringify({ sig: text.toLowerCase(), at: Date.now() })); } catch { /* ignore */ }
+        try { localStorage.setItem("superk.fb.last", JSON.stringify({ h: hashText(text.toLowerCase()), at: Date.now() })); } catch { /* ignore */ }
+        rateAdd(rl.recent);
         resetForm();
         setSending(false);
-        showModal(true, "Feedback sent successfully.", "Your report is with the developers. If we need to follow up, we will reply to <b>" + esc(email) + "</b>.", true);
+        showModal(true, "Feedback sent successfully.", "Your report is with the developers. If we need more details, we will reply to <b>" + esc(email) + '</b>.<br /><span class="fb-ref">Reference: <code>' + esc(ref.id) + '</code><button type="button" class="fb-copy" id="fbRefCopy">Copy</button></span>', true);
+        wireRefCopy(ref.id);
       } catch (ex) {
         setSending(false);
-        showModal(false, "Could not send feedback.", reasonFor(ex) + "<br />Technical detail: <code>" + esc(String((ex && ex.code) || "network-error")) + "</code>", false);
+        showModal(false, "Could not send feedback.", reasonFor(ex) + '<br />Or email us directly: <a href="mailto:kabaligamer.dev@proton.me">kabaligamer.dev@proton.me</a>.<br />Technical detail: <code>' + esc(String((ex && ex.code) || "network-error")) + "</code>", false);
       }
+    });
+    window.addEventListener("beforeunload", (e) => {
+      if (!modal.hidden) return;
+      const any = msg.value.trim() !== "" || fields.name.input.value.trim() !== "" || fields.email.input.value.trim() !== "" || fields.phone.input.value.trim() !== "" || fields.shot.input.value.trim() !== "" || consent.checked || rating > 0 || checks.some((c) => c.checked);
+      if (any) { e.preventDefault(); e.returnValue = ""; }
     });
     modalAgain.addEventListener("click", () => {
       closeModal(null);
       document.getElementById("feedback").scrollIntoView({ behavior: smooth(), block: "start" });
-      pills[0].focus({ preventScroll: true });
+      radios[0].focus({ preventScroll: true });
     });
     modalClose.addEventListener("click", () => closeModal(send));
     modal.addEventListener("click", (e) => { if (e.target === modal) closeModal(send); });
