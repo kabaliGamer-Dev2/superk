@@ -37,7 +37,7 @@
   var ZIP_HREF = "releases/superk-1.0.0.zip";
   var ZIP_NAME = "superk-1.0.0.zip";
   var IG_URL = "https://www.instagram.com/kabali.gamer/";
-  var K_TERMS = "superk.gate.terms.v1";
+  var K_TERMS = "superk.gate.terms.v2";
   var K_IG = "superk.gate.instagram.v1";
 
   function readKey(k) {
@@ -66,8 +66,8 @@
     "</div>" +
     '<div class="gate-body">' +
       '<p class="eyebrow">Before you download</p>' +
-      '<h2 id="skGateTitle" tabindex="-1">Two quick steps. Then it\u2019s yours.</h2>' +
-      '<p class="gate-sub">No account, no email \u2014 just a quick agreement and a follow. Both steps unlock the ZIP button below.</p>' +
+      '<h2 id="skGateTitle" tabindex="-1">One quick agreement. Then it\u2019s yours.</h2>' +
+      '<p class="gate-sub">No account, no email \u2014 just a quick agreement. Accepting the terms unlocks the ZIP button below; the Instagram follow is optional.</p>' +
       '<div class="gate-step" id="skStepTerms">' +
         '<span class="gate-n" aria-hidden="true"><span class="n-num">1</span><span class="n-ok">' + IC_CHECK + "</span></span>" +
         "<div>" +
@@ -75,14 +75,16 @@
           '<label class="fb-check"><input type="checkbox" id="skGateTerms" /><span>I have read and agree to the <a href="terms.html" target="_blank" rel="noopener">Terms &amp; Conditions</a> and the <a href="privacy.html" target="_blank" rel="noopener">Privacy Policy</a>.</span></label>' +
         "</div>" +
       "</div>" +
-      '<div class="gate-step" id="skStepIg">' +
-        '<span class="gate-n" aria-hidden="true"><span class="n-num">2</span><span class="n-ok">' + IC_CHECK + "</span></span>" +
+      // Only step 1 (terms) is required; the Instagram follow is optional,
+  // so its badge reads "?" rather than a step number.
+  '<div class="gate-step" id="skStepIg">' +
+        '<span class="gate-n gate-n-opt" aria-hidden="true"><span class="n-num">?</span><span class="n-ok">' + IC_CHECK + "</span></span>" +
         "<div>" +
-          '<h3>Follow <span class="gate-handle">@kabali.gamer</span> on Instagram</h3>' +
-          '<p class="gate-hint" id="skIgHint">Opens Instagram in a new tab and marks this step done \u2014 follow, then come back for your ZIP.</p>' +
+          '<h3>Follow <span class="gate-handle">@kabali.gamer</span> on Instagram <span class="gate-opt">(optional)</span></h3>' +
+          '<p class="gate-hint" id="skIgHint">Optional: opens Instagram in a new tab. Follow if you\u2019d like to support the project \u2014 it is not required.</p>' +
           '<div class="gate-ig-row">' +
             '<a class="btn btn-paper btn-sm gate-follow" id="skGateFollow" href="' + IG_URL + '" target="_blank" rel="noopener">' + IC_IG + "Follow on Instagram</a>" +
-            '<span class="gate-done-pill" id="skIgDone">' + IC_CHECK + "Followed</span>" +
+            '<span class="gate-done-pill" id="skIgDone">' + IC_CHECK + "Done</span>" +
           "</div>" +
         "</div>" +
       "</div>" +
@@ -104,13 +106,28 @@
   var lastFocus = null;
   var passing = false;
 
-  function unlockedNow() { return termsBox.checked && stepIg.classList.contains("done"); }
+  function unlockedNow() { return termsBox.checked; }
   function refresh() {
     stepTerms.classList.toggle("done", termsBox.checked);
     var open = unlockedNow();
     dlBtn.classList.toggle("unlocked", open);
     dlBtn.setAttribute("aria-disabled", open ? "false" : "true");
-    lockLine.textContent = open ? "You\u2019re all set \u2014 grab the ZIP." : "Both steps unlock the download button.";
+    lockLine.textContent = open ? "You\u2019re all set \u2014 grab the ZIP." : "Accept the terms to unlock the download button.";
+  }
+  /* make everything behind the gate non-interactive (a11y + honest modal) */
+  function setBackgroundInert(on) {
+    var kids = document.body.children;
+    for (var i = 0; i < kids.length; i++) {
+      var el = kids[i];
+      if (el === gate) continue;
+      if (on) {
+        el.setAttribute("inert", "");
+        el.setAttribute("aria-hidden", "true");
+      } else {
+        el.removeAttribute("inert");
+        el.removeAttribute("aria-hidden");
+      }
+    }
   }
   function openGate() {
     lastFocus = document.activeElement;
@@ -119,11 +136,13 @@
     var nav = document.querySelector(".links.open");
     if (nav) nav.classList.remove("open");
     refresh();
+    setBackgroundInert(true);
     title.focus();
   }
   function closeGate() {
     gate.hidden = true;
     docEl.classList.remove("gate-lock");
+    setBackgroundInert(false);
     if (lastFocus && lastFocus.focus) lastFocus.focus();
   }
   function startDownload() {
@@ -136,6 +155,7 @@
     a.remove();
     passing = false;
     closeGate();
+    document.dispatchEvent(new CustomEvent("superk:download"));
   }
 
   /* restore remembered progress (per browser, localStorage) */

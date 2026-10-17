@@ -10,9 +10,9 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700;800&family=Montserrat:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet" />
 <link rel="stylesheet" href="tokens.css" />
-<link rel="stylesheet" href="site.css?v=10" />
+<link rel="stylesheet" href="site.css?v=12" />
 <script>(function () { var d = document.documentElement; if (!("IntersectionObserver" in window)) return; d.classList.add("js"); setTimeout(function () { if (!d.hasAttribute("data-reveal-ready")) d.classList.remove("js"); }, 2500); })();</script>
-<script src="site.js?v=1" defer></script>
+<script src="site.js?v=3" defer></script>
 <style>
   .page-hero { padding: 56px 0 6px; }
   .page-hero h1 { font: 800 clamp(32px, 4.6vw, 48px)/1.05 var(--display); letter-spacing: -.03em; margin: 14px 0 12px; }
@@ -35,7 +35,7 @@
 <div class="announce"><div class="wrap"><span>v1.0.0 is here — one-click subject ZIPs are live</span><a href="releases/superk-1.0.0.zip">Get the ZIP</a></div></div>
 <nav class="nav" aria-label="Primary">
   <div class="wrap nav-row">
-    <a class="brand" href="index.html"><img src="assets/logo.svg" alt="SuperK logo" /><b>SuperK</b><span class="ver">v1.0.0 Official</span></a>
+    <a class="brand" href="index.html"><img src="assets/logo.svg" alt="SuperK logo" /><b>SuperK</b><span class="ver">v1.0.0</span></a>
     <div class="links" id="navLinks">
       <a href="index.html#features">Features</a>
       <a href="story.html">Story</a>
@@ -56,17 +56,18 @@
   </div>
 
   <div class="doc reveal">
-    <p class="eff">EFFECTIVE DATE: OCTOBER 17, 2026 · PRODUCT: SUPERK (CREATED BY KABALI GAMER)</p>
+    <p class="eff">EFFECTIVE DATE: OCTOBER 17, 2026 · LAST UPDATED: OCTOBER 17, 2026 · PRODUCT: SUPERK (CREATED BY KABALI GAMER)</p>
     <h2>1. Our Commitment</h2>
-    <p>SuperK was built by a student, for students. The developer does not collect, store, transmit, sell, or share any of your personal data, usage metrics, or browsing activity. The extension has no servers of its own, so there is nothing for the developer to collect.</p>
+    <p>SuperK was built by a student, for students. The extension does not collect, store, transmit, sell, or share any of your personal data, usage metrics, or browsing activity. The extension has no servers of its own, so there is nothing for the developer to collect. The only personal data we ever receive is what you choose to send through the Feedback form (Section 7).</p>
     <h2>2. Scope</h2>
     <p>This policy covers (a) the SuperK browser extension and (b) this website. Section 7 explains the website separately.</p>
     <h2>3. What the Extension Accesses and Why</h2>
     <ul>
       <li><strong>a) Active Tab (<code>activeTab</code>):</strong> used only when you click the extension, to check that you are on an authorized Parul University classroom page (<code>elearning.paruluniversity.ac.in</code>).</li>
-      <li><strong>b) Storage (<code>storage</code>):</strong> used only on your device (<code>chrome.storage.local</code>) to keep the list of discovered PDF titles and download progress during your session. This data never leaves your device.</li>
-      <li><strong>c) Downloads (<code>downloads</code>):</strong> used only to save the PDF or ZIP files you request into your local <code>Downloads/Parul/</code> folder.</li>
-      <li><strong>d) Host permissions:</strong> <code>elearning.paruluniversity.ac.in</code> (to work with the classroom page); <code>platform-api.edorer.com</code> (to read your subject syllabus using your existing session); <code>*.digitaloceanspaces.com</code> (to download the authorized files from the university's cloud storage).</li>
+    <li><strong>b) Scripting (<code>scripting</code>):</strong> used only to run the one-time scan that lists the files on the classroom page you are viewing.</li>
+      <li><strong>c) Storage (<code>storage</code>):</strong> used only on your device (<code>chrome.storage.local</code>) to keep the list of discovered PDF titles and download progress during your session. This data never leaves your device.</li>
+      <li><strong>d) Downloads (<code>downloads</code>):</strong> used only to save the PDF or ZIP files you request into your local <code>Downloads/Parul/</code> folder.</li>
+      <li><strong>e) Host permissions:</strong> <code>elearning.paruluniversity.ac.in</code> (to work with the classroom page); <code>platform-api.edorer.com</code> (to read your subject syllabus using your existing session); <code>*.digitaloceanspaces.com</code> (to download the authorized files from the university's cloud storage).</li>
     </ul>
     <h2>4. Authentication and Credentials</h2>
     <p>SuperK never sees or stores your password. When you log in to the university portal, your browser keeps a session token in its localStorage. SuperK uses that existing token in memory only to request your own subject list and files from the university's API. It does not copy, save, or send the token anywhere else.</p>
@@ -75,12 +76,12 @@
     <h2>6. No Analytics or Tracking</h2>
     <p>SuperK contains: no Google Analytics or similar trackers, no user fingerprinting, no advertising networks, no remote logging or crash-report servers, and no accounts.</p>
     <h2>7. This Website</h2>
-    <p>This website does not use analytics or advertising trackers. It loads fonts from Google Fonts, so your browser may send your IP address and standard request data to Google when you visit. Pages that show the demo video embed a YouTube player, which may set its own cookies once loaded. See our <a href="cookies.html">Cookie Statement</a> for details. Links to GitHub and Instagram lead to third-party sites with their own policies. Tips are voluntary payments made through your own UPI app; this site does not receive your payment details.</p>
-    <p><strong>Feedback form.</strong> When you send a report through our <a href="feedback.html">Feedback page</a>, the form sends the following to Google Firebase (Cloud Firestore), a database service used by the developer: your name, email address, optional WhatsApp/phone number, the message you write, an optional screenshot link, an optional star rating, any symptom boxes you tick, and the address of the page you submitted from. Your browser and operating system, and the extension version (when you arrive from the extension), are attached automatically to help reproduce the issue. This is used solely to read and act on your report, and is visible only to the developer — never published. Reports are deleted once the issue is handled, and in any case within 6 months. You can ask for deletion at any time via the contact details below.</p>
+    <p>This website does not use analytics or advertising trackers. It loads fonts from Google Fonts, so your browser may send your IP address and standard request data to Google when you visit. Our host, Google Firebase Hosting, may keep standard server logs (IP address, time, page requested) for security and operation. Pages that show the demo video embed a YouTube player, which may set its own cookies once loaded. See our <a href="cookies.html">Cookie Statement</a> for details. Links to GitHub and Instagram lead to third-party sites with their own policies. Tips are voluntary payments made through your own UPI app; this site does not receive your payment details.</p>
+    <p><strong>Feedback form.</strong> When you send a report through our <a href="feedback.html">Feedback page</a>, the form sends the following to Google Firebase (Cloud Firestore), a database service used by the developer: your name, email address, optional WhatsApp/phone number, the message you write, an optional screenshot link, an optional star rating, any symptom boxes you tick, and the address of the page you submitted from. Your browser and operating system, and the extension version (when you arrive from the extension), are attached automatically to help reproduce the issue. This is used solely to read and act on your report, and is visible only to the developer — never published. Each report is automatically deleted 6 months after it is sent (deletion happens within about a day of that date), and we may delete it sooner once the issue is handled. You can ask for deletion at any time via the contact details below.</p>
     <h2>8. Data Retention and Deletion</h2>
     <p>All data SuperK stores lives on your device. You can remove it by clearing the extension's storage or uninstalling the extension. Downloaded files are saved in your Downloads/Parul/ folder, and you can delete them at any time.</p>
     <h2>9. Children</h2>
-    <p>SuperK is intended for university students and instructors and is not directed at children under 13. The developer knowingly collects no data from children.</p>
+    <p>SuperK is intended for university students and instructors and is not directed at children under 18. The developer knowingly collects no data from children.</p>
     <h2>10. Your Rights</h2>
     <p>The extension collects nothing from you, so there is no extension data to access, correct, or erase. Reports you send through the Feedback page (Section 7) can be deleted on request at any time. If you still have a privacy question or request (including under India's Digital Personal Data Protection Act, 2023, where applicable), contact us and we will respond in good faith.</p>
     <h2>11. Open Source and Transparency</h2>

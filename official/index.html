@@ -24,9 +24,9 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700;800&family=Montserrat:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet" />
 <link rel="stylesheet" href="tokens.css" />
-<link rel="stylesheet" href="site.css?v=10" />
+<link rel="stylesheet" href="site.css?v=12" />
 <script>(function () { var d = document.documentElement; if (!("IntersectionObserver" in window)) return; d.classList.add("js"); setTimeout(function () { if (!d.hasAttribute("data-reveal-ready")) d.classList.remove("js"); }, 2500); })();</script>
-<script src="site.js?v=1" defer></script>
+<script src="site.js?v=3" defer></script>
 <style>
   /* --- INDEX backdrop: Warm Paper dot-grid + top glow (behind everything) --- */
   body {
@@ -350,6 +350,7 @@
   .final p { color: var(--ink2); margin: 0 0 26px; }
   @media (max-width: 900px) {
     .grid, .steps { grid-template-columns: 1fr; }
+    .steps::before { display: none; }
     .quote { grid-template-columns: 1fr; }
     .quote-mark { padding: 10px; font-size: 56px; }
   }
@@ -401,7 +402,7 @@
   @media (max-width: 600px) { .coffee { left: 12px; right: 12px; max-width: none; bottom: max(12px, env(safe-area-inset-bottom)); } .coffee-x { width: 40px; height: 40px; } .coffee-fab { right: 12px; bottom: max(12px, env(safe-area-inset-bottom)); width: 48px; height: 48px; padding: 0; } .coffee-fab span { display: none; } }
 </style>
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"SoftwareApplication","name":"SuperK","operatingSystem":"Chrome, Brave, Edge, Opera, Arc","applicationCategory":"BrowserApplication","softwareVersion":"1.0.0","isAccessibleForFree":true,"license":"https://github.com/kabaliGamer-Dev2/superk/blob/main/LICENSE","description":"Free, open-source browser extension for Parul University students: one-click batch PDF downloads and subject ZIP archives that run entirely in your own browser.","url":"https://superk-official.web.app/","downloadUrl":"https://superk-official.web.app/releases/superk-1.0.0.zip","offers":{"@type":"Offer","price":"0","priceCurrency":"INR"},"author":{"@type":"Person","name":"Kabali Gamer","url":"https://www.instagram.com/kabali.gamer/"}}
+{"@context":"https://schema.org","@type":"SoftwareApplication","name":"SuperK","operatingSystem":"Chrome, Brave, Edge, Opera, Vivaldi, Arc","applicationCategory":"BrowserApplication","softwareVersion":"1.0.0","isAccessibleForFree":true,"license":"https://github.com/kabaliGamer-Dev2/superk/blob/main/LICENSE","description":"Free, open-source browser extension for Parul University students: one-click batch PDF downloads and subject ZIP archives that run entirely in your own browser.","url":"https://superk-official.web.app/","downloadUrl":"https://superk-official.web.app/installation.html","offers":{"@type":"Offer","price":"0","priceCurrency":"INR"},"author":{"@type":"Person","name":"Kabali Gamer","url":"https://www.instagram.com/kabali.gamer/"}}
 </script>
 </head>
 <body>
@@ -477,7 +478,7 @@
       <div class="meta-row" aria-label="Compatibility">
         <span class="meta-tag">Manifest V3</span>
         <span class="meta-tag">100% Client-Side</span>
-        <span class="meta-tag">Chrome · Brave · Edge · Opera · Arc</span>
+        <span class="meta-tag">Chrome · Brave · Edge · Opera · Vivaldi · Arc</span>
         <span class="meta-tag">Open Source · MIT</span>
       </div>
       <p class="hero-note">Independent student project — not affiliated with or endorsed by Parul University or Edorer.</p>
@@ -594,7 +595,7 @@
       <article class="card reveal">
         <h3>Requirements &amp; limits</h3>
         <ul>
-          <li>Desktop Chromium browsers only — Chrome, Brave, Edge, Opera, or Arc.</li>
+          <li>Desktop Chromium browsers only — Chrome, Brave, Edge, Opera, Vivaldi, or Arc.</li>
           <li>Not supported on Firefox, Safari, or phones.</li>
           <li>Needs an active classroom login while you use it.</li>
           <li>Works only for Parul University's elearning portal — built and tested on the developer's own enrolled courses.</li>
@@ -650,7 +651,7 @@
         </li>
       </ol>
       <div class="setup-foot">
-        <span>Full walkthrough with screenshots</span>
+        <span>Full walkthrough, per-browser URLs &amp; troubleshooting</span>
         <a class="setup-guide" href="installation.html">Installation Guide
           <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14" /><path d="m13 6 6 6-6 6" /></svg></a>
       </div>
@@ -712,7 +713,7 @@
     <div class="faq reveal">
       <details><summary>Why did my ZIP download say "Too Big"?</summary><p>Your browser tab only has so much RAM. SuperK measures every file first, and past ~150 MB it skips the single ZIP and downloads the files individually instead — same PDFs, zero crashes.</p></details>
       <details><summary>Why does it say "No Auth" or fallback mode?</summary><p>Your classroom login session hadn't loaded when SuperK scanned. Refresh the Edorer classroom tab once so the session token loads, then reopen SuperK.</p></details>
-      <details><summary>Which browsers work?</summary><p>Chrome, Brave, Edge, Opera, and Arc — any Chromium browser that supports Manifest V3 extensions.</p></details>
+      <details><summary>Which browsers work?</summary><p>Chrome, Brave, Edge, Opera, Vivaldi, and Arc — any Chromium browser that supports Manifest V3 extensions.</p></details>
       <details><summary>Is this official?</summary><p>No. SuperK is an independent student project — not affiliated with, asked for, or endorsed by Parul University or Edorer. Nobody at the university approved it.</p></details>
       <details><summary>Is it allowed? Will I get in trouble?</summary><p>Honest answer: we can't promise. Your university's portal rules still apply to you, and SuperK doesn't change them. Use it at your own responsibility, for your own enrolled subjects and personal study. See the <a href="terms.html">Terms &amp; Conditions</a>.</p></details>
       <details><summary>Does it store my password?</summary><p>No. SuperK never sees or saves your password. It reads the session token your browser already holds, in memory only, to ask the university's API for your own file list — nothing is stored on any server of ours.</p></details>
@@ -863,11 +864,12 @@
   var navCoffee = document.getElementById("navCoffee");
   if (navCoffee) navCoffee.addEventListener("click", function (e) { e.preventDefault(); show(true); });
   var timer = null;
-  document.querySelectorAll('a[href$=".zip"]').forEach(function (a) {
-    a.addEventListener("click", function () {
-      clearTimeout(timer);
-      timer = setTimeout(function () { show(false); }, 2500);
-    });
+  document.addEventListener("superk:download", function () {
+    clearTimeout(timer);
+    timer = setTimeout(function () {
+      if (document.documentElement.classList.contains("gate-lock")) return;
+      show(false);
+    }, 2500);
   });
   var x = document.getElementById("coffeeClose");
   if (x) x.addEventListener("click", hide);

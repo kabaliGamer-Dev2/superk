@@ -10,9 +10,9 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700;800&family=Montserrat:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet" />
 <link rel="stylesheet" href="tokens.css" />
-<link rel="stylesheet" href="site.css?v=10" />
+<link rel="stylesheet" href="site.css?v=12" />
 <script>(function () { var d = document.documentElement; if (!("IntersectionObserver" in window)) return; d.classList.add("js"); setTimeout(function () { if (!d.hasAttribute("data-reveal-ready")) d.classList.remove("js"); }, 2500); })();</script>
-<script src="site.js?v=1" defer></script>
+<script src="site.js?v=3" defer></script>
 <style>
   .page-hero { padding: 56px 0 6px; }
   .page-hero h1 { font: 800 clamp(32px, 4.6vw, 48px)/1.05 var(--display); letter-spacing: -.03em; margin: 14px 0 12px; }
@@ -34,7 +34,7 @@
 <div class="announce"><div class="wrap"><span>v1.0.0 is here — one-click subject ZIPs are live</span><a href="releases/superk-1.0.0.zip">Get the ZIP</a></div></div>
 <nav class="nav" aria-label="Primary">
   <div class="wrap nav-row">
-    <a class="brand" href="index.html"><img src="assets/logo.svg" alt="SuperK logo" /><b>SuperK</b><span class="ver">v1.0.0 Official</span></a>
+    <a class="brand" href="index.html"><img src="assets/logo.svg" alt="SuperK logo" /><b>SuperK</b><span class="ver">v1.0.0</span></a>
     <div class="links" id="navLinks">
       <a href="index.html#features">Features</a>
       <a href="story.html">Story</a>
@@ -55,13 +55,14 @@
   </div>
 
   <div class="doc reveal">
+    <p class="eff">EFFECTIVE DATE: OCTOBER 17, 2026 · LAST UPDATED: OCTOBER 17, 2026 · PRODUCT: SUPERK (CREATED BY KABALI GAMER)</p>
     <h2>1. Website Cookies</h2>
     <p>The official SuperK landing website uses <strong>zero tracking cookies</strong>, no marketing cookies, and no third-party analytic trackers. Some third-party resources can still connect your browser to their servers when a page loads or a feature is used:</p>
     <ul>
       <li><strong>Google Fonts</strong> — every page loads its typefaces from Google, so your IP address and standard request data reach Google.</li>
       <li><strong>YouTube</strong> — the homepage embeds the demo video through YouTube's privacy-enhanced mode (youtube-nocookie.com), which is designed to avoid setting cookies until you press play. The player itself may still set its own cookies once a video is played.</li>
-      <li><strong>Firebase (Cloud Firestore)</strong> — the Feedback page sends what you write there (name, email, optional phone, message, and the attached technical details — see our <a href="privacy.html">Privacy Policy</a>) to Google Firebase so the developer can read it. This uses no cookies.</li>
-      <li><strong>Local storage flags (this website)</strong> — the landing site keeps a few small keys in your browser's localStorage: <code>superk.coffee.shown</code> (so the one-time "support SuperK" tip card is never shown twice), <code>superk.fb.last</code> (a short hash — never your text — that blocks accidental duplicate feedback submissions for 60 seconds), <code>superk.fb.rate</code> (timestamps of reports sent from this browser in the last 24 hours, used to stop spam — no message content), and <code>superk.gate.terms.v1</code> / <code>superk.gate.instagram.v1</code> (remember that you completed the download-gate steps). They contain no identifiers, never leave your browser, and disappear when you clear site data.</li>
+      <li><strong>Firebase (Cloud Firestore)</strong> — the Feedback page sends what you write there (name, email, optional phone, message, and the attached technical details — see our <a href="privacy.html">Privacy Policy</a>) to Google Firebase so the developer can read it. This uses no cookies. Our host, Google Firebase Hosting, may also keep standard server logs (IP address, time, page requested) for security and operation.</li>
+      <li><strong>Local storage flags (this website)</strong> — the landing site keeps a few small keys in your browser's localStorage: <code>superk.coffee.shown</code> (so the one-time "support SuperK" tip card is never shown twice), <code>superk.fb.last</code> (a short hash — never your text — that blocks accidental duplicate feedback submissions for 60 seconds), <code>superk.fb.rate</code> (timestamps of reports sent from this browser in the last 24 hours, used to stop spam — no message content), and <code>superk.gate.terms.v2</code> / <code>superk.gate.instagram.v1</code> (remember that you completed the download-gate steps). They contain no identifiers, never leave your browser, and disappear when you clear site data.</li>
     </ul>
     <h2>2. Browser Storage in Extension</h2>
     <ul>

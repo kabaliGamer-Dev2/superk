@@ -273,10 +273,22 @@ a.code-chip:hover { background: var(--ink); border-color: var(--ink); color: var
 .fb-field textarea:focus, .fb-field select:focus, .fb-field input:focus { box-shadow: 2.5px 2.5px 0 rgba(42,37,41,.9); }
 .fb-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
 .fb-checks { display: flex; flex-direction: column; gap: 8px; }
-.fb-check { display: flex; gap: 10px; align-items: flex-start; cursor: pointer; background: var(--paper); border: 1.5px solid var(--line); border-radius: 12px; padding: 10px 12px; font: 500 13px var(--body); }
-.fb-check input { appearance: none; flex: none; width: 17px; height: 17px; margin-top: 1px; border-radius: 6px; cursor: pointer; border: 1.5px solid var(--ink); background: var(--card); display: grid; place-items: center; }
+.fb-check { display: flex; gap: 12px; align-items: flex-start; cursor: pointer; background: var(--paper); color: var(--ink); border: 1.5px solid var(--line); border-radius: 12px; padding: 11px 14px; font: 500 13.5px/1.55 var(--body); text-wrap: pretty; transition: background var(--t-fast) var(--ease), border-color var(--t-fast) var(--ease), box-shadow var(--t-fast) var(--ease); }
+.fb-check:hover { background: #fff; border-color: var(--ink); }
+.fb-check:has(input:focus-visible) { outline: 2.5px solid var(--ink); outline-offset: 2px; }
+.fb-check:has(input:checked) { background: var(--card); border-color: var(--ink); }
+.fb-check input { appearance: none; flex: none; width: 20px; height: 20px; margin-top: 1px; border-radius: 7px; cursor: pointer; border: 1.5px solid var(--ink); background: var(--card); display: grid; place-items: center; transition: background var(--t-fast) var(--ease), border-color var(--t-fast) var(--ease); }
+.fb-check input::after { content: ""; width: 11px; height: 6px; border-left: 2.5px solid var(--paper); border-bottom: 2.5px solid var(--paper); transform: rotate(-45deg) translateY(-1px) scale(.4); opacity: 0; transition: transform var(--t-fast) var(--ease), opacity var(--t-fast) var(--ease); }
 .fb-check input:checked { background: var(--ink); }
-.fb-check input:checked::after { content: ""; width: 9px; height: 5px; border-left: 2px solid var(--paper); border-bottom: 2px solid var(--paper); transform: rotate(-45deg) translateY(-1px); }
+.fb-check input:checked::after { opacity: 1; transform: rotate(-45deg) translateY(-1px); }
+/* consent gate — same system, a touch more presence */
+.fb-check.lead { padding: 14px 16px; background: var(--card); border-color: var(--ink); }
+.fb-check.lead:hover { background: #fff; }
+.fb-check.lead .fb-check-txt { display: block; }
+.fb-check.lead .fb-check-txt b { font-weight: 700; }
+.fb-check.lead a { color: var(--ink); font-weight: 600; text-decoration: underline; text-decoration-color: var(--mut); text-decoration-thickness: 1.5px; text-underline-offset: 2.5px; border-radius: 4px; }
+.fb-check.lead a:hover { text-decoration-color: var(--ink); background: var(--paper2); }
+@media (prefers-reduced-motion: reduce) { .fb-check, .fb-check input, .fb-check input::after { transition: none; } }
 .fb-tip { background: var(--paper2); border: 1.5px solid var(--ink); border-radius: 12px; padding: 12px 14px; font-size: 13px; color: var(--ink); margin: 0 0 16px; }
 .fb-tip b { font-family: var(--display); }
 .fb-stars { display: flex; gap: 6px; }
@@ -289,7 +301,7 @@ a.code-chip:hover { background: var(--ink); border-color: var(--ink); color: var
 .fb-fielderr { font: 600 12px var(--body); color: #8f1d1d; margin: 8px 0 0; }
 .fb-field.bad > span { color: #8f1d1d; }
 .fb-field.bad > textarea, .fb-field.bad > select, .fb-field.bad > input { border-color: #8f1d1d; background: #f6e8e5; }
-.fb-field.bad .fb-check { border-color: #8f1d1d; }
+.fb-field.bad .fb-check { border-color: #8f1d1d; background: #f6e8e5; }
 .fb-hp { position: absolute; left: -9999px; top: 0; width: 1px; height: 1px; overflow: hidden; }
 .fb-note { font: 500 11.5px/1.6 var(--body); color: var(--mut); margin: 8px 0 0; }
 @media (max-width: 640px) { .fb-field textarea, .fb-field select, .fb-field input { font-size: 16px; } }
@@ -342,6 +354,9 @@ html.gate-lock, html.gate-lock body { overflow: hidden; }
 .gate-step { display: grid; grid-template-columns: 40px minmax(0, 1fr); gap: 16px; background: var(--card); border: 1.5px solid var(--ink); border-radius: 18px; box-shadow: var(--tactile); padding: 20px; margin: 0 0 14px; transition: background .2s var(--ease); }
 .gate-step.done { background: var(--paper2); }
 .gate-n { width: 40px; height: 40px; border-radius: 12px; background: var(--ink); color: var(--acc-ink); font: 700 13px var(--mono); display: grid; place-items: center; box-shadow: 2.5px 2.5px 0 rgba(42, 37, 41, .9); }
+/* the optional follow step reads "?" and is visually softer than a required step */
+.gate-n-opt { background: var(--paper2); color: var(--ink2); border: 1.5px solid var(--line); box-shadow: none; }
+.gate-opt { font: 600 11px var(--mono); letter-spacing: .06em; color: var(--mut); text-transform: uppercase; white-space: nowrap; }
 .gate-n svg { width: 17px; height: 17px; }
 .gate-n .n-ok { display: none; }
 .gate-step.done .gate-n { background: var(--card); color: var(--ink); border: 1.5px solid var(--ink); box-shadow: none; }

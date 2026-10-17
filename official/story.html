@@ -4,15 +4,15 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Why SuperK Was Created — The Story | SuperK by Kabali Gamer</title>
-<meta name="description" content="The origin story of SuperK: how a Parul University LMS update removed every PDF download link, and why student developer Kabali Gamer built the fix." />
+<meta name="description" content="The origin story of SuperK: why a student developer built a free, open-source browser extension after an LMS update changed the download options, and why SuperK is independent of the university." />
 <link rel="icon" href="assets/favicon.ico?v=2" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700;800&family=Montserrat:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet" />
 <link rel="stylesheet" href="tokens.css" />
-<link rel="stylesheet" href="site.css?v=10" />
+<link rel="stylesheet" href="site.css?v=12" />
 <script>(function () { var d = document.documentElement; if (!("IntersectionObserver" in window)) return; d.classList.add("js"); setTimeout(function () { if (!d.hasAttribute("data-reveal-ready")) d.classList.remove("js"); }, 2500); })();</script>
-<script src="site.js?v=1" defer></script>
+<script src="site.js?v=3" defer></script>
 <style>
   .page-hero { padding: 56px 0 6px; }
   .page-hero h1 { font: 800 clamp(32px, 4.6vw, 48px)/1.05 var(--display); letter-spacing: -.03em; margin: 14px 0 12px; }
@@ -40,7 +40,7 @@
 <div class="announce"><div class="wrap"><span>v1.0.0 is here — one-click subject ZIPs are live</span><a href="releases/superk-1.0.0.zip">Get the ZIP</a></div></div>
 <nav class="nav" aria-label="Primary">
   <div class="wrap nav-row">
-    <a class="brand" href="index.html"><img src="assets/logo.svg" alt="SuperK logo" /><b>SuperK</b><span class="ver">v1.0.0 Official</span></a>
+    <a class="brand" href="index.html"><img src="assets/logo.svg" alt="SuperK logo" /><b>SuperK</b><span class="ver">v1.0.0</span></a>
     <div class="links" id="navLinks">
       <a href="index.html#features">Features</a>
       <a href="story.html">Story</a>
@@ -59,31 +59,32 @@
     <p class="eyebrow rule">Origin &amp; Mission</p>
     <h1>Why SuperK Was Created</h1>
     <p class="byline">By <a href="https://www.instagram.com/kabali.gamer/" target="_blank" rel="noopener" style="color:var(--ink);font-weight:700;text-decoration:none">Kabali Gamer</a> · Student Developer &amp; Creator</p>
+    <p class="byline">Independent student project, not affiliated with Parul University or Edorer.</p>
   </div>
 
   <div class="quote reveal">
     <div class="quote-mark" aria-hidden="true">&ldquo;</div>
     <div class="quote-body">
-      <p>A few days ago, our college website was updated, and we lost the option to download our lecture notes and PPTs completely. Whenever exams came around, we couldn't save our study materials offline. I couldn't let students struggle through that. So, I built SuperK. Now, every student can install SuperK and download all their course PDFs with a single click.</p>
+      <p>A recent update removed the download option for our lecture notes and PPTs completely. Whenever exams came around, we couldn't save our study materials offline. I couldn't let students struggle through that. So, I built SuperK. Now, every student can install SuperK and download all their course PDFs with a single click.</p>
       <cite>— <b>Kabali Gamer</b>, Creator &amp; Lead Developer of SuperK</cite>
     </div>
   </div>
 
   <div class="doc reveal">
     <h2>The Day the Downloads Disappeared</h2>
-    <p>In October 2026, students across Parul University logged into the elearning portal to prepare for upcoming examinations and assignments. Following a recent LMS platform update, every single direct PDF download link had vanished.</p>
-    <p>Lecture presentations, handwritten faculty notes, laboratory manuals, and previous years' question papers were locked inside an embedded viewer (<code>PdfViewer-*.js</code>). Students could only read files page-by-page inside the browser tab. Offline study during commute, printing notes, and revising without an internet connection suddenly became impossible.</p>
+    <p>In October 2026, students across Parul University logged into the elearning portal to prepare for upcoming examinations and assignments. Following a recent LMS platform update, the download options I used were no longer there. I don't know why the portal changed, and this project is not a statement about the university.</p>
+    <p>Lecture presentations, handwritten faculty notes, laboratory manuals, and previous years' question papers were locked inside an embedded viewer. Students could only read files page-by-page inside the browser tab. Offline study during commute, printing notes, and revising without an internet connection suddenly became impossible.</p>
     <h2>The Decision to Build a Solution</h2>
-    <p>Rather than waiting weeks for official fixes, I decided to take action. As a student developer, I knew that the underlying documents were still accessible via authorized API endpoints and cloud buckets.</p>
+    <p>Rather than wait, I decided to build something for my own study. As a student developer, I knew that the files were still available to students who were logged in.</p>
     <p>I set out to create an extension that would be:</p>
     <ol>
       <li>Completely effortless for any student to use, regardless of technical background.</li>
       <li>Fully compliant with browser privacy standards — never collecting user passwords or data.</li>
       <li>Capable of downloading not just single files, but entire subjects packaged cleanly into ZIP archives.</li>
     </ol>
-    <h2>From Prototype to Official Release</h2>
-    <p>After reverse-engineering the classroom API tokens and writing custom filename normalization heuristics to fix messy faculty filenames, <b>SuperK</b> was born.</p>
-    <p>What started as a script to help my classmates is now an official extension available to every student in our university. SuperK is free, open, and dedicated to every student striving for academic excellence.</p>
+    <h2>From Prototype to Public Release</h2>
+    <p>After studying how the classroom page loads files for logged-in students, and writing my own cleanup rules for messy file titles, <b>SuperK</b> was born.</p>
+    <p>What started as a script to help my classmates is now a free, open-source extension that any Parul student can choose to install. It is an independent student project, not an official university tool.</p>
     <p class="sign">— <a href="https://www.instagram.com/kabali.gamer/" target="_blank" rel="noopener" style="color:inherit;text-decoration:none;border-bottom:1.5px solid var(--ink)">Kabali Gamer</a></p>
   </div>
 

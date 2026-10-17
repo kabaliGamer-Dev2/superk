@@ -23,9 +23,9 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700;800&family=Montserrat:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet" />
 <link rel="stylesheet" href="tokens.css" />
-<link rel="stylesheet" href="site.css?v=10" />
+<link rel="stylesheet" href="site.css?v=12" />
 <script>(function () { var d = document.documentElement; if (!("IntersectionObserver" in window)) return; d.classList.add("js"); setTimeout(function () { if (!d.hasAttribute("data-reveal-ready")) d.classList.remove("js"); }, 2500); })();</script>
-<script src="site.js?v=1" defer></script>
+<script src="site.js?v=3" defer></script>
 <style>
   .page-hero { padding: 56px 0 6px; }
   .page-hero h1 { font: 800 clamp(32px, 4.6vw, 48px)/1.05 var(--display); letter-spacing: -.03em; margin: 14px 0 12px; text-wrap: balance; }
@@ -154,7 +154,7 @@
         <button type="button" class="fb-clear" id="fbClear" hidden>Clear rating</button>
       </fieldset>
       <div class="fb-field" id="fbConsentField">
-        <label class="fb-check"><input type="checkbox" id="fbConsent" aria-describedby="fbConsentErr" />I agree that SuperK stores my name, email and this report to read it and reply if needed. See the <a href="privacy.html" target="_blank" rel="noopener">Privacy Policy</a>.</label>
+        <label class="fb-check lead"><input type="checkbox" id="fbConsent" aria-describedby="fbConsentErr" /><span class="fb-check-txt"><b>I agree</b> that SuperK stores my name, email and this report to read it and reply if needed. I am 18 or older, or my parent/guardian agrees. See the <a href="privacy.html" target="_blank" rel="noopener">Privacy Policy</a>.</span></label>
         <p class="fb-fielderr" id="fbConsentErr" aria-live="polite" hidden></p>
       </div>
       <p class="fb-err" id="fbErr" role="alert" hidden></p>
@@ -682,7 +682,10 @@
           rating,
           page: location.href.slice(0, 300),
           consent: true,
-          createdAt: firebase.firestore.FieldValue.serverTimestamp()
+          createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+          // Automatic 6-month retention: Firestore TTL deletes the document after
+          // this timestamp (deletion happens within ~24h of expiry, not instantly).
+          expireAt: firebase.firestore.Timestamp.fromDate(new Date(Date.now() + 180 * 86400000))
         });
         try { localStorage.setItem("superk.fb.last", JSON.stringify({ h: hashText(text.toLowerCase()), at: Date.now() })); } catch { /* ignore */ }
         rateAdd(rl.recent);
