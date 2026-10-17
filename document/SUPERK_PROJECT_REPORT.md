@@ -65,7 +65,7 @@ Design law: Warm Paper (`#F3F0E7` paper / `#2A2529` ink), Poppins display / Mont
 | `terms.html` / `privacy.html` / `cookies.html` | Exact spec legal text in tactile doc cards |
 | `feedback.html` | Standalone form page (see §3.3): hero, form + roadmap + promise side, success/error modal |
 
-Shared chrome: announce bar, sticky nav (hamburger icon ≤860px, 44px touch target), dark footer with Instagram glyph, `?v=N` cache-busting (current `site.css?v=9` + `site.js?v=1`; favicon `assets/favicon.ico?v=2`, plus a root `favicon.ico` copy so the browser's default probe gets a 200).
+Shared chrome: announce bar, sticky nav (hamburger icon ≤860px, 44px touch target), dark footer with Instagram glyph, `?v=N` cache-busting (current `site.css?v=10` + `site.js?v=1`; favicon `assets/favicon.ico?v=2`, plus a root `favicon.ico` copy so the browser's default probe gets a 200).
 
 ### 3.2 Hero iterations (decisions, newest last)
 1. Two-column + browser mock → removed (rotation/shadow caused mobile overflow).
@@ -78,9 +78,12 @@ Shared chrome: announce bar, sticky nav (hamburger icon ≤860px, 44px touch tar
 8. ~~All reveal/fade motion removed~~ — superseded 2026-10-17: scroll-linked fades stay banned, but a one-shot on-entry reveal system was later requested and added (§3.5).
 
 ### 3.3 Feedback system (Firestore, zero server)
-- 4 SVG pill types (bug/feature/download/praise), conditional 1-tap issue checks, auto-fix tip box, dynamic placeholders, browser select + version chip, screenshot-link field (link only — file upload is a paid Formspree-tier concept, dropped with Formspree), optional contact, SVG star rating, inline validation.
-- Submit: spinner button (`aria-busy`), success modal ("Feedback sent successfully."), failure modal with mapped human reason + raw code. Deep-link prefill: `feedback.html?type=&error=&v=`.
-- Collection `feedback`; rules: public create-only with field validation (type allowlist, message 10–2000 chars, rating 0–5 int); all reads/writes denied (console-only viewing).
+- 4 SVG pill types (bug/feature/download/praise), conditional 1-tap symptom checks (5th "Other — none of these fit" option added 2026-10-17; ≥1 required for bug/download so reports are classified), auto-fix tip box per symptom, dynamic placeholders per type, star rating.
+- **Strict validation (2026-10-17 upgrade):** Full name (2–80, must contain a letter), email (format-checked), and details (10–2000 chars) required; WhatsApp/phone optional (10–13 digits, +91-friendly) and screenshot link optional (full http(s) URL). Invalid fields get red border/tint + inline message (`aria-describedby`), and the form auto-scrolls to + focuses the first invalid control; once flagged, fields re-validate live on input. Mobile inputs render at 16px so iOS never zooms on focus.
+- **Context capture:** browser + OS auto-detected ("Chrome 155 · Windows" chip) and attached to every report alongside the extension-version chip (still prefilled by the popup's `?v=` deep link).
+- **Anti-spam:** off-screen honeypot field + minimum 2s fill-time (bots get a fake success, nothing is written) + 60s duplicate-message guard via localStorage.
+- Submit: spinner button (`aria-busy`), success modal ("Feedback sent successfully.", echoes the reply email) with **"Send another"** (resets + scrolls back to the form) and "Close" buttons; failure modal keeps the mapped human reason + raw code. Deep-link prefill unchanged: `feedback.html?type=&error=&v=`.
+- Collection `feedback`; rules: public create-only with field validation (type allowlist, message 10–2000, name 2–80, email format via `matches`, phone/browser/platform/extVersion/screenshot/page size-capped, issues list ≤10, rating 0–5 int); all reads/writes denied (console-only viewing). Rules ship with hosting: `firebase deploy --only hosting,firestore:rules`.
 - Roadmap card (Auto Subject Detection live / Custom Folder Naming soon / Split ZIPs planned) + response-promise card with Instagram link.
 - Started as homepage section → moved to separate page; homepage keeps a dark teaser band; all navs/footers + extension deep-links point to `feedback.html`.
 
@@ -131,7 +134,7 @@ Every ZIP link site-wide (announce bar, nav, hero, setup-card chip, install/stor
 - **Firestore:** Native mode, region `asia-south1` (Mumbai — permanent, do not change); created via console (CLI cannot enable the API without gcloud).
 - **Files:** `firebase.json` (public `official/`, mp4 ignored, css/js cache 1h), `.firebaserc` (default project), `firestore.rules` (see §3.3).
 - **Deploy:** `firebase deploy --only hosting` (site) / add `,firestore:rules` when rules change. Verify live with `?v=`-busted fetches; test-browser cache lies — always re-check with a fresh query string.
-- **Console reads:** `console.firebase.google.com/project/superk-official/firestore` → `feedback` collection. Two builder test docs were submitted during verification — delete them when convenient.
+- **Console reads:** `console.firebase.google.com/project/superk-official/firestore` → `feedback` collection. Three builder test docs were submitted during verification (two from the reveal/gate pass + "Aditi Sharma" from the feedback-upgrade pass) — delete them when convenient.
 
 ---
 
@@ -148,7 +151,7 @@ Every ZIP link site-wide (announce bar, nav, hero, setup-card chip, install/stor
 1. **"SuperK Official" wording** — nav badge, page titles, extension strings still say Official (meaning your official release). Scrub to affiliation-safe copy on request.
 2. **Per-report notifications** (email/Discord on each feedback) — Phase 2 via Trigger Email extension or Cloud Function.
 3. **Video** — confirm Unlisted + finished HD processing on YouTube.
-4. **Cache discipline** — bump `site.css?v=N` (currently **v9**) and `site.js?v=N` (currently **v1**) on every deploy of those files; favicon token currently `?v=2` (sticky cache — bump on the next icon change); HTML can sit in cache ~1h (ask users to hard-refresh after big launches).
+4. **Cache discipline** — bump `site.css?v=N` (currently **v10**) and `site.js?v=N` (currently **v1**) on every deploy of those files; favicon token currently `?v=2` (sticky cache — bump on the next icon change); HTML can sit in cache ~1h (ask users to hard-refresh after big launches).
 5. **Local dev server** — `python -m http.server 8099` in `official/` (note: sandbox test browsers cannot reach this machine's localhost; verify via direct HTTP or the live URL).
 
 ## 7. Key Identifiers (public-safe)

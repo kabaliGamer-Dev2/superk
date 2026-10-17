@@ -268,7 +268,7 @@ a.code-chip:hover { background: var(--ink); border-color: var(--ink); color: var
 .fb-pill:active { transform: translate(2px,2px); box-shadow: none; }
 .fb-field { margin: 0 0 16px; }
 .fb-field > span { display: block; font: 600 11px var(--mono); letter-spacing: .14em; text-transform: uppercase; color: var(--ink2); margin-bottom: 8px; }
-.fb-field textarea, .fb-field select, .fb-field input[type="text"], .fb-field input[type="url"] { width: 100%; background: var(--paper); color: var(--ink); border: 1.5px solid var(--ink); border-radius: 12px; padding: 11px 13px; font: 500 13.5px var(--body); outline: none; }
+.fb-field textarea, .fb-field select, .fb-field input[type="text"], .fb-field input[type="tel"], .fb-field input[type="email"], .fb-field input[type="url"] { width: 100%; background: var(--paper); color: var(--ink); border: 1.5px solid var(--ink); border-radius: 12px; padding: 11px 13px; font: 500 13.5px var(--body); outline: none; }
 .fb-field textarea { min-height: 110px; resize: vertical; }
 .fb-field textarea:focus, .fb-field select:focus, .fb-field input:focus { box-shadow: 2.5px 2.5px 0 rgba(42,37,41,.9); }
 .fb-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
@@ -286,6 +286,13 @@ a.code-chip:hover { background: var(--ink); border-color: var(--ink); color: var
 .fb-meta { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
 .fb-ver { font: 600 11px var(--mono); letter-spacing: .1em; background: var(--ink); color: var(--acc-ink); border-radius: 99px; padding: 5px 13px; }
 .fb-err { font: 600 12.5px var(--body); color: #8f1d1d; margin: 10px 0 0; }
+.fb-fielderr { font: 600 12px var(--body); color: #8f1d1d; margin: 8px 0 0; }
+.fb-field.bad > span { color: #8f1d1d; }
+.fb-field.bad > textarea, .fb-field.bad > select, .fb-field.bad > input { border-color: #8f1d1d; background: #f6e8e5; }
+.fb-field.bad .fb-check { border-color: #8f1d1d; }
+.fb-hp { position: absolute; left: -9999px; top: 0; width: 1px; height: 1px; overflow: hidden; }
+.fb-note { font: 500 11.5px/1.6 var(--body); color: var(--mut); margin: 8px 0 0; }
+@media (max-width: 640px) { .fb-field textarea, .fb-field select, .fb-field input { font-size: 16px; } }
 .road { background: var(--ink); color: var(--acc-ink); border-radius: 18px; padding: clamp(22px, 3vw, 30px); }
 .road h3 { font: 700 17px var(--display); margin: 0 0 4px; color: var(--acc-ink); }
 .road > p { font-size: 13px; color: #c9c5cf; margin: 0 0 18px; }
@@ -309,6 +316,11 @@ a.code-chip:hover { background: var(--ink); border-color: var(--ink); color: var
 .fb-dialog p { font-size: 13.5px; color: var(--ink2); margin: 0 0 6px; }
 .fb-dialog code { font: 600 11.5px var(--mono); background: var(--paper2); border: 1px solid var(--line); border-radius: 6px; padding: 1px 6px; }
 .fb-dialog .btn { width: 100%; justify-content: center; margin-top: 16px; }
+.fb-modal-actions { display: grid; gap: 10px; margin-top: 16px; }
+.fb-modal-actions .btn { margin-top: 0; }
+.fb-modal-actions .btn[hidden] { display: none; }
+.btn-quiet { background: var(--paper); color: var(--ink); box-shadow: none; }
+.btn-quiet:hover { background: #fff; }
 .btn .spin { width: 15px; height: 15px; flex: none; border-radius: 99px; border: 2.5px solid rgba(243,240,231,.4); border-top-color: var(--acc-ink); animation: spin .7s linear infinite; }
 @keyframes spin { to { transform: rotate(360deg); } }
 @media (max-width: 900px) { .fb-layout { grid-template-columns: 1fr; } }

@@ -10,7 +10,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700;800&family=Montserrat:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet" />
 <link rel="stylesheet" href="tokens.css" />
-<link rel="stylesheet" href="site.css?v=9" />
+<link rel="stylesheet" href="site.css?v=10" />
 <script>(function () { var d = document.documentElement; if (!("IntersectionObserver" in window)) return; d.classList.add("js"); setTimeout(function () { if (!d.hasAttribute("data-reveal-ready")) d.classList.remove("js"); }, 2500); })();</script>
 <script src="site.js?v=1" defer></script>
 <style>
@@ -49,11 +49,12 @@
 
   <div class="fb-layout" id="feedback">
     <form class="fb-form reveal" id="fbForm" novalidate>
+      <div class="fb-hp" aria-hidden="true"><label for="fbSite">Website</label><input type="text" id="fbSite" name="website" tabindex="-1" autocomplete="off" /></div>
       <div class="fb-pills" role="radiogroup" aria-label="Feedback type">
         <button type="button" class="fb-pill on" data-type="bug" aria-pressed="true"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="13" r="7" /><path d="M12 9v4" /><path d="M12 16.5h.01" /><path d="M9 2 7.5 5M15 2l1.5 3M4 8l3 1M20 8l-3 1" /></svg><span>Bug Report<small>Something is not working</small></span></button>
         <button type="button" class="fb-pill" data-type="feature" aria-pressed="false"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6" /><path d="M10 21h4" /><path d="M12 3a6 6 0 0 0-4 10.5c.8.7 1 1.5 1 2.5h6c0-1 .2-1.8 1-2.5A6 6 0 0 0 12 3z" /><path d="M18 4l.7 1.8 1.8.7-1.8.7L18 9l-.7-1.8-1.8-.7 1.8-.7z" /></svg><span>Feature Request<small>Make SuperK better</small></span></button>
         <button type="button" class="fb-pill" data-type="download" aria-pressed="false"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v11" /><path d="m7 11 5 5 5-5" /><path d="M4 20h16" /></svg><span>Download Error<small>ZIP failed · No Auth · names</small></span></button>
-        <button type="button" class="fb-pill" data-type="praise" aria-pressed="false"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20.5s-8-4.7-8-11a4.6 4.6 0 0 1 8-3 4.6 4.6 0 0 1 8 3c0 6.3-8 11-8 11z" /></svg><span>Praise<small>SuperK saved my exam</small></span></button>
+        <button type="button" class="fb-pill" data-type="praise" aria-pressed="false"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20.5s-8-4.7-8-11a4.6 4.6 0 0 1 8-3 4.6 4.6 0 0 1 8 3c0 6.3-8 11-8 11z" /></svg><span>General Praise<small>SuperK saved my exam</small></span></button>
       </div>
       <div class="fb-field" id="fbIssuesWrap">
         <span>Quick tap — which of these matches?</span>
@@ -62,30 +63,40 @@
           <label class="fb-check"><input type="checkbox" value="tooBig" />ZIP download says "Too Big" (over 150 MB)</label>
           <label class="fb-check"><input type="checkbox" value="genericNames" />PDF names still generic (PPT / Assignment)</label>
           <label class="fb-check"><input type="checkbox" value="noSubject" />Subject name was not detected automatically</label>
+          <label class="fb-check"><input type="checkbox" value="other" />Other — none of these fit (explain in Details)</label>
         </div>
+        <p class="fb-fielderr" id="fbIssuesErr" hidden></p>
       </div>
       <div class="fb-tip" id="fbTip" hidden></div>
-      <div class="fb-field">
+      <div class="fb-field" id="fbMsgWrap">
         <span><label for="fbMsg">Details</label></span>
-        <textarea id="fbMsg" required maxlength="2000" placeholder="Which subject were you downloading? What happened when you clicked Download?"></textarea>
+        <textarea id="fbMsg" required maxlength="2000" aria-describedby="fbMsgErr" placeholder="Which subject were you downloading? What happened when you clicked Download?"></textarea>
+        <p class="fb-fielderr" id="fbMsgErr" hidden></p>
       </div>
-      <div class="fb-row">
-        <div class="fb-field">
-          <span><label for="fbBrowser">Browser</label></span>
-          <select id="fbBrowser"><option>Chrome</option><option>Brave</option><option>Edge</option><option>Arc</option><option>Opera</option><option>Other</option></select>
-        </div>
-        <div class="fb-field">
-          <span>Extension version</span>
-          <div class="fb-meta"><span class="fb-ver" id="fbVer">v1.0.0</span></div>
-        </div>
+      <div class="fb-field" id="fbNameWrap">
+        <span><label for="fbName">Full name</label></span>
+        <input type="text" id="fbName" maxlength="80" autocomplete="name" aria-describedby="fbNameErr" placeholder="The name we should reply to" />
+        <p class="fb-fielderr" id="fbNameErr" hidden></p>
       </div>
-      <div class="fb-field">
+      <div class="fb-field" id="fbEmailWrap">
+        <span><label for="fbEmail">Email address</label></span>
+        <input type="email" id="fbEmail" maxlength="120" autocomplete="email" inputmode="email" aria-describedby="fbEmailErr" placeholder="you@example.com" />
+        <p class="fb-fielderr" id="fbEmailErr" hidden></p>
+      </div>
+      <div class="fb-field" id="fbPhoneWrap">
+        <span><label for="fbPhone">WhatsApp / phone <span style="text-transform:none;letter-spacing:0">(optional)</span></label></span>
+        <input type="tel" id="fbPhone" maxlength="24" autocomplete="tel" inputmode="tel" aria-describedby="fbPhoneErr" placeholder="+91 98765 43210" />
+        <p class="fb-fielderr" id="fbPhoneErr" hidden></p>
+      </div>
+      <div class="fb-field" id="fbShotWrap">
         <span><label for="fbShot">Screenshot link <span style="text-transform:none;letter-spacing:0">(optional)</span></label></span>
-        <input type="url" id="fbShot" inputmode="url" placeholder="Paste an image link if the popup looks broken" />
+        <input type="url" id="fbShot" inputmode="url" maxlength="500" aria-describedby="fbShotErr" placeholder="Paste an image link if the popup looks broken" />
+        <p class="fb-fielderr" id="fbShotErr" hidden></p>
       </div>
       <div class="fb-field">
-        <span><label for="fbContact">Email or handle <span style="text-transform:none;letter-spacing:0">(optional — only if you want a reply)</span></label></span>
-        <input type="text" id="fbContact" maxlength="120" autocomplete="email" placeholder="you@example.com or @handle" />
+        <span>Detected from your browser</span>
+        <div class="fb-meta"><span class="fb-ver" id="fbBrowserMeta">Detecting…</span><span class="fb-ver" id="fbVer">v1.0.0</span></div>
+        <p class="fb-note">Sent with your report so we can reproduce issues without guessing your setup.</p>
       </div>
       <div class="fb-field">
         <span>How much time did SuperK save you today?</span>
@@ -122,7 +133,10 @@
       <div class="ok" id="fbModalIcon"><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m5 13 4 4L19 7" /></svg></div>
       <h3 id="fbModalTitle">Feedback sent successfully.</h3>
       <p id="fbModalMsg">Thanks for helping improve SuperK.</p>
-      <button class="btn btn-ink" id="fbModalClose">Done</button>
+      <div class="fb-modal-actions">
+        <button class="btn btn-ink" id="fbModalAgain">Send another</button>
+        <button class="btn btn-quiet" id="fbModalClose">Close</button>
+      </div>
     </div>
   </div>
 </main>
@@ -162,6 +176,7 @@
     if (!form) return;
     const pills = [...form.querySelectorAll(".fb-pill")];
     const issuesWrap = document.getElementById("fbIssuesWrap");
+    const issuesErr = document.getElementById("fbIssuesErr");
     const checks = [...issuesWrap.querySelectorAll("input[type=checkbox]")];
     const tip = document.getElementById("fbTip");
     const msg = document.getElementById("fbMsg");
@@ -171,8 +186,19 @@
     const modalIcon = document.getElementById("fbModalIcon");
     const modalTitle = document.getElementById("fbModalTitle");
     const modalMsg = document.getElementById("fbModalMsg");
+    const modalAgain = document.getElementById("fbModalAgain");
+    const modalClose = document.getElementById("fbModalClose");
+    const honeypot = document.getElementById("fbSite");
+    const browserMeta = document.getElementById("fbBrowserMeta");
     const stars = [...document.querySelectorAll("#fbStars button")];
-    let type = "bug", rating = 0;
+    const fields = {
+      msg: { wrap: "fbMsgWrap", err: "fbMsgErr", input: msg },
+      name: { wrap: "fbNameWrap", err: "fbNameErr", input: document.getElementById("fbName") },
+      email: { wrap: "fbEmailWrap", err: "fbEmailErr", input: document.getElementById("fbEmail") },
+      phone: { wrap: "fbPhoneWrap", err: "fbPhoneErr", input: document.getElementById("fbPhone") },
+      shot: { wrap: "fbShotWrap", err: "fbShotErr", input: document.getElementById("fbShot") }
+    };
+    let type = "bug", rating = 0, loadedAt = Date.now();
     const PH = {
       bug: "Which subject were you downloading? What happened when you clicked Download?",
       feature: "What should SuperK do next? (e.g. dark mode, custom folder names...)",
@@ -183,7 +209,8 @@
       noAuth: "<b>Quick fix:</b> refresh your classroom tab once so the session token loads, then reopen SuperK. Still stuck? Send this report below.",
       tooBig: "<b>By design:</b> browser memory caps single ZIPs at ~150 MB — SuperK then downloads files individually instead. Same PDFs, zero crashes.",
       genericNames: "<b>Heads up:</b> SuperK resolves most generic titles from cloud slugs automatically. If some still show PPT/Assignment, tell us the subject below.",
-      noSubject: "<b>Quick fix:</b> open any subject topic page first — SuperK locks onto the open subject from the page breadcrumb."
+      noSubject: "<b>Quick fix:</b> open any subject topic page first — SuperK locks onto the open subject from the page breadcrumb.",
+      other: "<b>No problem:</b> describe it below in your own words — every report is read by a human."
     };
     const TYPES = ["bug", "feature", "download", "praise"];
     function setType(t) {
@@ -196,11 +223,12 @@
       });
       const showChecks = (t === "bug" || t === "download");
       issuesWrap.style.display = showChecks ? "" : "none";
-      if (!showChecks) { checks.forEach((c) => { c.checked = false; }); tip.hidden = true; }
+      if (!showChecks) { checks.forEach((c) => { c.checked = false; }); tip.hidden = true; setIssuesErr(""); }
       msg.placeholder = PH[t];
     }
     pills.forEach((p) => p.addEventListener("click", () => setType(p.dataset.type)));
     checks.forEach((c) => c.addEventListener("change", () => {
+      if (issuesWrap.classList.contains("bad") && checks.some((x) => x.checked)) setIssuesErr("");
       const hit = checks.find((x) => x.checked);
       if (!hit) { tip.hidden = true; return; }
       tip.innerHTML = TIPS[hit.value] || "";
@@ -220,6 +248,31 @@
       }
       if (q.get("v")) document.getElementById("fbVer").textContent = "v" + q.get("v");
     } catch { /* static page still works without prefill */ }
+    /* Context capture: browser + platform detected once, attached to every report. */
+    function detectBrowser() {
+      const ua = navigator.userAgent || "";
+      const v = (re) => ((ua.match(re) || [])[1] || "");
+      if (ua.indexOf("Edg/") > -1) return ("Edge " + v(/Edg\/(\d+)/)).trim();
+      if (ua.indexOf("OPR/") > -1) return ("Opera " + v(/OPR\/(\d+)/)).trim();
+      if (ua.indexOf("Vivaldi/") > -1) return ("Vivaldi " + v(/Vivaldi\/(\d+)/)).trim();
+      if (ua.indexOf("Firefox/") > -1) return ("Firefox " + v(/Firefox\/(\d+)/)).trim();
+      if (navigator.brave) return ("Brave " + v(/Chrome\/(\d+)/)).trim();
+      if (ua.indexOf("Chrome/") > -1) return ("Chrome " + v(/Chrome\/(\d+)/)).trim();
+      if (ua.indexOf("Safari/") > -1) return ("Safari " + v(/Version\/(\d+)/)).trim();
+      return "Unknown browser";
+    }
+    function detectPlatform() {
+      const ua = navigator.userAgent || "";
+      if (/Android/i.test(ua)) return "Android";
+      if (/iPhone|iPad|iPod/i.test(ua)) return "iOS";
+      if (/Windows/i.test(ua)) return "Windows";
+      if (/Mac OS X/i.test(ua)) return "macOS";
+      if (/Linux/i.test(ua)) return "Linux";
+      return "Unknown OS";
+    }
+    const browserLabel = detectBrowser();
+    const platformLabel = detectPlatform();
+    browserMeta.textContent = browserLabel + " · " + platformLabel;
     let db = null;
     try {
       if (window.firebase && SUPERK_FB.projectId) {
@@ -233,16 +286,102 @@
       if (on) { send.setAttribute("aria-busy", "true"); send.innerHTML = '<span class="spin" aria-hidden="true"></span>Sending…'; }
       else { send.removeAttribute("aria-busy"); send.textContent = "Send Feedback"; }
     }
+    /* Strict validation: every rule returns an error string ("" = valid). */
+    const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+    function fieldError(k) {
+      if (k === "msg") {
+        const v = msg.value.trim();
+        if (!v) return "Please describe what happened — the details box cannot be empty.";
+        if (v.length < 10) return "Add a few more words (at least 10 characters) so we can reproduce it.";
+        return "";
+      }
+      if (k === "name") {
+        const v = fields.name.input.value.trim();
+        if (!v) return "Please enter your full name.";
+        if (v.length < 2) return "That name looks too short — enter your full name.";
+        if (!/\p{L}/u.test(v)) return "Please enter a real name, not numbers or symbols.";
+        return "";
+      }
+      if (k === "email") {
+        const v = fields.email.input.value.trim();
+        if (!v) return "Please enter your email so we can follow up.";
+        if (v.length > 120 || !EMAIL_RE.test(v)) return "That email does not look right — check for @ and a domain (you@example.com).";
+        return "";
+      }
+      if (k === "phone") {
+        const v = fields.phone.input.value.trim();
+        if (!v) return "";
+        if (!/^\+?\d{10,13}$/.test(v.replace(/[\s\-().]/g, ""))) return "Check the number — 10 to 13 digits, with or without +91.";
+        return "";
+      }
+      if (k === "shot") {
+        const v = fields.shot.input.value.trim();
+        if (!v) return "";
+        if (!/^https?:\/\/\S+$/i.test(v)) return "Paste the full link, starting with https://";
+        return "";
+      }
+      return "";
+    }
+    function issuesError() {
+      if (type !== "bug" && type !== "download") return "";
+      return checks.some((c) => c.checked) ? "" : "Pick at least one symptom above, or choose \"Other — none of these fit\".";
+    }
+    function setErr(k, text) {
+      const f = fields[k];
+      const wrap = document.getElementById(f.wrap);
+      const e = document.getElementById(f.err);
+      if (text) { wrap.classList.add("bad"); e.textContent = text; e.hidden = false; f.input.setAttribute("aria-invalid", "true"); }
+      else { wrap.classList.remove("bad"); e.hidden = true; f.input.removeAttribute("aria-invalid"); }
+    }
+    function setIssuesErr(text) {
+      issuesWrap.classList.toggle("bad", !!text);
+      issuesErr.textContent = text || "";
+      issuesErr.hidden = !text;
+    }
+    function validateAll() {
+      let first = null;
+      const ie = issuesError();
+      setIssuesErr(ie);
+      if (ie) first = checks[0];
+      ["msg", "name", "email", "phone", "shot"].forEach((k) => {
+        const e = fieldError(k);
+        setErr(k, e);
+        if (e && !first) first = fields[k].input;
+      });
+      return first;
+    }
+    function focusField(el) {
+      el.scrollIntoView({ behavior: smooth(), block: "center" });
+      el.focus({ preventScroll: true });
+    }
+    Object.entries(fields).forEach(([k, f]) => f.input.addEventListener("input", () => {
+      if (document.getElementById(f.wrap).classList.contains("bad")) setErr(k, fieldError(k));
+    }));
     const OK_SVG = '<svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m5 13 4 4L19 7" /></svg>';
     const BAD_SVG = '<svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 8v5" /><path d="M12 16.5h.01" /><circle cx="12" cy="12" r="9" /></svg>';
-    function showModal(ok, title, msgHtml) {
+    function showModal(ok, title, msgHtml, withAgain) {
       modalIcon.className = ok ? "ok" : "bad";
       modalIcon.innerHTML = ok ? OK_SVG : BAD_SVG;
       modalTitle.textContent = title;
       modalMsg.innerHTML = msgHtml;
+      modalAgain.hidden = !withAgain;
       modal.hidden = false;
-      document.getElementById("fbModalClose").focus();
+      (withAgain ? modalAgain : modalClose).focus();
     }
+    function closeModal(refocusTo) { modal.hidden = true; if (refocusTo) refocusTo.focus({ preventScroll: true }); }
+    function resetForm() {
+      form.reset();
+      setType("bug");
+      rating = 0;
+      stars.forEach((x) => x.classList.remove("lit"));
+      tip.hidden = true;
+      Object.entries(fields).forEach(([k]) => setErr(k, ""));
+      setIssuesErr("");
+      err.hidden = true;
+      loadedAt = Date.now();
+    }
+    const esc = (s) => String(s).replace(/[&<>"']/g, (ch) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[ch]));
+    const smooth = () => (window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth");
     function reasonFor(ex) {
       const code = (ex && ex.code) || "";
       if (code === "permission-denied") return "The database refused the write — the site's security rules need a fix on our side. Your report mattered; tell us on Instagram so we see it.";
@@ -253,40 +392,60 @@
     }
     form.addEventListener("submit", async (e) => {
       e.preventDefault();
+      if (send.disabled) return;
       err.hidden = true;
-      const text = msg.value.trim();
-      if (text.length < 10) { fail("Give a few more words so we can actually reproduce it (10+ characters)."); msg.focus(); return; }
+      const first = validateAll();
+      if (first) { focusField(first); return; }
+      /* Bot traps: honeypot filled or an impossibly fast submit → pretend success, write nothing. */
+      if (honeypot.value.trim() !== "" || Date.now() - loadedAt < 2000) {
+        resetForm();
+        showModal(true, "Feedback sent successfully.", "Thanks — your report is on its way to the developers.", false);
+        return;
+      }
       if (!db) { fail("Could not reach the database. Check your connection and retry."); return; }
+      const text = msg.value.trim();
+      const email = fields.email.input.value.trim();
+      try {
+        const last = JSON.parse(localStorage.getItem("superk.fb.last") || "null");
+        if (last && last.sig === text.toLowerCase() && Date.now() - last.at < 60000) {
+          fail("This exact report was sent a moment ago — give it a minute before sending again.");
+          return;
+        }
+      } catch { /* storage unavailable — skip dedupe */ }
       setSending(true);
-      const shot = document.getElementById("fbShot").value.trim();
-      if (shot && !/^https?:\/\//i.test(shot)) { setSending(false); fail("Screenshot must be a full link starting with http(s)://"); return; }
       try {
         await db.collection("feedback").add({
           type,
           issues: checks.filter((c) => c.checked).map((c) => c.value),
           message: text.slice(0, 2000),
-          browser: document.getElementById("fbBrowser").value,
-          extVersion: document.getElementById("fbVer").textContent,
-          screenshot: shot.slice(0, 500),
-          contact: document.getElementById("fbContact").value.trim().slice(0, 120),
+          name: fields.name.input.value.trim().slice(0, 80),
+          email: email.slice(0, 120),
+          phone: fields.phone.input.value.trim().slice(0, 24),
+          browser: browserLabel.slice(0, 40),
+          platform: platformLabel.slice(0, 40),
+          extVersion: document.getElementById("fbVer").textContent.slice(0, 20),
+          screenshot: fields.shot.input.value.trim().slice(0, 500),
           rating,
           page: location.href.slice(0, 300),
           createdAt: firebase.firestore.FieldValue.serverTimestamp()
         });
-        form.reset();
-        setType("bug");
-        rating = 0;
-        stars.forEach((x) => x.classList.remove("lit"));
+        try { localStorage.setItem("superk.fb.last", JSON.stringify({ sig: text.toLowerCase(), at: Date.now() })); } catch { /* ignore */ }
+        resetForm();
         setSending(false);
-        showModal(true, "Feedback sent successfully.", "Thanks for helping improve SuperK. If you left contact info, you will hear back when it ships.");
+        showModal(true, "Feedback sent successfully.", "Your report is with the developers. If we need to follow up, we will reply to <b>" + esc(email) + "</b>.", true);
       } catch (ex) {
         setSending(false);
-        showModal(false, "Could not send feedback.", reasonFor(ex) + "<br />Technical detail: <code>" + String((ex && ex.code) || "network-error") + "</code>");
+        showModal(false, "Could not send feedback.", reasonFor(ex) + "<br />Technical detail: <code>" + esc(String((ex && ex.code) || "network-error")) + "</code>", false);
       }
     });
-    document.getElementById("fbModalClose").addEventListener("click", () => { modal.hidden = true; });
-    modal.addEventListener("click", (e) => { if (e.target === modal) modal.hidden = true; });
-    document.addEventListener("keydown", (e) => { if (e.key === "Escape" && !modal.hidden) modal.hidden = true; });
+    modalAgain.addEventListener("click", () => {
+      closeModal(null);
+      document.getElementById("feedback").scrollIntoView({ behavior: smooth(), block: "start" });
+      pills[0].focus({ preventScroll: true });
+    });
+    modalClose.addEventListener("click", () => closeModal(send));
+    modal.addEventListener("click", (e) => { if (e.target === modal) closeModal(send); });
+    document.addEventListener("keydown", (e) => { if (e.key === "Escape" && !modal.hidden) closeModal(send); });
   })();
 </script>
 </body>
