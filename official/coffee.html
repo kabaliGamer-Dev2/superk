@@ -129,20 +129,24 @@
     transform: rotate(-45deg);
   }
 
-  /* two honest QR paths, side by side */
+  /* two honest QR paths, side by side. --qr-size drives both the live canvas and
+     the static code, so breakpoints resize the QR without fighting inline styles */
+  .give { --qr-size: 148px; --qr-pad: 12px; }
   .qr-pair { display: grid; grid-template-columns: repeat(2, auto); gap: 16px; }
   .qr-tile { margin: 0; text-align: center; }
   .qr-tile-head { margin-bottom: 9px; }
   .qr-tile-title { display: block; font: 700 13.5px var(--display); color: var(--ink); letter-spacing: -.01em; }
   .qr-tile-sub { display: block; font: 500 10px var(--mono); letter-spacing: .07em; text-transform: uppercase; color: var(--mut); margin-top: 3px; }
   .qr-frame {
-    display: grid; place-items: center; width: 170px; height: 170px;
+    display: grid; place-items: center;
+    width: calc(var(--qr-size) + var(--qr-pad) * 2);
+    height: calc(var(--qr-size) + var(--qr-pad) * 2);
     background: #fff; border: 1.5px solid var(--ink); border-radius: 14px;
     box-shadow: 2.5px 2.5px 0 rgba(42,37,41,.55);
   }
-  .qr-frame canvas, .qr-frame img { display: block; width: 148px; height: 148px; }
+  .qr-frame canvas, .qr-frame img { display: block; width: var(--qr-size); height: var(--qr-size); }
   .qr-empty { padding: 0 16px; font: 500 11.5px/1.5 var(--body); color: var(--mut); text-align: center; text-wrap: pretty; }
-  .qr-tile-note { font: 500 11px/1.5 var(--body); color: var(--mut); margin: 9px auto 0; max-width: 172px; text-wrap: pretty; }
+  .qr-tile-note { font: 500 11px/1.5 var(--body); color: var(--mut); margin: 9px auto 0; max-width: 200px; text-wrap: pretty; }
 
   .give-foot { padding: 16px clamp(22px, 3.4vw, 44px) clamp(20px, 2.6vw, 26px); background: var(--paper2); border-top: 1px solid var(--line-soft); }
   .give-foot p { font: 500 11.5px/1.65 var(--body); color: var(--mut); margin: 0; max-width: 74ch; text-wrap: pretty; }
@@ -185,15 +189,32 @@
     .hero-coffee { padding-top: 28px; }
     .hero-coffee .ctas { flex-direction: column; align-items: stretch; }
     .hero-coffee .ctas .btn { width: 100%; justify-content: center; }
-    .pay-actions { flex-direction: column; }
-    .pay-actions .btn { width: 100%; }
+
+    /* the QR is the main mobile action - give it room to breathe */
+    .give { --qr-size: min(74vw, 208px); --qr-pad: 14px; }
+
+    /* compact the payment row: side by side, shorter, primary kept slightly wider */
+    .pay-actions { flex-direction: row; gap: 8px; }
+    .pay-actions .btn {
+      flex: 1 1 0; width: auto; min-width: 0; min-height: 44px;
+      padding: 10px 10px; font-size: 12.5px; gap: 6px; border-radius: 11px;
+    }
+    .pay-actions .btn:first-child { flex: 1.18 1 0; }
+
     .custom-row { grid-template-columns: 1fr; gap: 8px; }
     .benefit-grid { grid-template-columns: 1fr; }
     .amount-card { min-height: 70px; }
     .amount-card .amount-value { font-size: 24px; }
-    .qr-pair { grid-template-columns: 1fr; justify-items: center; gap: 26px; }
-    .qr-frame { width: 158px; height: 158px; }
-    .qr-frame canvas, .qr-frame img { width: 136px; height: 136px; }
+    .qr-pair { grid-template-columns: 1fr; justify-items: center; gap: 28px; }
+    .qr-tile { width: 100%; }
+    .qr-tile-note { max-width: 260px; }
+  }
+
+  /* very narrow phones: keep both labels on one line so the row stays compact */
+  @media (max-width: 400px) {
+    .pay-actions { gap: 7px; }
+    .pay-actions .btn { font-size: 11.5px; padding: 9px 7px; gap: 5px; white-space: nowrap; }
+    .pay-actions .btn svg { width: 15px; height: 15px; }
   }
   @media (prefers-reduced-motion: reduce) {
     .amount-card, .amount-card .amount-value, .amount-card .amount-cur, .amount-card .amount-label, .faq summary::after { transition: none; }
@@ -474,14 +495,13 @@
       var count = qr.getModuleCount();
       var quiet = 4;                       // quiet zone required by the spec
       var total = count + quiet * 2;
-      var cssSize = 148;
-      var scale = Math.max(1, Math.floor((cssSize * 4) / total)); // 4x for crispness
+      // display size is owned by CSS (--qr-size); JS only sets the backing store
+      var cssSize = parseFloat(getComputedStyle(qrCanvas.parentNode).getPropertyValue("--qr-size")) || 148;
+      var scale = Math.max(1, Math.round((cssSize * 3) / total)); // 3x for crispness
       var px = total * scale;
 
       qrCanvas.width = px;
       qrCanvas.height = px;
-      qrCanvas.style.width = cssSize + "px";
-      qrCanvas.style.height = cssSize + "px";
 
       var ctx = qrCanvas.getContext("2d");
       ctx.fillStyle = "#ffffff";
