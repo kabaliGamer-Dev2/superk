@@ -452,6 +452,37 @@
 </footer>
 
 <script>
+/* Mobile menu: aria state + outside-click + Escape (same pattern as index.html / feedback.html). */
+(function () {
+  "use strict";
+  var navLinks = document.getElementById("navLinks");
+  var menuBtn = document.getElementById("menuBtn");
+  if (!navLinks || !menuBtn) return;
+
+  function setOpen(open) {
+    navLinks.classList.toggle("open", open);
+    menuBtn.setAttribute("aria-expanded", open ? "true" : "false");
+  }
+  menuBtn.onclick = function (e) {
+    e.stopPropagation();
+    setOpen(!navLinks.classList.contains("open"));
+  };
+  navLinks.querySelectorAll("a").forEach(function (a) {
+    a.onclick = function () { setOpen(false); };
+  });
+  document.addEventListener("click", function (e) {
+    if (!navLinks.contains(e.target) && e.target !== menuBtn && !menuBtn.contains(e.target)) setOpen(false);
+  });
+  document.addEventListener("keydown", function (e) {
+    if (e.key === "Escape" && navLinks.classList.contains("open")) {
+      setOpen(false);
+      menuBtn.focus();
+    }
+  });
+})();
+</script>
+
+<script>
 (function () {
   "use strict";
   var UPI = "9347007497@ybl";
