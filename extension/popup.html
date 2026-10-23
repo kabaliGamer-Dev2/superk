@@ -49,7 +49,10 @@
     <div id="subjects" class="subjbar" aria-label="Subjects"></div>
 
     <div id="status" class="note" role="status">Open a <b>/classrooms/…/student</b> page, then open SuperK.</div>
-    <div id="progress" class="meter hidden" aria-hidden="true"><div id="bar"></div></div>
+    <div class="prog-row">
+      <div id="progress" class="meter hidden" aria-hidden="true"><div id="bar"></div></div>
+      <button id="cancelDownload" class="cancel-btn hidden" title="Cancel download" aria-label="Cancel download">✕ Cancel</button>
+    </div>
     <div id="progressLabel" class="plabel hidden"></div>
 
     <main id="list" class="shelf" aria-live="polite"></main>
@@ -59,10 +62,10 @@
     <div class="sel"><span id="selCount">0</span> selected</div>
     <button id="downloadSel" class="btn paper" disabled>
       <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v11"/><path d="m7 11 5 5 5-5"/><path d="M4 20h16"/></svg>
-      Selected</button>
+      <span id="selBtnTxt">Selected</span></button>
     <button id="downloadAll" class="btn ink" disabled>
       <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v11"/><path d="m7 11 5 5 5-5"/><path d="M4 20h16"/></svg>
-      Download all</button>
+      <span id="allBtnTxt">Download all</span></button>
   </footer>
 </div>
 <div id="aboutModal" class="modal hidden" role="dialog" aria-modal="true" aria-label="About SuperK">

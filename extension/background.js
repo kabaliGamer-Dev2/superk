@@ -54,6 +54,7 @@ async function fetchBuf(url) {
 
 let zipSeq = 0;
 const pendingZips = new Map(); // jobId -> { resolve }
+let currentZipJobId = null;    // track active job so cancel can target it
 
 async function ensureOffscreen() {
   if (!chrome.offscreen || typeof chrome.offscreen.createDocument !== "function") {
@@ -93,18 +94,20 @@ async function deliverZipStart(payload) {
   throw lastErr || new Error("offscreen unreachable");
 }
 
-function runOffscreenZip(jobId, items, subject) {
+function runOffscreenZip(jobId, items, subject, knownSizes) {
   return new Promise((resolve, reject) => {
     const timer = setTimeout(() => {
       pendingZips.delete(jobId);
+      currentZipJobId = null;
       reject(new Error("offscreen zip timed out"));
     }, OFFSCREEN_TIMEOUT);
     pendingZips.set(jobId, {
-      resolve: (v) => { clearTimeout(timer); pendingZips.delete(jobId); resolve(v); }
+      resolve: (v) => { clearTimeout(timer); pendingZips.delete(jobId); currentZipJobId = null; resolve(v); }
     });
-    deliverZipStart({ type: "PU_ZIP_START", jobId, items, subject }).catch((e) => {
+    deliverZipStart({ type: "PU_ZIP_START", jobId, items, subject, knownSizes }).catch((e) => {
       clearTimeout(timer);
       pendingZips.delete(jobId);
+      currentZipJobId = null;
       reject(e);
     });
   });
@@ -234,6 +237,13 @@ chrome.runtime.onMessage.addListener((msg, _sender, send) => {
     }).catch(() => {});
     return;
   }
+  // Cancel: forward to the offscreen document with the current job ID
+  if (msg.type === "PU_ZIP_CANCEL") {
+    if (currentZipJobId) {
+      chrome.runtime.sendMessage({ type: "PU_ZIP_CANCEL", jobId: currentZipJobId }).catch(() => {});
+    }
+    return;
+  }
   if (msg.type === "PU_DOWNLOAD_MANY") {
     (async () => {
       const items = msg.items || [];
@@ -274,8 +284,9 @@ chrome.runtime.onMessage.addListener((msg, _sender, send) => {
         legacyZipInSW(items, msg.subject, prog, done);
         return;
       }
+      currentZipJobId = jobId;
       try {
-        const res = await runOffscreenZip(jobId, items, msg.subject);
+        const res = await runOffscreenZip(jobId, items, msg.subject, msg.knownSizes);
         done(res);
       } catch (e) {
         // delivery/timeout failure — last-resort legacy path

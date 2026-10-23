@@ -65,6 +65,12 @@ body{width:392px;max-height:600px;background:var(--paper);color:var(--ink);
 @keyframes shimmer{from{transform:translateX(-100%)}to{transform:translateX(100%)}}
 .plabel{font:400 11px var(--mono);color:var(--ink2)}
 .hidden{display:none}
+.prog-row{display:flex;align-items:center;gap:8px}
+.prog-row .meter{flex:1}
+.cancel-btn{flex:none;cursor:pointer;background:transparent;border:1.5px solid var(--ink2);
+  border-radius:8px;padding:3px 9px;font:600 11px var(--mono);color:var(--ink2);
+  transition:background .14s,color .14s}
+.cancel-btn:hover{background:var(--ink);color:var(--acc-ink);border-color:var(--ink)}
 
 /* Results shelf */
 .shelf{flex:1 1 auto;min-height:120px;max-height:none;overflow:auto;display:flex;flex-direction:column;gap:10px;
@@ -104,6 +110,17 @@ body{width:392px;max-height:600px;background:var(--paper);color:var(--ink);
   transition:transform .1s var(--ease),box-shadow .14s}
 .item .dl:hover{background:#fff}
 .item .dl:active{transform:translate(2px,2px);box-shadow:none}
+.item .cp{display:inline-flex;align-items:center;gap:5px;flex:none;cursor:pointer;
+  background:transparent;color:var(--mut);border:1.5px solid var(--line);border-radius:10px;
+  padding:6px 8px;font:600 11px var(--mono);transition:all .14s var(--ease)}
+.item .cp:hover{background:var(--paper2);color:var(--ink);border-color:var(--ink)}
+.item .cp.copied{background:var(--ink);color:var(--acc-ink);border-color:var(--ink)}
+.item .pv{display:inline-flex;align-items:center;justify-content:center;flex:none;cursor:pointer;
+  background:transparent;color:var(--mut);border:1.5px solid var(--line);border-radius:10px;
+  width:28px;height:28px;padding:0;transition:all .14s var(--ease)}
+.item .pv:hover{background:var(--paper2);color:var(--ink);border-color:var(--ink)}
+.item .pv:active{transform:scale(.95)}
+.item .sz{font:400 10.5px var(--mono);color:var(--faint);margin-left:4px}
 .empty{border:1.5px dashed var(--ink2);border-radius:14px;padding:26px 12px;text-align:center;
   color:var(--ink2);font-size:12.5px;background:var(--card)}
 
